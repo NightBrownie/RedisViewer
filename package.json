@@ -4,7 +4,7 @@
   "description": "Cross-platform Redis database viewer GUI",
   "main": "main.js",
   "scripts": {
-    "start": "electron main.js",
+    "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
