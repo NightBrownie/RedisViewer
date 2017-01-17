@@ -1,2 +1,2 @@
 # RedisViewer
-Cross-platform Redis database viewer
+Cross-platform Redis database viewer GUI

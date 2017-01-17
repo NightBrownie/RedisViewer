@@ -1,7 +1,7 @@
 {
   "name": "redis-viewer",
   "version": "0.0.0",
-  "description": "The GUI tool to view redis data, check data updates and view redis status",
+  "description": "Cross-platform Redis database viewer GUI",
   "main": "app.js",
   "scripts": {
     "start": "electron app.js",
