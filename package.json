@@ -1,0 +1,27 @@
+{
+  "name": "redis-viewer",
+  "version": "0.0.0",
+  "description": "The GUI tool to view redis data, check data updates and view redis status",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NightBrownie/RedisViewer.git"
+  },
+  "keywords": [
+    "redis",
+    "viewer"
+  ],
+  "author": "Nikita Klyushnikov (NightBrownie)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NightBrownie/RedisViewer/issues"
+  },
+  "homepage": "https://github.com/NightBrownie/RedisViewer#readme",
+  "devDependencies": {
+    "electron": "^1.4.14"
+  }
+}
