@@ -22,12 +22,9 @@
     "promise/no-native": "off",
     "react/jsx-no-bind": "off",
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
-    "react/prefer-stateless-function": "off",
-    "flowtype-errors/show-errors": "error"
+    "react/prefer-stateless-function": "off"
   },
   "plugins": [
-    "flowtype",
-    "flowtype-errors",
     "import",
     "promise",
     "compat",
