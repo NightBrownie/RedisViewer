@@ -23,8 +23,7 @@
     "package": "npm run build && build --publish never",
     "package-win": "npm run build && build --win --x64",
     "package-linux": "npm run build && build --linux",
-    "package-all": "npm run build && build -mwl",
-    "cleanup": "mop -v"
+    "package-all": "npm run build && build -mwl"
   },
   "browserslist": "electron 1.4",
   "build": {
