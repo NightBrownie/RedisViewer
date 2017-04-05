@@ -1,13 +1,13 @@
 {
-  "name": "electron-react-boilerplate",
-  "productName": "electron-react-boilerplate",
-  "version": "1.0.0",
-  "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
+  "name": "RedisViewer",
+  "productName": "RedisViewer",
+  "version": "0.0.1",
+  "description": "Cross-platform Redis database viewer GUI",
   "main": "./main.js",
   "author": {
-    "name": "C. T. Lin",
-    "email": "chentsulin@gmail.com",
-    "url": "https://github.com/chentsulin"
+    "name": "Nikita Klyushnikov",
+    "email": "me@nikitaklyushnikov.com",
+    "url": "https://github.com/NightBrownie"
   },
   "license": "MIT",
   "dependencies": {
