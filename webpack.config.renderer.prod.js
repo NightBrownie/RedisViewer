@@ -44,6 +44,38 @@ export default merge(baseConfig, {
           }
         }),
       },
+      // Add LESS support  - compile all .global.less files and pipe it to style.css
+      {
+        test: /\.global\.less$/,
+        use: ExtractTextPlugin.extract({
+          use: [
+            {
+              loader: 'css-loader'
+            },
+            {
+              loader: 'less-loader'
+            }
+          ],
+          fallback: 'style-loader',
+        })
+      },
+      // Add LESS support  - compile all other .less files and pipe it to style.css
+      {
+        test: /^((?!\.global).)*\.less$/,
+        use: ExtractTextPlugin.extract({
+          use: [{
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[name]__[local]__[hash:base64:5]',
+            }
+          },
+          {
+            loader: 'less-loader'
+          }]
+        }),
+      },
       // WOFF Font
       {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,

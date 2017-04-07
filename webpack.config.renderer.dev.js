@@ -12,7 +12,7 @@ import fs from 'fs';
 import webpack from 'webpack';
 import chalk from 'chalk';
 import merge from 'webpack-merge';
-import { spawn } from 'child_process';
+import {spawn} from 'child_process';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import baseConfig from './webpack.config.base';
 
@@ -47,6 +47,7 @@ export default merge(baseConfig, {
 
   module: {
     rules: [
+      // Extract all .global.css to style.css as is
       {
         test: /\.global\.css$/,
         use: [
@@ -61,6 +62,7 @@ export default merge(baseConfig, {
           }
         ]
       },
+      // Pipe other styles through css modules and append to style.css
       {
         test: /^((?!\.global).)*\.css$/,
         use: [
@@ -76,6 +78,45 @@ export default merge(baseConfig, {
               localIdentName: '[name]__[local]__[hash:base64:5]',
             }
           },
+        ]
+      },
+      // Add LESS support  - compile all .global.less files and pipe it to style.css
+      {
+        test: /\.global\.less/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'less-loader'
+          }
+        ]
+      },
+      // Add LESS support  - compile all other .less files and pipe it to style.css
+      {
+        test: /^((?!\.global).)*\.less/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              sourceMap: true,
+              importLoaders: 1,
+              localIdentName: '[name]__[local]__[hash:base64:5]',
+            }
+          },
+          {
+            loader: 'less-loader'
+          }
         ]
       },
       // WOFF Font
@@ -187,7 +228,7 @@ export default merge(baseConfig, {
     inline: true,
     lazy: false,
     hot: true,
-    headers: { 'Access-Control-Allow-Origin': '*' },
+    headers: {'Access-Control-Allow-Origin': '*'},
     contentBase: path.join(__dirname, 'dist'),
     watchOptions: {
       aggregateTimeout: 300,
@@ -202,10 +243,10 @@ export default merge(baseConfig, {
         spawn(
           'npm',
           ['run', 'start-hot-renderer'],
-          { shell: true, env: process.env, stdio: 'inherit' }
+          {shell: true, env: process.env, stdio: 'inherit'}
         )
-        .on('close', code => process.exit(code))
-        .on('error', spawnError => console.error(spawnError));
+          .on('close', code => process.exit(code))
+          .on('error', spawnError => console.error(spawnError));
       }
     }
   },
