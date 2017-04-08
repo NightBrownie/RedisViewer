@@ -1,2 +1,2 @@
 # RedisViewer
-A Crossplatform GUI tool to browse and manage Redis servers
+Cross-platform Redis database viewer GUI
