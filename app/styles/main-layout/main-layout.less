@@ -1,0 +1,15 @@
+.main-layout-container {
+    height: 100%;
+    display: flex;
+
+    & > .left-panel {
+        background: lightcoral;
+        margin-right: @vertical-delimiter-width / 2;
+    }
+
+    & > .right-panel {
+        background: aquamarine;
+        flex-grow: 1;
+        margin-left: @vertical-delimiter-width / 2;
+    }
+}
