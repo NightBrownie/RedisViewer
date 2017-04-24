@@ -2,14 +2,24 @@
     height: 100%;
     display: flex;
 
-    & > .left-panel {
-        background: lightcoral;
-        margin-right: @vertical-delimiter-width / 2;
+    & > .Resizer {
+        width: @vertical-delimiter-width;
+        margin-left: -(@vertical-delimiter-width / 2);
+        margin-right: -(@vertical-delimiter-width / 2);
+
+        background: @vertical-delimiter-background;
+        cursor: ew-resize;
     }
 
-    & > .right-panel {
-        background: aquamarine;
-        flex-grow: 1;
+    & > .Pane1 {
+        margin-right: @vertical-delimiter-width / 2;
+
+        background: lightcoral;
+    }
+
+    & > .Pane2 {
         margin-left: @vertical-delimiter-width / 2;
+
+        background: aquamarine;
     }
 }
