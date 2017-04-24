@@ -1,0 +1,16 @@
+.SplitPane.vertical > .Resizer {
+    cursor: ew-resize;
+
+    &:after {
+        display: inline-block;
+        height: 100%;
+        width: 1px;
+
+        margin-left: @vertical-delimiter-width/2;
+        margin-right: @vertical-delimiter-width/2;
+
+        content: ' ';
+
+        background: @vertical-delimiter-background;
+    }
+}

@@ -7,9 +7,9 @@ export default class Main extends Component {
             <SplitPane
                 className="main-layout-container"
                 split="vertical"
-                minSize={100}
+                minSize={0}
                 defaultSize={100}
-                maxSize={0}
+                maxSize={-5}
             >
                 <div className="left-panel">
                 </div>

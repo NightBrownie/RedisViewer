@@ -1,25 +1,4 @@
 .main-layout-container {
     height: 100%;
     display: flex;
-
-    & > .Resizer {
-        width: @vertical-delimiter-width;
-        margin-left: -(@vertical-delimiter-width / 2);
-        margin-right: -(@vertical-delimiter-width / 2);
-
-        background: @vertical-delimiter-background;
-        cursor: ew-resize;
-    }
-
-    & > .Pane1 {
-        margin-right: @vertical-delimiter-width / 2;
-
-        background: lightcoral;
-    }
-
-    & > .Pane2 {
-        margin-left: @vertical-delimiter-width / 2;
-
-        background: aquamarine;
-    }
 }
