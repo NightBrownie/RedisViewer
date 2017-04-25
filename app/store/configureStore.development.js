@@ -1,17 +1,23 @@
 import {createStore, applyMiddleware, compose} from 'redux';
-import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 import {hashHistory} from 'react-router';
 import {routerMiddleware, push} from 'react-router-redux';
 import {createLogger} from 'redux-logger';
 import rootReducer from '../reducers';
+
+import rootSaga from "../sagas";
+
+let sagaMonitor;
 
 export default (initialState) => {
     // Redux Configuration
     const middleware = [];
     const enhancers = [];
 
-    // Thunk Middleware
-    middleware.push(thunk);
+    // Saga Middleware
+    //TODO: apply saga monitor
+    const sagaMiddleware = createSagaMiddleware();
+    middleware.push(sagaMiddleware);
 
     // Logging Middleware
     const logger = createLogger({
@@ -47,6 +53,9 @@ export default (initialState) => {
     // Create Store
     const store = createStore(rootReducer, initialState, enhancer);
 
+    // apply sagas
+    sagaMiddleware.run(rootSaga);
+
     if (module.hot) {
         module.hot.accept('../reducers', () =>
             store.replaceReducer(require('../reducers')) // eslint-disable-line global-require
@@ -55,3 +64,7 @@ export default (initialState) => {
 
     return store;
 };
+
+export function getSagaMonitor() {
+    return sagaMonitor || (sagaMonitor = createSagaMonitor());
+}

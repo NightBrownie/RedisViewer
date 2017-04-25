@@ -164,5 +164,7 @@ export default merge(baseConfig, {
         })
     ],
 
+    externals: [{'electron-config': 'electron-config'}],
+
     target: 'electron-renderer'
 });

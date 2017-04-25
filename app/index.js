@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { hashHistory } from 'react-router';
 import { AppContainer } from 'react-hot-loader';
 import { syncHistoryWithStore } from 'react-router-redux';
-import Root from './containers/Root';
+import Root from './containers/root';
 import configureStore from './store/configureStore';
 import './styles/app.global.less';
 
@@ -19,7 +19,7 @@ render(
 
 if (module.hot) {
   module.hot.accept('./containers/Root', () => {
-    const NextRoot = require('./containers/Root'); // eslint-disable-line global-require
+    const NextRoot = require('./containers/root'); // eslint-disable-line global-require
     render(
       <AppContainer>
         <NextRoot store={store} history={history} />
