@@ -18,7 +18,7 @@ render(
 );
 
 if (module.hot) {
-  module.hot.accept('./containers/Root', () => {
+  module.hot.accept('./containers/root', () => {
     const NextRoot = require('./containers/root'); // eslint-disable-line global-require
     render(
       <AppContainer>

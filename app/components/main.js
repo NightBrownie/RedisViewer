@@ -2,6 +2,8 @@ import React, {Component, PropTypes} from 'react';
 
 import SplitPane from 'react-split-pane';
 
+import ServerView from './serverView';
+
 export default class Main extends Component {
     static propTypes = {
         treeViewWidth: PropTypes.number,
@@ -23,8 +25,7 @@ export default class Main extends Component {
                 onChange={this.props.treeViewWidthChanged}
                 maxSize={-150}
             >
-                <div className="left-panel">
-                </div>
+                <ServerView />
                 <div className="right-panel">
                     {/*TODO: routing here*/}
                 </div>
