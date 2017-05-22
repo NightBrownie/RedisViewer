@@ -1,4 +1,4 @@
-import * as types from "../constants/actionTypes"
+import * as types from '../constants/actionTypes';
 
 export const treeViewWidthChanged = (width) => ({
     type: types.TREE_VIEW_WIDTH_CHANGED,

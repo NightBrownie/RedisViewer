@@ -1,8 +1,8 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import SplitPane from 'react-split-pane';
 
-import ServerView from './serverView';
+import ServerView from './server-view/serverView';
 
 export default class Main extends Component {
     static propTypes = {
@@ -17,19 +17,19 @@ export default class Main extends Component {
 
     render() {
         return (
-            <SplitPane
-                className="main-layout-container"
-                split="vertical"
-                minSize={150}
-                defaultSize={this.props.treeViewWidth}
-                onChange={this.props.treeViewWidthChanged}
-                maxSize={-150}
-            >
-                <ServerView />
-                <div className="right-panel">
-                    {/*TODO: routing here*/}
-                </div>
-            </SplitPane>
+          <SplitPane
+            className="main-layout-container"
+            split="vertical"
+            minSize={150}
+            defaultSize={this.props.treeViewWidth}
+            onChange={this.props.treeViewWidthChanged}
+            maxSize={-150}
+          >
+            <ServerView />
+            <div className="right-panel">
+              {/* TODO: routing here*/}
+            </div>
+          </SplitPane>
         );
     }
 }

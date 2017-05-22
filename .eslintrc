@@ -6,6 +6,7 @@
     "node": true
   },
   "rules": {
+    "indent": ["error", 4],
     "arrow-parens": ["off"],
     "compat/compat": "error",
     "consistent-return": "off",

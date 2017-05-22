@@ -1,0 +1,32 @@
+.server-view-search-tool {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-grow: 1;
+
+    & > .search-field {
+        flex-grow: 1;
+
+        outline: none;
+
+        border: 1px solid cyan;
+        border-radius: 0 3px 3px 0;
+
+        padding: 5px 10px;
+
+        &:focus, &:hover {
+            background: red;
+
+            + .search-icon {
+                background: red;
+            }
+        }
+    }
+
+    & > .search-icon {
+        border: 1px solid cyan;
+        border-right: 0;
+        border-radius: 3px 0 0 3px;
+
+        padding: 5px 10px;
+    }
+}
