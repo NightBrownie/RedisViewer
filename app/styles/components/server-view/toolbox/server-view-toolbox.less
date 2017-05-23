@@ -1,3 +1,21 @@
 .server-view-toolbox {
     display: flex;
+
+    & > .toolbox-btn {
+        border: @control-border-thickness solid @control-border-color;
+        border-radius: @control-border-radius;
+
+        margin-left: 5px;
+        padding: 5px 10px;
+
+        background: none;
+        outline: none;
+
+        transition: border-color @control-border-color-transition-time ease;
+
+        &:hover,
+        &:focus {
+            border-color: @control-border-active-color;
+        }
+    }
 }

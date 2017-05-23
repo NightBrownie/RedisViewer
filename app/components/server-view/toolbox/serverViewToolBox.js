@@ -6,9 +6,9 @@ export default class ServerViewToolBox extends Component {
     render() {
         return (<div className="server-view-toolbox">
           <ServerViewSearchTool />
-          <button className="add-server-btn add-server-icon" />
-          <button className="settings-btn settings-icon" />
-          <button className="remove-btn remove-icon" />
+          <button className="toolbox-btn add-server-btn add-server-icon" />
+          <button className="toolbox-btn settings-btn settings-icon" />
+          <button className="toolbox-btn remove-btn remove-icon" />
         </div>);
     }
 }
