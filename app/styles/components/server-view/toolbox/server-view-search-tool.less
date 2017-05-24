@@ -24,7 +24,7 @@
         background-color: @control-default-background-color;
         color: @control-text-color;
 
-        transition: background-color @control-color-transition-time ease;
+        transition: background-color @control-color-transition-time linear;
 
         & + .search-icon {
             border-right: 0;
@@ -34,6 +34,15 @@
         }
 
         &:focus, &:hover {
+            background-color: @control-active-background-color;
+
+            &, & + .search-icon {
+                border-color: @control-border-active-color;
+            }
+        }
+    }
+    &:focus, &:hover {
+        & > .search-field {
             background-color: @control-active-background-color;
 
             &, & + .search-icon {

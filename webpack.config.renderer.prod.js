@@ -36,11 +36,6 @@ export default merge(baseConfig, {
                 use: ExtractTextPlugin.extract({
                     use: {
                         loader: 'css-loader',
-                        options: {
-                            modules: true,
-                            importLoaders: 1,
-                            localIdentName: '[name]__[local]__[hash:base64:5]',
-                        }
                     }
                 }),
             },
@@ -65,15 +60,10 @@ export default merge(baseConfig, {
                 use: ExtractTextPlugin.extract({
                     use: [{
                         loader: 'css-loader',
-                        options: {
-                            modules: true,
-                            importLoaders: 1,
-                            localIdentName: '[name]__[local]__[hash:base64:5]',
-                        }
                     },
-                        {
-                            loader: 'less-loader'
-                        }]
+                    {
+                        loader: 'less-loader'
+                    }]
                 }),
             },
             // WOFF Font
@@ -164,7 +154,7 @@ export default merge(baseConfig, {
         })
     ],
 
-    externals: [{'electron-config': 'electron-config'}],
+    externals: [{ 'electron-config': 'electron-config' }],
 
     target: 'electron-renderer'
 });
