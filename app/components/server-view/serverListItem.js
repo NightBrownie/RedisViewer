@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 
-export default class ServerViewRow extends Component {
+export default class ServerListItem extends Component {
     static propTypes = {
-        addFriend: PropTypes.func.isRequired
+        treeViewSpans: PropTypes.array.isRequired,
+
     }
 
     render() {
@@ -18,11 +19,7 @@ export default class ServerViewRow extends Component {
             <span className="tree-view-span" />
           </span>
           <span
-            className="tree-view-item-icon
-                tree-view-folder-icon
-                tree-view-server-icon
-                tree-view-database-icon
-                tree-view-key-icon"
+            className="tree-view-item-icon tree-view-folder-icon tree-view-server-icon tree-view-database-icon tree-view-key-icon"
           >
             <span className="fa fa-folder-o fa-fw" />
             <span className="fa fa-folder-open-o fa-fw" />
