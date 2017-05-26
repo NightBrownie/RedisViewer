@@ -8,7 +8,7 @@
 
     transition: background-color @control-color-transition-time ease;
 
-    & > .options-button {
+    & > .options-button-container {
         opacity: 0;
 
         transition: opacity @dontrol-default-transition-time ease;
@@ -16,7 +16,7 @@
 
     &:hover,
     &:focus {
-        & > .options-button {
+        & > .options-button-container {
             opacity: 1;
         }
     }
@@ -31,5 +31,13 @@
 
     .server-list-item-name {
         flex: 1;
+
+        margin-left: 5px;
+
+        vertical-align: middle;
+
+        .server-list-item-name-text {
+            vertical-align: middle;
+        }
     }
 }

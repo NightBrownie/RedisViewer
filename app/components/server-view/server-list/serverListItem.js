@@ -5,7 +5,7 @@ import * as treeViewItemTypes from '../../../constants/treeViewItemTypes';
 
 import TreeViewSpan from './treeViewSpan';
 import ServerListItemIcon from './serverListItemIcon';
-import OptionsButton from "../../optionsButton";
+import OptionsButton from '../../optionsButton';
 
 export default class ServerListItem extends Component {
     static propTypes = {
@@ -33,7 +33,7 @@ export default class ServerListItem extends Component {
         return (<li className="server-list-item" tabIndex={0}>
           { spanTypes.map((spanType, spanTypeIndex) => (
             <TreeViewSpan
-                    // eslint-disable-next-line react/no-array-index-key
+              // eslint-disable-next-line react/no-array-index-key
               key={spanType + spanTypeIndex}
               spanType={spanType}
               isExpandable={
@@ -50,10 +50,14 @@ export default class ServerListItem extends Component {
           />
 
           <span className="server-list-item-name">
-            { this.props.name }
+            <span className="server-list-item-name-text">
+              { this.props.name }
+            </span>
           </span>
 
-          <OptionsButton />
+          <span className="options-button-container">
+            <OptionsButton />
+          </span>
         </li>);
     }
 }
