@@ -1,10 +1,25 @@
 .server-list-item {
-    padding: 0 10px;
+    display: flex;
+
+    padding: 2px 10px;
 
     outline: none;
     background-color: transparent;
 
     transition: background-color @control-color-transition-time ease;
+
+    & > .options-button {
+        opacity: 0;
+
+        transition: opacity @dontrol-default-transition-time ease;
+    }
+
+    &:hover,
+    &:focus {
+        & > .options-button {
+            opacity: 1;
+        }
+    }
 
     &:hover {
         background: @control-default-background-color;
@@ -12,5 +27,9 @@
 
     &:focus {
         background: @control-active-background-color;
+    }
+
+    .server-list-item-name {
+        flex: 1;
     }
 }

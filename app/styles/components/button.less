@@ -1,0 +1,23 @@
+.button {
+    display: inline;
+    vertical-align: middle;
+
+    border: @control-border-thickness solid;
+    border-radius: @control-border-radius;
+
+    padding: 5px;
+
+    background: none;
+    outline: none;
+
+    border-color: transparent;
+    color: @control-text-color;
+
+    transition: color @control-color-transition-time ease,
+        border-color @control-border-color-transition-time ease;
+
+    &:hover,
+    &:focus {
+        border-color: @control-border-color;
+    }
+}

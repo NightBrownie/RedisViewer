@@ -6,21 +6,10 @@
     padding: 10px 5px 5px 5px;
     margin: 0 5px;
 
-    & > .toolbox-btn {
-        border: @control-border-thickness solid;
-        border-radius: @control-border-radius;
-
+    & > .add-server-btn,
+    & > .settings-btn,
+    & > .remove-btn {
         margin-left: 5px;
-        padding: 5px;
-
-        background: none;
-        outline: none;
-
-        border-color: transparent;
-        color: @control-text-color;
-
-        transition: color @control-color-transition-time ease,
-            border-color @control-border-color-transition-time ease;
 
         & > .add-server-icon,
         & > .settings-icon,
@@ -30,11 +19,9 @@
 
         &:hover,
         &:focus {
-            border-color: @control-border-color;
-
-            > .add-server-icon,
-            > .settings-icon,
-            > .remove-icon {
+            & > .add-server-icon,
+            & > .settings-icon,
+            & > .remove-icon {
                 color: @control-active-text-color;
             }
         }
