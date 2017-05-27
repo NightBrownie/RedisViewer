@@ -21,7 +21,7 @@ export default class ServerList extends Component {
             treeViewSpanTypes.TREE_VIEW_NODE_SPAN]}
           itemType={treeViewItemTypes.TREE_VIEW_SERVER_ITEM}
           isExpanded={false}
-          name={'Test folder name'}
+          name={'Test folder name with really long long long name'}
                 />
         <ServerListItem
           treeViewSpans={[treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN,
