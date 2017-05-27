@@ -37,6 +37,14 @@
         vertical-align: middle;
 
         .server-list-item-name-text {
+            display: inline-block;
+            overflow: hidden;
+
+            max-width: @server-list-item-name-text-max-width;
+
+            white-space: nowrap;
+            text-overflow: ellipsis;
+
             vertical-align: middle;
         }
     }
