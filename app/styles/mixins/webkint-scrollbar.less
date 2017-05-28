@@ -18,10 +18,15 @@
 
     &::-webkit-scrollbar-thumb {
         border-radius: 10px;
-        background-color: @control-default-background-color;
+
+        background-color: @scrollbar-default-background-color;
+    }
+
+    &:hover::-webkit-scrollbar-thumb {
+        background-color: @scrollbar-container-hover-background-color;
 
         &:hover {
-            background-color: @control-active-background-color;
+            background-color: @scrollbar-hover-background-color;
         }
     }
 }
