@@ -1,8 +1,10 @@
 import React, {Component, PropTypes} from 'react';
+import { Route, Router, IndexRoute } from 'react-router'
 
 import SplitPane from 'react-split-pane';
 import ServerView from './server-view/serverView';
 import {SERVER_VIEW_MIN_SIZE} from '../constants/defaultSettings';
+import ServerSettings from './serverSettings'
 
 export default class Main extends Component {
     static propTypes = {
@@ -27,7 +29,6 @@ export default class Main extends Component {
             >
                 <ServerView />
                 <div className="right-panel">
-                    {/* TODO: routing here*/}
                 </div>
             </SplitPane>
         );
