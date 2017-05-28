@@ -9,6 +9,8 @@
     transition: background-color @control-color-transition-time ease;
 
     & > .options-button-container {
+        margin-left: 5px;
+
         opacity: 0;
 
         transition: opacity @dontrol-default-transition-time ease;
@@ -36,6 +38,11 @@
 
         vertical-align: middle;
 
+        cursor: default;
+
+        user-select: none;
+        pointer-events: none;
+
         .server-list-item-name-text {
             display: inline-block;
             overflow: hidden;
@@ -46,6 +53,7 @@
             text-overflow: ellipsis;
 
             vertical-align: middle;
+            line-height: 23px;
         }
     }
 }
