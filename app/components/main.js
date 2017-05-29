@@ -4,7 +4,7 @@ import { Route } from 'react-router'
 import SplitPane from 'react-split-pane';
 import ServerView from './server-view/serverView';
 import {SERVER_VIEW_MIN_SIZE} from '../constants/defaultSettings';
-import ServerSettings from './serverSettings'
+import ServerSettings from './server-settings/serverSettings'
 
 export default class Main extends Component {
     static propTypes = {

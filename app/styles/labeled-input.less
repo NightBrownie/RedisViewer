@@ -1,0 +1,65 @@
+.labeled-input {
+    display: flex;
+
+    .input-label-container {
+        display: flex;
+        flex-direction: row-reverse;
+        flex: 1;
+
+        & > .input {
+            &, & + .input-label {
+                border: @control-border-thickness solid @control-border-color;
+
+                transition: border-color @control-border-color-transition-time ease;
+            }
+        }
+
+        & > .input {
+            flex: 1;
+            width: 100%;
+
+            outline: none;
+
+            border-radius: 0 @control-border-radius @control-border-radius 0;
+
+            padding: 5px;
+
+            background-color: @control-default-background-color;
+            color: @control-text-color;
+
+            transition: background-color @control-color-transition-time ease;
+
+            & + .input-label {
+                border-right: 0;
+                border-radius: @control-border-radius 0 0 @control-border-radius;
+
+                padding: 5px;
+
+                color: @control-text-color;
+
+                cursor: pointer;
+
+                transition: color @control-color-transition-time ease;
+            }
+
+            &:focus, &:hover {
+                background-color: @control-active-background-color;
+
+                &, & + .input-label {
+                    border-color: @control-border-active-color;
+                    color: @control-active-text-color;
+                }
+            }
+        }
+        &:focus, &:hover {
+            & > .input {
+                background-color: @control-active-background-color;
+
+                &, & + .input-label {
+                    border-color: @control-border-active-color;
+                    color: @control-active-text-color;
+                }
+            }
+        }
+    }
+}

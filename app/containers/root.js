@@ -11,3 +11,4 @@ export default function Root({ store, children }) {
     </Provider>
   );
 }
+;
