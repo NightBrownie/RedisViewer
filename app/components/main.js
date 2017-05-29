@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import { Route, Router, IndexRoute } from 'react-router'
+import { Route } from 'react-router'
 
 import SplitPane from 'react-split-pane';
 import ServerView from './server-view/serverView';
@@ -29,7 +29,7 @@ export default class Main extends Component {
             >
                 <ServerView />
                 <div className="right-panel">
-                    <Route path="/" component={ServerSettings} />
+                    <Route path="/" exact={true} component={ServerSettings} />
                 </div>
             </SplitPane>
         );
