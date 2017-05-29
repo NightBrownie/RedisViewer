@@ -1,12 +1,13 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router';
-import routes from '../routes';
+import { BrowserRouter as Router } from 'react-router-dom';
 
-export default function Root({ store, history }) {
+export default function Root({ store, children }) {
   return (
     <Provider store={store}>
-      <Router key={Math.random()} history={history} routes={routes} />
+        <Router>
+            {children}
+        </Router>
     </Provider>
   );
 }

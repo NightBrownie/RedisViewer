@@ -29,6 +29,7 @@ export default class Main extends Component {
             >
                 <ServerView />
                 <div className="right-panel">
+                    <Route path="/" component={ServerSettings} />
                 </div>
             </SplitPane>
         );
