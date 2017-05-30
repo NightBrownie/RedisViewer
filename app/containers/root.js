@@ -1,14 +1,13 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { MemoryRouter as Router } from 'react-router';
+import { ConnectedRouter as Router } from 'react-router-redux';
 
-export default function Root({ store, children }) {
+export default function Root({ store, history, children }) {
   return (
     <Provider store={store}>
-        <Router>
+        <Router history={history}>
             {children}
         </Router>
     </Provider>
   );
-}
-;
+};

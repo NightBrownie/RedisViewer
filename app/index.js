@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import Root from './containers/root';
 import App from './containers/app';
-import configureStore from './store/configureStore';
+import configureStore, { history } from './store/configureStore';
 import 'font-awesome/less/font-awesome.less';
 import './styles/main.less';
 
@@ -11,7 +11,7 @@ const store = configureStore();
 
 render(
   <AppContainer>
-      <Root store={store}>
+      <Root store={store} history={history}>
           <App />
       </Root>
   </AppContainer>,
