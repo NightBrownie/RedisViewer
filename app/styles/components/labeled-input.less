@@ -29,6 +29,10 @@
 
             transition: background-color @control-color-transition-time ease;
 
+            &::placeholder {
+                color: @control-text-color;
+            }
+
             & + .input-label {
                 border-right: 0;
                 border-radius: @control-border-radius 0 0 @control-border-radius;

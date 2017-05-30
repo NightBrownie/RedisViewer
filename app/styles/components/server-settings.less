@@ -9,6 +9,11 @@
 
     .server-settings-form-label {
         margin: 0;
+
+        user-select: none;
+        pointer-events: none;
+
+        cursor: default;
     }
 
     .server-settings-form {
@@ -33,14 +38,23 @@
             }
         }
 
+        .advanced-server-setting-expander {
+            margin-top: 10px;
+
+            .advanced-server-settings {
+                padding-bottom: 10px;
+
+                border-bottom: @default-border-thickness solid @default-border-color;
+            }
+
+            &.expanded .advanced-server-settings {
+                margin-bottom: 10px;
+            }
+        }
+
         .buttons-container {
             display: flex;
             flex-direction: row;
-
-            border-top: @default-border-thickness solid @default-border-color;
-
-            margin-top: 5px;
-            padding-top: 5px;
 
             .test-connection-button {
                 margin-right: auto;

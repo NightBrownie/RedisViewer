@@ -13,12 +13,18 @@ export default class ServerSettings extends Component {
       </h2>
       <form className='server-settings-form'>
         <PrimaryServerSettings />
-        <Expander>
+        <Expander
+          className='advanced-server-setting-expander'
+          label='Advanced settings'
+        >
           <AdvancedServerSettings />
         </Expander>
 
         <div className='buttons-container'>
-          <Button className='test-connection-button'>
+          <Button
+            className='test-connection-button'
+            type='button'
+          >
             <i
               className='test-connection-button-icon fa fa-refresh fa-fw fa-lg'
               aria-hidden='true'
@@ -31,7 +37,10 @@ export default class ServerSettings extends Component {
           >
               Save
           </Button>
-          <Button className='cancel-server-settings-changes-button'>
+          <Button
+            className='cancel-server-settings-changes-button'
+            type='button'
+          >
               Cancel
           </Button>
         </div>

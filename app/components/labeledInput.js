@@ -8,7 +8,9 @@ export default class LabeledInput extends Component {
         type: PropTypes.string,
         title: PropTypes.string,
         hasError: PropTypes.bool,
-        isRequired: PropTypes.bool
+        isRequired: PropTypes.bool,
+        min: PropTypes.number,
+        max: PropTypes.number
     };
 
     static defaultProps = {
@@ -29,6 +31,8 @@ export default class LabeledInput extends Component {
                     type={this.props.type}
                     title={this.props.title}
                     placeholder={this.props.placeholder}
+                    min={this.props.min}
+                    max={this.props.max}
                 />
                 <span className="input-label">
                     {this.props.children}

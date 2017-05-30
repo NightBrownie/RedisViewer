@@ -1,0 +1,65 @@
+.expander {
+    .expander-header {
+        display: flex;
+        align-items: center;
+
+        .expand-collapse-button {
+            border: none;
+
+            margin: 0 2px;
+            padding: 0;
+
+            outline: none;
+            background: none;
+
+            cursor: pointer;
+
+            color: @control-text-color;
+
+            transition: color @control-color-transition-time ease;
+
+            &:hover {
+                color: @control-active-text-color;
+            }
+
+            &:focus {
+                color: @control-active-text-color;
+            }
+        }
+
+        .expander-header-label {
+            margin: 0 5px;
+
+            user-select: none;
+            cursor: default;
+
+            color: @control-text-color;
+
+            transition: color @control-color-transition-time ease;
+
+            &:hover {
+                color: @control-active-text-color;
+            }
+        }
+
+        .expander-header-empty-space-placeholder {
+            flex: 1;
+
+            border-top: @default-border-thickness solid @default-border-color;
+
+            &:last-of-type {
+                margin-right: 5px;
+            }
+        }
+    }
+
+    .expander-content-container {
+        margin-top: 10px;
+
+        max-height: 0;
+
+        overflow: hidden;
+
+        transition: max-height @control-default-transition-time ease;
+    }
+}

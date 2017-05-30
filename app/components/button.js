@@ -4,7 +4,8 @@ import classNames from 'classnames';
 export default class Button extends Component {
     static propTypes = {
         type: PropTypes.string,
-        isInactiveTransparentBorder: PropTypes.bool
+        isInactiveTransparentBorder: PropTypes.bool,
+        onClick: PropTypes.func
     };
 
     static defaultProps = {
@@ -13,12 +14,17 @@ export default class Button extends Component {
 
     render() {
         return (<button
+            ref={(button) => this.innerButton = button}
             className={classNames('button',
                 this.props.isInactiveTransparentBorder
                     ? 'inactive-transparent-border'
                     : false,
                 this.props.className || '')}
             type={this.props.type}
+            onClick={(event) => {
+                this.props.onClick && this.props.onClick(event);
+                this.innerButton.blur();
+            }}
         >
           {this.props.children}
         </button>);
