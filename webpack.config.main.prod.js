@@ -12,10 +12,10 @@ export default merge(baseConfig, {
 
     entry: ['babel-polyfill', './app/main'],
 
-    // 'main.js' in root
+    // 'main.development.js' in root
     output: {
         path: __dirname,
-        filename: './app/main.js'
+        filename: './app/main.development.js'
     },
 
     plugins: [

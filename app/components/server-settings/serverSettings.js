@@ -26,8 +26,8 @@ export default class ServerSettings extends Component {
           </Button>
 
           <Button
-              className='save-server-settings-button'
-              type='submit'
+            className='save-server-settings-button'
+            type='submit'
           >
               Save
           </Button>
