@@ -5,8 +5,6 @@ import AdvancedServerSettings from './advancedServerSettings'
 import Expander from '../expander'
 import Button from '../button'
 
-import {Link} from 'react-router-dom';
-
 export default class ServerSettings extends Component {
   render () {
     return (<div className='server-settings'>
