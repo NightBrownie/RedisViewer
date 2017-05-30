@@ -10,7 +10,7 @@
     background: none;
     outline: none;
 
-    border-color: transparent;
+    border-color: @control-border-color;
     color: @control-text-color;
 
     cursor: pointer;
@@ -20,6 +20,14 @@
 
     &:hover,
     &:focus {
-        border-color: @control-border-color;
+        border-color: @control-border-active-color;
+    }
+
+    &.inactive-transparent-border {
+        border-color: transparent;
+
+        &:hover {
+            border-color: @control-border-color;
+        }
     }
 }

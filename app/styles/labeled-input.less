@@ -40,6 +40,16 @@
                 cursor: pointer;
 
                 transition: color @control-color-transition-time ease;
+
+                .required-icon {
+                    margin-left: 0.2em;
+
+                    font-size: 0.5em;
+
+                    vertical-align: text-top;
+
+                    color: @control-required-mark-color;
+                }
             }
 
             &:focus, &:hover {
@@ -51,6 +61,7 @@
                 }
             }
         }
+
         &:focus, &:hover {
             & > .input {
                 background-color: @control-active-background-color;
@@ -61,5 +72,9 @@
                 }
             }
         }
+    }
+
+    &.error .input-label-container > .input {
+        border-color: @control-border-error-color;
     }
 }

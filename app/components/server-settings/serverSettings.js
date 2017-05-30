@@ -11,7 +11,7 @@ export default class ServerSettings extends Component {
       <h2 className='server-settings-form-label'>
           Add new server
       </h2>
-      <form>
+      <form className='server-settings-form'>
         <PrimaryServerSettings />
         <Expander>
           <AdvancedServerSettings />
@@ -24,7 +24,11 @@ export default class ServerSettings extends Component {
               aria-hidden='true'
             />
           </Button>
-          <Button className='save-server-settings-button'>
+
+          <Button
+              className='save-server-settings-button'
+              type='submit'
+          >
               Save
           </Button>
           <Button className='cancel-server-settings-changes-button'>
