@@ -1,6 +1,6 @@
 import * as actionTypes from "../constants/actionTypes";
 
-export default function layout(state = {}, action) {
+export default function layoutReducer(state = {}, action) {
     switch (action.type) {
         //currently actions have the same semantics
         case actionTypes.TREE_VIEW_WIDTH_CHANGED:

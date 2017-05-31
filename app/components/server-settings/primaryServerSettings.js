@@ -17,8 +17,8 @@ export default class PrimaryServerSettings extends Component {
       <LabeledInput
           placeholder='6379 (default)'
           type='number'
-          min='0'
-          max='65535'
+          min={0}
+          max={65535}
       >
         Port
       </LabeledInput>
