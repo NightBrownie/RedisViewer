@@ -6,7 +6,7 @@ export default class ServerViewSearchTool extends Component {
   render () {
     return (<LabeledInput
       className='server-view-search-tool'
-      placeholder='Type filter term...'
+      placeholder='Enter filter term...'
       type='text'
       title='Input search term here'
         >

@@ -1,5 +1,6 @@
 .labeled-input {
     display: flex;
+    position: relative;
 
     .input-label-container {
         display: flex;
@@ -56,13 +57,64 @@
                 }
             }
 
+            &[type='number'] {
+                &::-webkit-inner-spin-button {
+                    margin-top: 2px;
+                    margin-right: -5px;
+                    height: 2.5em;
+
+                    opacity: 0;
+                }
+
+                & + .input-label {
+                    &:before,
+                    &:after {
+                        display: block;
+                        position: absolute;
+
+                        right: 1px;
+                        padding: 0 3px;
+
+                        border-left: @control-border-thickness solid @control-border-color;
+
+                        font-family: FontAwesome;
+                        vertical-align: middle;
+
+                        cursor: pointer;
+                        pointer-events: none;
+
+                        background-color: @control-default-background-color;
+
+                        transition: border-color @control-border-color-transition-time ease;
+                    }
+
+                    &:before {
+                        content: '\f0d8';
+
+                        top: 1px;
+                        bottom: 45%;
+                    }
+
+                    &:after {
+                        content: '\f0d7';
+
+                        top: 45%;
+                        bottom: 1px;
+                    }
+                }
+            }
+
             &:focus, &:hover {
                 background-color: @control-active-background-color;
 
-                &, & + .input-label {
+                &,
+                &[type='number'] + .input-label:before,
+                &[type='number'] + .input-label:after,
+                & + .input-label {
                     border-color: @control-border-active-color;
                     color: @control-active-text-color;
                 }
+
             }
         }
 
@@ -70,7 +122,10 @@
             & > .input {
                 background-color: @control-active-background-color;
 
-                &, & + .input-label {
+                &,
+                &[type='number'] + .input-label:before,
+                &[type='number'] + .input-label:after,
+                & + .input-label {
                     border-color: @control-border-active-color;
                     color: @control-active-text-color;
                 }
