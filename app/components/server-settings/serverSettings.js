@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 
 import PrimaryServerSettings from './primaryServerSettings'
 import AdvancedServerSettings from './advancedServerSettings'
-import Expander from '../expander'
-import Button from '../button'
+import Expander from '../controls/expander'
+import Button from '../controls/button'
 
 export default class ServerSettings extends Component {
   render () {

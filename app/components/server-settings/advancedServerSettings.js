@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-import LabeledInput from '../labeledInput'
+import LabeledInput from '../controls/labeledInput'
 
 export default class AdvancedServerSettings extends Component {
   render () {

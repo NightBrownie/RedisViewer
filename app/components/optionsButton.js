@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 
-import Button from './button';
+import Button from './controls/button';
 
 export default class OptionsButton extends Component {
     static propTypes = {

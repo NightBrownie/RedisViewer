@@ -1,11 +1,11 @@
 import {put, takeLatest} from "redux-saga/effects";
 
 import * as actionTypes from "../constants/actionTypes";
-import {treeViewWidthRestored} from "../actions/configActions";
+import {serverViewWidthRestored} from "../actions/mainLayoutActions";
 import * as layoutConfig from "../services/layoutConfig.service";
 
 function* restoreTreeViewWidth() {
-    yield put(treeViewWidthRestored(layoutConfig.getTreeViewSavedWidth()));
+    yield put(serverViewWidthRestored(layoutConfig.getTreeViewSavedWidth()));
 }
 
 function* saveTreeViewWidth(action) {
@@ -14,7 +14,7 @@ function* saveTreeViewWidth(action) {
 
 export default function* saga() {
     yield [
-        takeLatest(actionTypes.TREE_VIEW_WIDTH_RESTORE_REQUESTED, restoreTreeViewWidth),
-        takeLatest(actionTypes.TREE_VIEW_WIDTH_CHANGED, saveTreeViewWidth)
+        takeLatest(actionTypes.MAIN_LAYOUT_SERVER_VIEW_WIDTH_RESTORE_REQUESTED, restoreTreeViewWidth),
+        takeLatest(actionTypes.MAIN_LAYOUT_SERVER_VIEW_WIDTH_CHANGED, saveTreeViewWidth)
     ];
 }

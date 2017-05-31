@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 
-import Button from '../../button';
+import Button from '../../controls/button';
 import ServerViewSearchTool from './serverViewSearchTool';
 
 export default class ServerViewToolBox extends Component {
     render() {
         return (<div className="server-view-toolbox">
-          <ServerViewSearchTool />
+            <ServerViewSearchTool />
             <Button
                 className="add-server-btn"
                 isInactiveTransparentBorder={true}
