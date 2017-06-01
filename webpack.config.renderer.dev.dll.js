@@ -68,5 +68,9 @@ export default merge(baseConfig, {
             },
         })
     ],
-    externals: ['fsevents', 'crypto-browserify', {'electron-config': 'electron-config'}]
+    externals: [
+        'fsevents',
+        'crypto-browserify',
+        {'electron-config': 'electron-config'}
+    ]
 });
