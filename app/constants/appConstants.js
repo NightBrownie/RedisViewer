@@ -1,4 +1,5 @@
 /* Configuration */
+export const CONFIG_FILE_TEXT_ENCODING = 'utf8';
 export const CONFIG_FILE_NAME = 'RedisViewer.config.json';
 export const ENCRYPTED_CONFIG_FILE_NAME = CONFIG_FILE_NAME + '.enc';
 

@@ -175,6 +175,7 @@
     "electron-debug": "^1.1.0",
     "extract-text-webpack-plugin": "^2.0.0",
     "font-awesome": "^4.7.0",
+    "fs-extra": "^3.0.1",
     "hiredis": "^0.5.0",
     "history": "^4.6.1",
     "ioredis": "^3.1.1",
