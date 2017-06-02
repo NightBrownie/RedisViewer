@@ -1,11 +1,11 @@
 import {combineReducers} from 'redux'
 
-import {routerReducer as routing} from 'react-router-redux'
+import {routerReducer as router} from 'react-router-redux'
 import layout from './layout.reducer'
 import serverView from './serverView.reducer'
 
 const rootReducer = combineReducers({
-  routing,
+  router,
   layout,
   serverView
 })

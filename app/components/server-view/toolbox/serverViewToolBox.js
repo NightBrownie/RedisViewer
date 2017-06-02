@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import { Redirect } from 'react-router'
 
 import Button from '../../controls/button'
 import ServerViewSearchTool from './serverViewSearchTool'
@@ -22,19 +21,19 @@ export default class ServerViewToolBox extends Component {
         isInactiveTransparentBorder
         onClick={this.props.requestAddServer}
       >
-        <i className='add-server-icon fa fa-server fa-fw fa-lg' />
+        <i className='add-server-icon fa fa-server fa-fw fa-lg'/>
       </Button>
       <Button
         className='settings-btn'
         isInactiveTransparentBorder
       >
-        <i className='settings-icon fa fa-cog fa-fw fa-lg' />
+        <i className='settings-icon fa fa-cog fa-fw fa-lg'/>
       </Button>
       <Button
         className='remove-btn'
         isInactiveTransparentBorder
       >
-        <i className='remove-icon fa fa-trash-o fa-fw fa-lg' />
+        <i className='remove-icon fa fa-trash-o fa-fw fa-lg'/>
       </Button>
     </div>)
   }

@@ -1,17 +1,17 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import Main from '../containers/main';
+import Main from '../containers/main'
 
 export default class App extends Component {
-    static propTypes = {
-        children: PropTypes.node
-    };
+  static propTypes = {
+    children: PropTypes.node
+  }
 
-    render() {
-        return (
-          <div className="app-container">
-            <Main />
-          </div>
-        );
-    }
+  render () {
+    return (
+      <div className="app-container">
+        <Main />
+      </div>
+    )
+  }
 }

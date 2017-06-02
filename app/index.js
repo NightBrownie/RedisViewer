@@ -2,10 +2,10 @@ import React from 'react'
 import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import Root from './containers/root'
-import App from './containers/app'
-import configureStore, { history } from './store/configureStore'
+import { configureStore, history } from './store/configureStore'
 import 'font-awesome/less/font-awesome.less'
 import './styles/main.less'
+import App from './containers/app'
 
 const store = configureStore()
 
