@@ -13,7 +13,7 @@ const sagaMiddleware = createSagaMiddleware()
 
 const enhancer = applyMiddleware(sagaMiddleware, router)
 
-export default function configureStore (initialState) {
+export const configureStore = (initialState) => {
   let store = createStore(rootReducer, initialState, enhancer); // eslint-disable-line
 
   // apply sagas here
