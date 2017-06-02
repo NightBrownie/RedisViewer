@@ -23,7 +23,6 @@ export default class ServerViewToolBox extends Component {
         onClick={this.props.requestAddServer}
       >
         <i className='add-server-icon fa fa-server fa-fw fa-lg' />
-        {this.props.addServerRequested && <Redirect to='/add-server' push />}
       </Button>
       <Button
         className='settings-btn'

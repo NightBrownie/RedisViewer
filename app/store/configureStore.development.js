@@ -16,8 +16,8 @@ export default (initialState) => {
   const middleware = []
   const enhancers = []
 
-    // Saga Middleware
-    // TODO: apply saga monitor
+  // Saga Middleware
+  // TODO: apply saga monitor
   const sagaMiddleware = createSagaMiddleware()
   middleware.push(sagaMiddleware)
 

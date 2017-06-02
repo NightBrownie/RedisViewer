@@ -1,3 +1,5 @@
+import { routerActions } from 'react-router-redux'
+
 import * as types from '../constants/actionTypes'
 
 export const requestServerList = () => ({
@@ -13,9 +15,7 @@ export const serverListChanged = (servers) => ({
   servers
 })
 
-export const requestAddServer = () => ({
-  type: types.SERVER_VIEW_REQUEST_ADD_SERVER
-})
+export const requestAddServer = () => routerActions.replace('/add-server')
 
 export const addServer = (server) => ({
   type: types.SERVER_VIEW_ADD_SERVER,
