@@ -1,11 +1,11 @@
-import {combineReducers} from 'redux';
+import {combineReducers} from 'redux'
 
-import serverViewToolbar from './serverViewToolbar.reducer';
-import serverList from "./serverList.reducer";
+import serverViewToolBox from './serverViewToolBox.reducer'
+import serverList from './serverList.reducer'
 
 const serverViewReducer = combineReducers({
-    serverViewToolbar,
-    serverList
-});
+  serverViewToolBox,
+  serverList
+})
 
-export default serverViewReducer;
+export default serverViewReducer

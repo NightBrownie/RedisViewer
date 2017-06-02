@@ -5,7 +5,13 @@ import ServerList from './server-list/serverList';
 
 export default class ServerView extends Component {
     static propTypes = {
-        requestServerList: PropTypes.func.isRequired
+        requestServerList: PropTypes.func.isRequired,
+        requestAddServer: PropTypes.func.isRequired,
+        addServerRequested: PropTypes.bool.isRequired
+    };
+
+    static defaultProps = {
+        addServerRequested: false
     };
 
     componentWillMount() {
@@ -14,7 +20,10 @@ export default class ServerView extends Component {
 
     render() {
         return (<div className="server-view">
-          <ServerViewToolBox />
+          <ServerViewToolBox
+            requestAddServer={this.props.requestAddServer}
+            addServerRequested={this.props.addServerRequested}
+          />
           <ServerList />
         </div>);
     }

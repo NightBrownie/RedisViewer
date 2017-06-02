@@ -1,12 +1,12 @@
-import React from 'react';
+import React from 'react'
 import { Route, Switch } from 'react-router'
 
 import ServerSettings from '../components/server-settings/serverSettings'
-import AppMainInfo from "../components/appMainInfo";
+import AppMainInfo from '../components/appMainInfo'
 
 const mainRoutes = (<Switch>
-    <Route path="/" exact={true} component={AppMainInfo} />
-    <Route path="/add-server" exact={true} component={ServerSettings} />
-</Switch>);
+  <Route path='/' component={AppMainInfo} />
+  <Route path='/add-server' component={ServerSettings} />
+</Switch>)
 
-export default mainRoutes;
+export default mainRoutes

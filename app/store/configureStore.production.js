@@ -1,23 +1,23 @@
-import {createStore, applyMiddleware} from 'redux';
-import createSagaMiddleware from 'redux-saga';
-import {routerMiddleware} from 'react-router-redux';
-import rootReducer from '../reducers';
-import {createMemoryHistory as createHistory} from 'history';
+import {createStore, applyMiddleware} from 'redux'
+import createSagaMiddleware from 'redux-saga'
+import {routerMiddleware} from 'react-router-redux'
+import rootReducer from '../reducers'
+import {createMemoryHistory as createHistory} from 'history'
 
-import rootSaga from '../sagas';
+import rootSaga from '../sagas'
 
-export const history = createHistory();
+export const history = createHistory()
 
-const router = routerMiddleware(history);
-const sagaMiddleware = createSagaMiddleware();
+const router = routerMiddleware(history)
+const sagaMiddleware = createSagaMiddleware()
 
-const enhancer = applyMiddleware(sagaMiddleware, router);
+const enhancer = applyMiddleware(sagaMiddleware, router)
 
-export default function configureStore(initialState) {
-    let store = createStore(rootReducer, initialState, enhancer); // eslint-disable-line
+export default function configureStore (initialState) {
+  let store = createStore(rootReducer, initialState, enhancer); // eslint-disable-line
 
-    //apply sagas here
-    sagaMiddleware.run(rootSaga);
+  // apply sagas here
+  sagaMiddleware.run(rootSaga)
 
-    return store;
+  return store
 }

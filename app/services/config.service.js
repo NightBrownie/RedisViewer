@@ -35,8 +35,8 @@ export const getConfigKey = async (key, defaultValue) => {
   await initializeConfig()
 
   return dotProp.has(currentConfig, key)
-    ? dotProp.get(currentConfig, key)
-    : defaultValue
+        ? dotProp.get(currentConfig, key)
+        : defaultValue
 }
 
 const initializeConfig = async () => {
@@ -52,19 +52,19 @@ const getOrCreateEncryptionPassPhrase = async () => {
 
   try {
     currentPassword = await keytar.getPassword(
-      appName,
-      appConstants.USER_KEY_STORAGE_CONFIG_ENCRYPTION_PASSPHRASE_KEY)
+            appName,
+            appConstants.USER_KEY_STORAGE_CONFIG_ENCRYPTION_PASSPHRASE_KEY)
 
     if (!currentPassword) {
       currentPassword = (await await crypto.randomBytes(
-          appConstants.CONFIG_ENCRYPTION_PASSPHRASE_LENGTH_BYTES)
-      ).toString()
+                    appConstants.CONFIG_ENCRYPTION_PASSPHRASE_LENGTH_BYTES)
+            ).toString()
 
       await keytar.setPassword(
-        appName,
-        appConstants.USER_KEY_STORAGE_CONFIG_ENCRYPTION_PASSPHRASE_KEY,
-        currentPassword
-      )
+                appName,
+                appConstants.USER_KEY_STORAGE_CONFIG_ENCRYPTION_PASSPHRASE_KEY,
+                currentPassword
+            )
     }
   } catch (err) {
     winston.error(`An error occurred during config encryption pass phrase generation: ${err.message}`)
@@ -75,7 +75,7 @@ const getOrCreateEncryptionPassPhrase = async () => {
 
 const getOrCreateConfig = async () => {
   try {
-    // check portable mode config
+        // check portable mode config
     if (await fs.pathExists(portableConfigPath)) {
       let configText = await fs.readFile(portableConfigPath, appConstants.CONFIG_FILE_TEXT_ENCODING)
       try {
@@ -87,7 +87,8 @@ const getOrCreateConfig = async () => {
             encrypted: false
           }
         }
-      } catch (err) {}
+      } catch (err) {
+      }
     }
 
     if (!configEncryptionPassPhrase) {
@@ -96,7 +97,7 @@ const getOrCreateConfig = async () => {
 
     if (await fs.pathExists(userDataAppEncryptedConfigPath)) {
       let encryptedConfigText = await fs.readFile(userDataAppEncryptedConfigPath,
-        appConstants.CONFIG_FILE_TEXT_ENCODING)
+                appConstants.CONFIG_FILE_TEXT_ENCODING)
 
       try {
         if (configEncryptionPassPhrase) {
@@ -108,7 +109,8 @@ const getOrCreateConfig = async () => {
             encrypted: true
           }
         }
-      } catch (err) {}
+      } catch (err) {
+      }
     }
 
     if (fs.existsSync(userDataAppConfigPath)) {
@@ -119,7 +121,8 @@ const getOrCreateConfig = async () => {
           portable: false,
           encrypted: false
         }
-      } catch (err) {}
+      } catch (err) {
+      }
     }
 
     return {
@@ -141,7 +144,7 @@ const saveConfig = async () => {
     } else if (encrypted) {
       let encryptedConfigText = cryptoHelper.encrypt(configText, configEncryptionPassPhrase)
       await await fs.writeFile(userDataAppEncryptedConfigPath,
-        encryptedConfigText, appConstants.CONFIG_FILE_TEXT_ENCODING)
+                encryptedConfigText, appConstants.CONFIG_FILE_TEXT_ENCODING)
     } else {
       await fs.writeFile(userDataAppConfigPath, configText, appConstants.CONFIG_FILE_TEXT_ENCODING)
     }
