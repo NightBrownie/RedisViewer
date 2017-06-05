@@ -1,26 +1,22 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { Field, FormSection } from 'redux-form'
-import {required} from 'redux-form-validators/lib'
+import { required } from 'redux-form-validators/lib'
 
 import LabeledInput from '../controls/labeledInput'
 
-const renderServerNameField = (field) => {
-  console.log(field);
-
-  return (
-    <LabeledInput
-      isRequired
-      placeholder='Enter server name'
-      errors={(field.meta.touched && field.meta.invalid)
-        ? field.meta.error.props.defaultMessage
-        : null
-      }
-      {...field.input}
-    >
-      Server Name
-    </LabeledInput>
-  )
-}
+const renderServerNameField = (field) => (
+  <LabeledInput
+    isRequired
+    placeholder='Enter server name'
+    errors={(field.meta.touched && field.meta.invalid)
+      ? `Field ${field.meta.error.props.defaultMessage}`
+      : null
+    }
+    {...field.input}
+  >
+    Server Name
+  </LabeledInput>
+)
 
 const renderHostIPField = (field) => (
   <LabeledInput

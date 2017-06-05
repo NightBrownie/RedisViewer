@@ -1,139 +1,236 @@
 .labeled-input {
+  display: flex;
+  position: relative;
+
+  .input-label-container {
     display: flex;
-    position: relative;
+    flex-direction: row-reverse;
+    flex: 1;
 
-    .input-label-container {
-        display: flex;
-        flex-direction: row-reverse;
-        flex: 1;
+    & > .input {
+      &, & + .input-label {
+        border: @control-border-thickness solid @control-border-color;
+      }
+    }
 
-        & > .input {
-            &, & + .input-label {
-                border: @control-border-thickness solid @control-border-color;
-            }
+    & > .input {
+      flex: 1;
+      width: 100%;
+
+      outline: none;
+
+      border-radius: 0 @control-border-radius @control-border-radius 0;
+
+      padding: 5px;
+
+      background-color: @control-default-background-color;
+      color: @control-text-color;
+
+      transition: background-color @control-color-transition-time ease,
+      border-color @control-border-color-transition-time ease;
+
+      &::placeholder {
+        color: @control-text-color;
+      }
+
+      & + .input-label {
+        border-right: 0;
+        border-radius: @control-border-radius 0 0 @control-border-radius;
+
+        padding: 5px;
+
+        color: @control-text-color;
+
+        cursor: pointer;
+
+        transition: color @control-color-transition-time ease,
+        border-color @control-border-color-transition-time ease;
+
+        .required-icon {
+          margin-left: 0.2em;
+
+          font-size: 0.5em;
+
+          vertical-align: text-top;
+
+          color: @control-required-mark-color;
+        }
+      }
+
+      &[type='number'] {
+        &::-webkit-inner-spin-button {
+          margin-top: 2px;
+          margin-right: -5px;
+          height: 2.5em;
+
+          opacity: 0;
         }
 
-        & > .input {
-            flex: 1;
-            width: 100%;
+        & + .input-label {
+          &:before,
+          &:after {
+            display: block;
+            position: absolute;
 
-            outline: none;
+            right: 1px;
+            padding: 0 3px;
 
-            border-radius: 0 @control-border-radius @control-border-radius 0;
+            border-left: @control-border-thickness solid @control-border-color;
 
-            padding: 5px;
+            font-family: FontAwesome;
+            vertical-align: middle;
+
+            cursor: pointer;
+            pointer-events: none;
 
             background-color: @control-default-background-color;
-            color: @control-text-color;
 
-            transition: background-color @control-color-transition-time ease,
-                border-color @control-border-color-transition-time ease;
+            transition: border-color @control-border-color-transition-time ease;
+          }
 
-            &::placeholder {
-                color: @control-text-color;
-            }
+          &:before {
+            content: '\f0d8';
 
-            & + .input-label {
-                border-right: 0;
-                border-radius: @control-border-radius 0 0 @control-border-radius;
+            top: 1px;
+            bottom: 45%;
+          }
 
-                padding: 5px;
+          &:after {
+            content: '\f0d7';
 
-                color: @control-text-color;
+            top: 45%;
+            bottom: 1px;
+          }
+        }
+      }
 
-                cursor: pointer;
+      &:focus, &:hover {
+        background-color: @control-active-background-color;
 
-                transition: color @control-color-transition-time ease,
-                    border-color @control-border-color-transition-time ease;
-
-                .required-icon {
-                    margin-left: 0.2em;
-
-                    font-size: 0.5em;
-
-                    vertical-align: text-top;
-
-                    color: @control-required-mark-color;
-                }
-            }
-
-            &[type='number'] {
-                &::-webkit-inner-spin-button {
-                    margin-top: 2px;
-                    margin-right: -5px;
-                    height: 2.5em;
-
-                    opacity: 0;
-                }
-
-                & + .input-label {
-                    &:before,
-                    &:after {
-                        display: block;
-                        position: absolute;
-
-                        right: 1px;
-                        padding: 0 3px;
-
-                        border-left: @control-border-thickness solid @control-border-color;
-
-                        font-family: FontAwesome;
-                        vertical-align: middle;
-
-                        cursor: pointer;
-                        pointer-events: none;
-
-                        background-color: @control-default-background-color;
-
-                        transition: border-color @control-border-color-transition-time ease;
-                    }
-
-                    &:before {
-                        content: '\f0d8';
-
-                        top: 1px;
-                        bottom: 45%;
-                    }
-
-                    &:after {
-                        content: '\f0d7';
-
-                        top: 45%;
-                        bottom: 1px;
-                    }
-                }
-            }
-
-            &:focus, &:hover {
-                background-color: @control-active-background-color;
-
-                &,
-                &[type='number'] + .input-label:before,
-                &[type='number'] + .input-label:after,
-                & + .input-label {
-                    border-color: @control-border-active-color;
-                    color: @control-active-text-color;
-                }
-
-            }
+        &,
+        &[type='number'] + .input-label:before,
+        &[type='number'] + .input-label:after,
+        & + .input-label {
+          border-color: @control-border-active-color;
+          color: @control-active-text-color;
         }
 
-        &:focus, &:hover {
-            & > .input {
-                background-color: @control-active-background-color;
+      }
+    }
 
-                &,
-                &[type='number'] + .input-label:before,
-                &[type='number'] + .input-label:after,
-                & + .input-label {
-                    border-color: @control-border-active-color;
-                    color: @control-active-text-color;
-                }
-            }
+    & > .error-messages-container {
+      position: absolute;
+      z-index: 1;
+
+      left: 0;
+      right: 0;
+
+      margin: 0;
+      padding: 5px;
+
+      border: @control-border-thickness solid @control-border-error-color;
+      border-radius: @control-border-radius;
+
+      background-color: @control-default-background-color;
+
+      list-style: none;
+
+      opacity: 1;
+
+      transition: opacity @control-default-transition-time ease;
+
+      &:before,
+      &:after {
+        content: " ";
+
+        position: absolute;
+        left: 50%;
+
+        height: 0;
+        width: 0;
+
+        border: solid transparent;
+
+        pointer-events: none;
+      }
+
+      &:before {
+        border-width: (@control-caret-width + @control-border-thickness*2);
+        margin-left: -(@control-caret-width + @control-border-thickness*2);
+      }
+
+      &:after {
+        border-width: @control-caret-width;
+        margin-left: -@control-caret-width;
+      }
+
+      &.top {
+        bottom: 150%;
+
+        &:before,
+        &:after {
+          top: 100%;
         }
+
+        &:after {
+          border-top-color: @control-default-background-color;
+        }
+
+        &:before {
+          border-top-color: @control-border-error-color;
+        }
+      }
+
+      &.bottom {
+        top: 150%;
+
+        &:before,
+        &:after {
+          bottom: 100%;
+        }
+
+        &:after {
+          border-bottom-color: @control-default-background-color;
+        }
+        &:before {
+          border-bottom-color: @control-border-error-color;
+        }
+      }
+
+      &.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      & > .error-message {
+        margin-top: 5px;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        & > .error-message-icon {
+          color: @control-error-color;
+        }
+      }
     }
 
-    &.error .input-label-container > .input {
-        border-color: @control-border-error-color;
+    &:focus, &:hover {
+      & > .input {
+        background-color: @control-active-background-color;
+
+        &,
+        &[type='number'] + .input-label:before,
+        &[type='number'] + .input-label:after,
+        & + .input-label {
+          border-color: @control-border-active-color;
+          color: @control-active-text-color;
+        }
+      }
     }
+  }
+
+  &.error .input-label-container > .input {
+    border-color: @control-border-error-color;
+  }
 }

@@ -1,15 +1,16 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 
-import PrimaryServerSettings from './primaryServerSettings'
-import AdvancedServerSettings from './advancedServerSettings'
-import Expander from '../controls/expander'
-import Button from '../controls/button'
 import ServerSettingsForm from './serverSettingsForm'
 
 export default class ServerSettings extends Component {
-  handleSubmit (formValues) {
-    console.log('Server settings have been saved')
-    console.log(formValues)
+  static propTypes = {
+    initialServerSettings: PropTypes.object,
+    saveServer: PropTypes.func.isRequired
+  }
+
+  static defaultProps = {
+    initialServerSettings: {}
   }
 
   render () {
@@ -19,8 +20,8 @@ export default class ServerSettings extends Component {
       </h2>
 
       <ServerSettingsForm
-        initialValues={{}}
-        onSubmit={this.handleSubmit}
+        initialValues={this.props.initialServerSettings}
+        onSubmit={this.props.saveServer}
       />
     </div>)
   }

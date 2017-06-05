@@ -3,7 +3,6 @@ import classNames from 'classnames';
 
 export default class Button extends Component {
     static propTypes = {
-        type: PropTypes.string,
         isInactiveTransparentBorder: PropTypes.bool,
         onClick: PropTypes.func
     };
@@ -13,20 +12,20 @@ export default class Button extends Component {
     };
 
     render() {
+        let {isInactiveTransparentBorder, ...props} = this.props
+
         return (<button
+            {...props}
             ref={(button) => this.innerButton = button}
             className={classNames('button',
-                this.props.isInactiveTransparentBorder
-                    ? 'inactive-transparent-border'
-                    : false,
-                this.props.className || '')}
-            type={this.props.type}
+              isInactiveTransparentBorder
+                ? 'inactive-transparent-border'
+                : false,
+              this.props.className || '')}
             onClick={(event) => {
                 this.props.onClick && this.props.onClick(event);
                 this.innerButton.blur();
             }}
-        >
-          {this.props.children}
-        </button>);
+        />);
     }
 }

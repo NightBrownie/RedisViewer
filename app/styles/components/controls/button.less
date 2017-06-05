@@ -1,37 +1,46 @@
 .button {
-    display: inline;
-    vertical-align: middle;
+  display: inline;
+  vertical-align: middle;
 
-    border: @control-border-thickness solid;
-    border-radius: @control-border-radius;
+  border: @control-border-thickness solid;
+  border-radius: @control-border-radius;
 
-    padding: 5px;
+  padding: 5px;
 
-    background: none;
-    outline: none;
+  background: none;
+  outline: none;
 
+  border-color: @control-border-color;
+  color: @control-text-color;
+
+  cursor: pointer;
+
+  transition: color @control-color-transition-time ease,
+  background-color @control-color-transition-time ease,
+  border-color @control-border-color-transition-time ease;
+
+  &:hover,
+  &:focus {
+    border-color: @control-border-active-color;
+  }
+
+  &:disabled {
+    background-color: @control-disabled-background-color;
     border-color: @control-border-color;
-    color: @control-text-color;
+    color: @control-disabled-text-color;
 
-    cursor: pointer;
+    cursor: not-allowed;
+  }
 
-    transition: color @control-color-transition-time ease,
-        border-color @control-border-color-transition-time ease;
+  &.inactive-transparent-border {
+    border-color: transparent;
 
-    &:hover,
+    &:hover {
+      border-color: @control-border-color;
+    }
+
     &:focus {
-        border-color: @control-border-active-color;
+      border-color: @control-border-active-color;
     }
-
-    &.inactive-transparent-border {
-        border-color: transparent;
-
-        &:hover {
-            border-color: @control-border-color;
-        }
-
-        &:focus {
-            border-color: @control-border-active-color;
-        }
-    }
+  }
 }

@@ -10,10 +10,12 @@ import { reduxForm } from 'redux-form'
 class ServerSettingsForm extends Component {
   static propTypes = {
     requestTestConnection: PropTypes.func,
-    error: PropTypes.any
+    invalid: PropTypes.bool
   }
 
   render () {
+
+    console.log(this.props)
     return (<form
       className='server-settings-form'
       onSubmit={this.props.handleSubmit}
@@ -30,7 +32,7 @@ class ServerSettingsForm extends Component {
         <Button
           className='test-connection-button'
           type='button'
-          disabled={!!this.props.error}
+          disabled={this.props.invalid}
         >
           <i
             className='test-connection-button-icon fa fa-refresh fa-fw fa-lg'
@@ -40,7 +42,7 @@ class ServerSettingsForm extends Component {
         <Button
           className='save-server-settings-button'
           type='submit'
-          disabled={!!this.props.error}
+          disabled={this.props.invalid}
         >
           Save
         </Button>

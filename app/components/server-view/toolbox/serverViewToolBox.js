@@ -8,7 +8,7 @@ export default class ServerViewToolBox extends Component {
     requestAddServer: PropTypes.func.isRequired,
     addServerRequested: PropTypes.bool.isRequired
   }
-
+a
   static defaultProps = {
     addServerRequested: false
   }
