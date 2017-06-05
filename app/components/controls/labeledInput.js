@@ -6,8 +6,8 @@ import classNames from 'classnames';
 export default class LabeledInput extends Component {
     static propTypes = {
         errors: PropTypes.oneOfType([
-          PropTypes.arrayOf(PropTypes.object),
-          PropTypes.object
+          PropTypes.arrayOf(PropTypes.string),
+          PropTypes.string
         ]),
         isRequired: PropTypes.bool,
     };

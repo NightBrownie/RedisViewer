@@ -11,7 +11,10 @@ const renderServerNameField = (field) => {
     <LabeledInput
       isRequired
       placeholder='Enter server name'
-      errors={(field.meta.touched && field.meta.invalid) ? field.meta.error : null}
+      errors={(field.meta.touched && field.meta.invalid)
+        ? field.meta.error.props.defaultMessage
+        : null
+      }
       {...field.input}
     >
       Server Name
