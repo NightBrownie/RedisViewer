@@ -1,22 +1,66 @@
 import React, {Component} from 'react'
+import { Field, FormSection } from 'redux-form'
 
 import LabeledInput from '../controls/labeledInput'
 
+const renderKeysRootPatternField = (field) => (
+  <LabeledInput
+    placeholder='* (default)'
+    {...field.input}
+  >
+    Keys Root Pattern
+  </LabeledInput>
+)
+
+const renderKeysFolderSeparatorField = (field) => (
+  <LabeledInput
+    placeholder='/ (default)'
+    {...field.input}
+  >
+    Keys Folder Separator
+  </LabeledInput>
+)
+
+const renderConnectionTimeoutField = (field) => (
+  <LabeledInput
+    placeholder='60 (default)'
+    {...field.input}
+  >
+    Connection Timeout (s)
+  </LabeledInput>
+)
+
+const renderExecutionTimeoutField = (field) => (
+  <LabeledInput
+    placeholder='60 (default)'
+    {...field.input}
+  >
+    Execution Timeout (s)
+  </LabeledInput>
+)
+
 export default class AdvancedServerSettings extends Component {
   render () {
-    return <div className='advanced-server-settings'>
-      <LabeledInput placeholder='* (default)'>
-        Keys Root Pattern
-      </LabeledInput>
-      <LabeledInput placeholder='/ (default)'>
-        Keys Folder Separator
-      </LabeledInput>
-      <LabeledInput placeholder='60 (default)'>
-        Connection Timeout (s)
-      </LabeledInput>
-      <LabeledInput placeholder='60 (default)'>
-        Execution Timeout (s)
-      </LabeledInput>
-    </div>
+    return (<FormSection
+      name='advancedSettings'
+      className='advanced-server-settings'
+    >
+      <Field
+        name='keysRootPattern'
+        component={renderKeysRootPatternField}
+      />
+      <Field
+        name='keysFolderSeparator'
+        component={renderKeysFolderSeparatorField}
+      />
+      <Field
+        name='connectionTimeout'
+        component={renderConnectionTimeoutField}
+      />
+      <Field
+        name='executionTimeout'
+        component={renderExecutionTimeoutField}
+      />
+    </FormSection>)
   }
 }

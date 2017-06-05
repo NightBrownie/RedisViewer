@@ -1,30 +1,78 @@
 import React, {Component} from 'react'
+import { Field, FormSection } from 'redux-form'
+import {required} from 'redux-form-validators/lib'
 
 import LabeledInput from '../controls/labeledInput'
 
+const renderServerNameField = (field) => {
+  console.log(field);
+
+  return (
+    <LabeledInput
+      isRequired
+      placeholder='Enter server name'
+      errors={(field.meta.touched && field.meta.invalid) ? field.meta.error : null}
+      {...field.input}
+    >
+      Server Name
+    </LabeledInput>
+  )
+}
+
+const renderHostIPField = (field) => (
+  <LabeledInput
+    placeholder='127.0.0.1 (default)'
+    {...field.input}
+  >
+    Host / IP
+  </LabeledInput>
+)
+
+const renderPortField = (field) => (
+  <LabeledInput
+    placeholder='6379 (default)'
+    type='number'
+    min={0}
+    max={65535}
+    {...field.input}
+  >
+    Port
+  </LabeledInput>
+)
+
+const renderPasswordField = (field) => (
+  <LabeledInput
+    placeholder='empty (default if no password required by the server)'
+    type='password'
+    {...field.input}
+  >
+    Password
+  </LabeledInput>
+)
+
 export default class PrimaryServerSettings extends Component {
   render () {
-    return <div className='primary-server-settings'>
-      <LabeledInput
-        isRequired
-        placeholder='Enter server name'
-      >
-        Server Name
-      </LabeledInput>
-      <LabeledInput placeholder='127.0.0.1 (default)'>
-        Host / IP
-      </LabeledInput>
-      <LabeledInput
-          placeholder='6379 (default)'
-          type='number'
-          min={0}
-          max={65535}
-      >
-        Port
-      </LabeledInput>
-      <LabeledInput placeholder='empty (default if no password required by the server)'>
-        Password
-      </LabeledInput>
-    </div>
+    return (<FormSection
+      name='primarySettings'
+      className='primary-server-settings'
+    >
+      <Field
+        name='serverName'
+        component={renderServerNameField}
+        validate={[required()]}
+      />
+      <Field
+        name='host'
+        component={renderHostIPField}
+      />
+      <Field
+        name='port'
+        component={renderPortField}
+      />
+      <Field
+        name='password'
+        component={renderPasswordField}
+      />
+    </FormSection>)
   }
 }

@@ -181,6 +181,7 @@
     "ioredis": "^3.1.1",
     "keytar": "^4.0.3",
     "node-loader": "^0.6.0",
+    "prop-types": "^15.5.10",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-hot-loader": "3.0.0-beta.6",
@@ -190,6 +191,8 @@
     "react-router-redux": "next",
     "react-split-pane": "^0.1.63",
     "redux": "^3.6.0",
+    "redux-form": "^6.7.0",
+    "redux-form-validators": "^1.0.2",
     "redux-saga": "^0.14.8",
     "source-map-support": "^0.4.10",
     "winston": "^2.3.1"

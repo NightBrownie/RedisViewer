@@ -3,7 +3,7 @@ import createSagaMiddleware from 'redux-saga'
 import { createMemoryHistory as createHistory } from 'history'
 import { routerMiddleware, routerActions } from 'react-router-redux'
 import { createLogger } from 'redux-logger'
-import rootReducer from '../reducers'
+import rootReducer from '../reducers/root.reducer'
 
 import rootSaga from '../sagas'
 
@@ -58,8 +58,8 @@ export const configureStore = (initialState) => {
   sagaMiddleware.run(rootSaga)
 
   if (module.hot) {
-    module.hot.accept('../reducers', () =>
-      store.replaceReducer(require('../reducers')) // eslint-disable-line global-require
+    module.hot.accept('../reducers/root.reducer', () =>
+      store.replaceReducer(require('../reducers/root.reducer')) // eslint-disable-line global-require
     )
   }
 

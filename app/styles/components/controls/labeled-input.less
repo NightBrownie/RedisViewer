@@ -10,8 +10,6 @@
         & > .input {
             &, & + .input-label {
                 border: @control-border-thickness solid @control-border-color;
-
-                transition: border-color @control-border-color-transition-time ease;
             }
         }
 
@@ -28,7 +26,8 @@
             background-color: @control-default-background-color;
             color: @control-text-color;
 
-            transition: background-color @control-color-transition-time ease;
+            transition: background-color @control-color-transition-time ease,
+                border-color @control-border-color-transition-time ease;
 
             &::placeholder {
                 color: @control-text-color;
@@ -44,7 +43,8 @@
 
                 cursor: pointer;
 
-                transition: color @control-color-transition-time ease;
+                transition: color @control-color-transition-time ease,
+                    border-color @control-border-color-transition-time ease;
 
                 .required-icon {
                     margin-left: 0.2em;

@@ -1,42 +1,43 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 import classNames from 'classnames';
 
 export default class LabeledInput extends Component {
     static propTypes = {
-        placeholder: PropTypes.string,
-        type: PropTypes.string,
-        title: PropTypes.string,
-        hasError: PropTypes.bool,
+        errors: PropTypes.oneOfType([
+          PropTypes.arrayOf(PropTypes.object),
+          PropTypes.object
+        ]),
         isRequired: PropTypes.bool,
-        min: PropTypes.number,
-        max: PropTypes.number
     };
 
     static defaultProps = {
-        type: 'text',
-        hasError: false,
         isRequired: false
     };
 
     render() {
+        const {
+          errors,
+          isRequired,
+          children,
+          className,
+          ...inputProps
+        } = this.props;
+
         return (<span
             className={classNames('labeled-input',
-                this.props.hasError ? 'error' : '',
-                this.props.className)}
+              errors ? 'error' : '',
+              className)}
         >
             <label className="input-label-container">
                 <input
                     className="input"
-                    type={this.props.type}
-                    title={this.props.title}
-                    placeholder={this.props.placeholder}
-                    min={this.props.min}
-                    max={this.props.max}
+                    {...inputProps}
                 />
                 <span className="input-label">
-                    {this.props.children}
-                    {this.props.isRequired
+                    {children}
+                    {isRequired
                         ? (<i
                                 className='required-icon fa fa-asterisk fa-fw'
                                 aria-hidden='true'
