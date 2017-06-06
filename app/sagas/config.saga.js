@@ -3,20 +3,20 @@ import { delay } from 'redux-saga'
 
 import * as actionTypes from '../constants/actionTypes'
 import * as mainLayoutActions from '../actions/mainLayoutActions'
-import * as layoutConfig from '../services/layoutConfig.service'
+import * as layoutConfigService from '../services/layoutConfig.service'
 
 function * requestServerViewWidthRestore () {
   yield put(mainLayoutActions.serverViewWidthRestoreRequested())
 }
 
 function * restoreTreeViewWidth () {
-  let treeViewSavedWidth = yield call(layoutConfig.getTreeViewSavedWidth)
+  let treeViewSavedWidth = yield call(layoutConfigService.getTreeViewSavedWidth)
   yield put(mainLayoutActions.serverViewWidthRestored(treeViewSavedWidth))
 }
 
 function * saveTreeViewWidth (action) {
   yield call(delay, 300)
-  yield call(layoutConfig.setTreeViewSavedWidth, action.width)
+  yield call(layoutConfigService.setTreeViewSavedWidth, action.width)
 }
 
 export default function * saga () {

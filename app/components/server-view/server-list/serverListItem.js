@@ -9,20 +9,23 @@ import OptionsButton from '../../optionsButton'
 
 export default class ServerListItem extends Component {
     static propTypes = {
-        treeViewSpans: PropTypes.oneOfType([
-            PropTypes.arrayOf(PropTypes.oneOf(Object.values(treeViewSpanTypes))),
-            PropTypes.oneOf(Object.values(treeViewSpanTypes))
-        ]).isRequired,
-        isExpanded: PropTypes.bool.isRequired,
-        itemType: PropTypes.oneOf(Object.values(treeViewItemTypes)).isRequired,
-        name: PropTypes.string
+      treeViewSpans: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.oneOf(Object.values(treeViewSpanTypes))),
+        PropTypes.oneOf(Object.values(treeViewSpanTypes))
+      ]).isRequired,
+      isExpanded: PropTypes.bool.isRequired,
+      onSelected: PropTypes.func,
+      isSelected: PropTypes.bool,
+      itemType: PropTypes.oneOf(Object.values(treeViewItemTypes)).isRequired,
+      name: PropTypes.string
     }
 
     static defaultProps = {
-        treeViewSpans: treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN,
-        isExpandable: false,
-        isExpanded: false,
-        name: ''
+      treeViewSpans: treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN,
+      isExpandable: false,
+      isExpanded: false,
+      isSelected: false,
+      name: ''
     }
 
     render () {
@@ -30,7 +33,11 @@ export default class ServerListItem extends Component {
             ? this.props.treeViewSpans
             : [this.props.treeViewSpans]
 
-        return (<li className="server-list-item" tabIndex={0}>
+        return (<li
+          className="server-list-item"
+          tabIndex={0}
+          onClick={() => this.props.selected && this.props.selected()}
+        >
             { spanTypes.map((spanType, spanTypeIndex) => (
                 <TreeViewSpan
                     // eslint-disable-next-line react/no-array-index-key

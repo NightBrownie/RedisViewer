@@ -9,13 +9,12 @@ import { reduxForm } from 'redux-form'
 
 class ServerSettingsForm extends Component {
   static propTypes = {
-    requestTestConnection: PropTypes.func,
+    requestConnectionTest: PropTypes.func.isRequired,
+    cancelEdit: PropTypes.func.isRequired,
     invalid: PropTypes.bool
   }
 
   render () {
-
-    console.log(this.props)
     return (<form
       className='server-settings-form'
       onSubmit={this.props.handleSubmit}
@@ -33,6 +32,7 @@ class ServerSettingsForm extends Component {
           className='test-connection-button'
           type='button'
           disabled={this.props.invalid}
+          onClick={this.props.requestConnectionTest}
         >
           <i
             className='test-connection-button-icon fa fa-refresh fa-fw fa-lg'
@@ -49,6 +49,7 @@ class ServerSettingsForm extends Component {
         <Button
           className='cancel-server-settings-changes-button'
           type='button'
+          onClick={this.props.cancelEdit}
         >
           Cancel
         </Button>

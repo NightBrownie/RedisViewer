@@ -95,7 +95,7 @@ export default class LabeledInput extends Component {
           {(
             <ul
               className={classNames(
-                'error-messages-container',
+                'popup error-messages-container',
                 errorMessagesPlacement,
                 errors && (this.state.isFocused || this.state.isMouseOver)
                   ? ''

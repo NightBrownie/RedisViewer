@@ -1,2 +1,2 @@
 export const ROOT = '/'
-export const ADD_SERVER = '/add-server'
+export const EDIT_SERVER = '/edit-server'

@@ -3,11 +3,13 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 
 import ServerView from '../components/server-view/serverView'
-import * as serverViewActions from '../actions/serverViewActions'
+import * as serverViewActions from '../actions/serverActions'
 
 export default connect(
   state => ({
-    addServerRequested: state.serverView.serverViewToolBox.addServerRequested
+    editServerRequested: state.serverView.serverViewToolBox.editServerRequested,
+    serverList: state.serverView.serverList,
+    selectedServer: state.serverView.serverViewToolBox.selectedServer
   }),
   dispatch => bindActionCreators(serverViewActions, dispatch)
 )(ServerView)
