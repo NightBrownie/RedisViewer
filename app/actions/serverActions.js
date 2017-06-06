@@ -1,7 +1,4 @@
-import { routerActions } from 'react-router-redux'
-
 import * as types from '../constants/actionTypes'
-import * as routes from '../constants/routes'
 
 /* Server list */
 export const requestServerList = () => ({
@@ -17,29 +14,39 @@ export const serverListChanged = (servers) => ({
   servers
 })
 
-/* Edit server */
+/* Server toolbox */
 export const requestEditServer = (server) => ({
   type: types.SERVER_REQUEST_EDIT_SERVER,
   server
 })
 
-export const requestUpdateServer = () => ({
-  type: types.SERVER_REQUEST_UPDATE_SERVER
+export const requestRemoveServer = (server) => ({
+  type: types.SERVER_REMOVE_SERVER,
+  server
 })
 
-export const requestConnectionTest = () => {}
+export const serverSelected = (server) => ({
+  type: types.SERVER_SERVER_SELECTED,
+  server
+})
+
+/* Server settings */
+export const requestConnectionTest = (server) => ({
+  type: types.SERVER_REQUEST_CONNECTION_TEST,
+  server
+})
 
 export const setServer = (server) => ({
   type: types.SERVER_SET_SERVER,
   server
 })
 
-export const serverChanged = (server) => ({
+export const serverSaved = (server) => ({
   type: types.SERVER_SERVER_SAVED,
   server
 })
 
-export const serverSelected = (server) => ({
-  type: types.SERVER_SERVER_SELECTED,
+export const serverRemoved = (server) => ({
+  type: types.SERVER_SERVER_REMOVED,
   server
 })

@@ -8,6 +8,11 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
   switch (action.type) {
+    case actionTypes.SERVER_REQUEST_EDIT_SERVER:
+      return {
+        ...state,
+        initialServerSettings: action.server
+      }
     case LOCATION_CHANGE:
       return {
         ...state,

@@ -47,3 +47,10 @@ export const getServer = async (id) => {
 
   return savedServerConfigs
 }
+
+export const removeServer = async (server) => {
+  let savedServerConfigs = await configService.getConfigKey(configKeys.SERVER_CONFIG_LIST,
+    appConstants.DEFAULT_SERVER_CONFIG_LIST)
+  await configService.setConfigKey(configKeys.SERVER_CONFIG_LIST,
+    savedServerConfigs.filter(serverConfig => serverConfig.id !== server.id))
+}

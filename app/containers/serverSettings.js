@@ -9,7 +9,8 @@ import ServerSettings from '../components/server-settings/serverSettings'
 
 export default connect(
   state => ({
-    serverSuccessfullySaved: state.serverSettings.serverSuccessfullySaved
+    serverSuccessfullySaved: state.serverSettings.serverSuccessfullySaved,
+    initialServerSettings: state.serverSettings.initialServerSettings
   }),
   dispatch => ({
     saveServer: (server) => dispatch(serverActions.setServer(server)),

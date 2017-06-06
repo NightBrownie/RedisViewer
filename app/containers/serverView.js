@@ -9,7 +9,7 @@ export default connect(
   state => ({
     editServerRequested: state.serverView.serverViewToolBox.editServerRequested,
     serverList: state.serverView.serverList,
-    selectedServer: state.serverView.serverViewToolBox.selectedServer
+    selectedServer: state.serverView.serverList.selectedServer
   }),
   dispatch => bindActionCreators(serverViewActions, dispatch)
 )(ServerView)

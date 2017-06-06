@@ -9,6 +9,7 @@ import * as routes from '../../../constants/routes'
 export default class ServerViewToolBox extends Component {
   static propTypes = {
     requestEditServer: PropTypes.func.isRequired,
+    requestRemoveServer: PropTypes.func.isRequired,
     selectedServer: PropTypes.object,
     editServerRequested: PropTypes.bool.isRequired
   }
@@ -42,6 +43,7 @@ a
       <Button
         className='remove-btn'
         isInactiveTransparentBorder
+        onClick={() => this.props.requestRemoveServer(this.props.selectedServer)}
         disabled={!this.props.selectedServer}
       >
         <i className='remove-icon fa fa-trash-o fa-fw fa-lg'/>

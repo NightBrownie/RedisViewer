@@ -7,6 +7,7 @@ export default class ServerView extends Component {
     static propTypes = {
       requestServerList: PropTypes.func.isRequired,
       requestEditServer: PropTypes.func.isRequired,
+      requestRemoveServer: PropTypes.func.isRequired,
       editServerRequested: PropTypes.bool.isRequired,
       serverList: PropTypes.object.isRequired,
       serverSelected: PropTypes.func.isRequired,
@@ -25,6 +26,7 @@ export default class ServerView extends Component {
       return (<div className="server-view">
         <ServerViewToolBox
           requestEditServer={this.props.requestEditServer}
+          requestRemoveServer={this.props.requestRemoveServer}
           editServerRequested={this.props.editServerRequested}
           selectedServer={this.props.selectedServer}
         />

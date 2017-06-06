@@ -8,11 +8,6 @@ const defaultState = {
 
 const serverViewToolBoxReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case actionTypes.SERVER_SERVER_SELECTED:
-      return {
-        ...state,
-        selectedServer: action.server
-      }
     case actionTypes.SERVER_REQUEST_EDIT_SERVER:
       return {
         ...state,
