@@ -5,7 +5,7 @@ import { routerMiddleware, routerActions } from 'react-router-redux'
 import { createLogger } from 'redux-logger'
 import rootReducer from '../reducers/root.reducer'
 
-import rootSaga from '../sagas'
+import rootSaga from '../sagas/root.saga'
 
 let sagaMonitor
 
