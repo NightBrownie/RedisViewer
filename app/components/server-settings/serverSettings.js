@@ -10,16 +10,13 @@ export default class ServerSettings extends Component {
   static propTypes = {
     initialServerSettings: PropTypes.object,
     shouldRedirectToTheRoot: PropTypes.bool,
-    mode: PropTypes.oneOf(['add', 'edit']).isRequired,
     saveServer: PropTypes.func.isRequired,
     cancelEdit: PropTypes.func.isRequired,
     requestConnectionTest: PropTypes.func.isRequired
   }
 
   static defaultProps = {
-    initialServerSettings: {},
-    shouldRedirectToTheRoot: false,
-    mode: 'add'
+    shouldRedirectToTheRoot: false
   }
 
   saveServer (server) {
@@ -39,11 +36,16 @@ export default class ServerSettings extends Component {
 
     return (<div className='server-settings'>
       <h2 className='server-settings-form-label'>
-        {this.props.mode === 'add' ? 'Add new server' :'Edit server'}
+        {
+          !this.props.initialServerSettings
+          ? 'Add new server'
+          :'Edit server'
+        }
       </h2>
 
       <ServerSettingsForm
         initialValues={this.props.initialServerSettings}
+        enableReinitialize={true}
         onSubmit={::this.saveServer}
         requestConnectionTest={this.props.requestConnectionTest}
         cancelEdit={this.props.cancelEdit}

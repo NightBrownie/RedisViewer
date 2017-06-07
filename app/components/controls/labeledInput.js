@@ -6,9 +6,10 @@ import classNames from 'classnames'
 export default class LabeledInput extends Component {
   static propTypes = {
     errors: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.string),
-      PropTypes.string
+      PropTypes.arrayOf(PropTypes.any),
+      PropTypes.any
     ]),
+    errorPrefix: PropTypes.string,
     errorMessagesPlacement: PropTypes.oneOf(['top', 'bottom']),
     isRequired: PropTypes.bool,
     onFocus: PropTypes.func,
@@ -17,6 +18,7 @@ export default class LabeledInput extends Component {
 
   static defaultProps = {
     errorMessagesPlacement: 'top',
+    errorPrefix: '',
     isRequired: false
   }
 
@@ -36,6 +38,7 @@ export default class LabeledInput extends Component {
       children,
       className,
       errorMessagesPlacement,
+      errorPrefix,
       ...inputProps
     } = this.props
 
@@ -113,6 +116,7 @@ export default class LabeledInput extends Component {
                       aria-hidden='true'
                     />
                     <span className='error-message-text'>
+                      {errorPrefix}
                       {error}
                     </span>
                   </li>

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import classNames from 'classnames'
 
 import * as treeViewSpanTypes from '../../../constants/treeViewSpanTypes'
 import * as treeViewItemTypes from '../../../constants/treeViewItemTypes'
@@ -34,9 +35,14 @@ export default class ServerListItem extends Component {
             : [this.props.treeViewSpans]
 
         return (<li
-          className="server-list-item"
+          className={classNames(
+            'server-list-item',
+            this.props.isSelected
+              ? 'selected'
+              : ''
+          )}
           tabIndex={0}
-          onClick={() => this.props.selected && this.props.selected()}
+          onClick={() => this.props.onSelected && this.props.onSelected()}
         >
             { spanTypes.map((spanType, spanTypeIndex) => (
                 <TreeViewSpan

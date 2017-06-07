@@ -24,14 +24,6 @@
     border-color: @control-border-active-color;
   }
 
-  &:disabled {
-    background-color: @control-disabled-background-color;
-    border-color: @control-border-color;
-    color: @control-disabled-text-color;
-
-    cursor: not-allowed;
-  }
-
   &.inactive-transparent-border {
     border-color: transparent;
 
@@ -42,5 +34,14 @@
     &:focus {
       border-color: @control-border-active-color;
     }
+  }
+
+  &:disabled,
+  &.inactive-transparent-border:disabled {
+    background-color: @control-disabled-background-color;
+    border-color: @control-border-color;
+
+    color: @control-disabled-text-color;
+    cursor: not-allowed;
   }
 }

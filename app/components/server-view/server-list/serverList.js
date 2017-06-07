@@ -27,6 +27,7 @@ export default class ServerList extends Component {
     let serverListItems = []
 
     let servers = this.props.serverList.servers
+    let selectedServer = this.props.serverList.selectedServer
 
     for (let server of servers) {
       serverListItems.push({
@@ -39,7 +40,8 @@ export default class ServerList extends Component {
         ],
         itemType: treeViewItemTypes.TREE_VIEW_SERVER_ITEM,
         name: server.primarySettings.serverName,
-        selected: () => this.props.serverSelected(server)
+        onSelected: () => this.props.serverSelected(server),
+        isSelected: selectedServer && (server.id === selectedServer.id)
       })
     }
 

@@ -16,7 +16,8 @@ export default (state = defaultState, action) => {
     case actionTypes.SERVER_SERVER_REMOVED:
       return {
         ...state,
-        shouldRedirectToTheRoot: state.initialServerSettings.id === action.server.id
+        shouldRedirectToTheRoot: state.initialServerSettings &&
+          (state.initialServerSettings.id === action.server.id)
       }
     case LOCATION_CHANGE:
       return {

@@ -9,9 +9,10 @@ const renderServerNameField = (field) => (
     isRequired
     placeholder='Enter server name'
     errors={(field.meta.touched && field.meta.invalid)
-      ? `Field ${field.meta.error.props.defaultMessage}`
+      ? field.meta.error
       : null
     }
+    errorPrefix='Field '
     {...field.input}
   >
     Server Name

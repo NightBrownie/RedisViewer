@@ -28,7 +28,7 @@ a
       <Button
         className='add-server-btn'
         isInactiveTransparentBorder
-        onClick={this.props.requestEditServer}
+        onClick={() => this.props.requestEditServer()}
       >
         <i className='add-server-icon fa fa-server fa-fw fa-lg'/>
       </Button>
