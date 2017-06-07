@@ -3,7 +3,8 @@ import * as actionTypes from '../constants/actionTypes'
 const defaultState = {
   servers: [],
   itemsExpandedState: {},
-  serverKeys: {}
+  serverKeys: {},
+  loadingServerKeys: {}
 }
 
 const serverListReducer = (state = defaultState, action) => {
@@ -31,12 +32,24 @@ const serverListReducer = (state = defaultState, action) => {
           [action.itemKey]: !state.itemsExpandedState[action.itemKey]
         }
       }
+    case actionTypes.SERVER_REQUEST_KEYS:
+      return {
+        ...state,
+        loadingServerKeys: {
+          ...state.loadingServerKeys,
+          [action.server.id]: true
+        }
+      }
     case actionTypes.SERVER_KEYS_LOADED:
       return {
         ...state,
         serverKeys: {
           ...state.serverKeys,
           [action.server.id]: action.keys
+        },
+        loadingServerKeys: {
+          ...state.loadingServerKeys,
+          [action.server.id]: false
         }
       }
     default:

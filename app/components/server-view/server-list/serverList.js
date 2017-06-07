@@ -11,7 +11,8 @@ export default class ServerList extends Component {
   static propTypes = {
     serverList: PropTypes.object.isRequired,
     serverSelected: PropTypes.func.isRequired,
-    toggleItemExpand: PropTypes.func.isRequired
+    toggleItemExpand: PropTypes.func.isRequired,
+    requestServerKeys: PropTypes.func.isRequired
   }
 
   getRootFolderListItem () {
@@ -30,11 +31,14 @@ export default class ServerList extends Component {
   getServerListItems () {
     let serverListItems = []
 
-    let { servers, itemsExpandedState } = this.props.serverList
+    let { servers, itemsExpandedState, serverKeys, loadingServerKeys } =
+      this.props.serverList
     let selectedServer = this.props.serverList.selectedServer
 
     for (let server of servers) {
       let key = server.id
+      let currentServerKeys = serverKeys[key]
+      let currentServerKeysLoading = loadingServerKeys[key]
 
       serverListItems.push({
         key,
@@ -51,6 +55,7 @@ export default class ServerList extends Component {
         isExpanded: !!itemsExpandedState[server.id],
         onToggleExpand: () => {
           this.props.toggleItemExpand(key)
+          !currentServerKeys && !currentServerKeysLoading && this.props.requestServerKeys(server)
         }
       })
     }

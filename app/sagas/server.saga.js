@@ -31,7 +31,8 @@ function * removeServer (action) {
 
 function * requestKeys (action) {
   let serverConfig = action.server
-  console.log(serverConfig)
+  let loadedKeys = []
+  yield put(serverActions.keysLoaded(serverConfig, loadedKeys))
 }
 
 export default function * saga () {
