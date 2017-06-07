@@ -9,7 +9,7 @@ import ServerSettingsForm from './serverSettingsForm'
 export default class ServerSettings extends Component {
   static propTypes = {
     initialServerSettings: PropTypes.object,
-    serverSuccessfullySaved: PropTypes.bool,
+    shouldRedirectToTheRoot: PropTypes.bool,
     mode: PropTypes.oneOf(['add', 'edit']).isRequired,
     saveServer: PropTypes.func.isRequired,
     cancelEdit: PropTypes.func.isRequired,
@@ -18,7 +18,7 @@ export default class ServerSettings extends Component {
 
   static defaultProps = {
     initialServerSettings: {},
-    serverSuccessfullySaved: false,
+    shouldRedirectToTheRoot: false,
     mode: 'add'
   }
 
@@ -31,7 +31,7 @@ export default class ServerSettings extends Component {
   }
 
   render () {
-    if (this.props.serverSuccessfullySaved) {
+    if (this.props.shouldRedirectToTheRoot) {
       return (
         <Redirect to={routes.ROOT} />
       )

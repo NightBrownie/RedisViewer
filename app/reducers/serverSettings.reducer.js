@@ -3,7 +3,7 @@ import {LOCATION_CHANGE} from 'react-router-redux'
 import * as actionTypes from '../constants/actionTypes'
 
 const defaultState = {
-  serverSuccessfullySaved: false
+  shouldRedirectToTheRoot: false
 }
 
 export default (state = defaultState, action) => {
@@ -13,15 +13,20 @@ export default (state = defaultState, action) => {
         ...state,
         initialServerSettings: action.server
       }
+    case actionTypes.SERVER_SERVER_REMOVED:
+      return {
+        ...state,
+        shouldRedirectToTheRoot: state.initialServerSettings.id === action.server.id
+      }
     case LOCATION_CHANGE:
       return {
         ...state,
-        serverSuccessfullySaved: false
+        shouldRedirectToTheRoot: false
       }
     case actionTypes.SERVER_SERVER_SAVED:
       return {
         ...state,
-        serverSuccessfullySaved: true
+        shouldRedirectToTheRoot: true
       }
     default:
       return state
