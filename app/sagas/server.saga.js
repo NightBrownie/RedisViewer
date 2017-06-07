@@ -29,11 +29,17 @@ function * removeServer (action) {
   yield put(serverActions.serverListChanged(serverConfigs))
 }
 
+function * requestKeys (action) {
+  let serverConfig = action.server
+  console.log(serverConfig)
+}
+
 export default function * saga () {
   yield [
     takeLatest(actionTypes.SERVER_REQUEST_SERVER_LIST, requestServerList),
     takeLatest(actionTypes.SERVER_SERVER_LIST_REQUESTED, serverListRequested),
     takeLatest(actionTypes.SERVER_SET_SERVER, setServer),
-    takeLatest(actionTypes.SERVER_REMOVE_SERVER, removeServer)
+    takeLatest(actionTypes.SERVER_REMOVE_SERVER, removeServer),
+    takeLatest(actionTypes.SERVER_REQUEST_KEYS, requestKeys)
   ]
 }

@@ -15,6 +15,7 @@ export default class ServerListItem extends Component {
         PropTypes.oneOf(Object.values(treeViewSpanTypes))
       ]).isRequired,
       isExpanded: PropTypes.bool.isRequired,
+      onToggleExpand: PropTypes.func,
       onSelected: PropTypes.func,
       isSelected: PropTypes.bool,
       itemType: PropTypes.oneOf(Object.values(treeViewItemTypes)).isRequired,
@@ -54,6 +55,7 @@ export default class ServerListItem extends Component {
                         && (spanTypeIndex === spanTypes.length - 1)
                     }
                     isExpanded={this.props.isExpanded}
+                    onToggleExpand={this.props.onToggleExpand}
                 />
             )) }
 

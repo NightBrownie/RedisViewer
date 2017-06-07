@@ -5,33 +5,39 @@ import ServerListItem from './serverListItem'
 
 import * as treeViewSpanTypes from '../../../constants/treeViewSpanTypes'
 import * as treeViewItemTypes from '../../../constants/treeViewItemTypes'
+import * as appConstants from '../../../constants/appConstants'
 
 export default class ServerList extends Component {
   static propTypes = {
     serverList: PropTypes.object.isRequired,
-    serverSelected: PropTypes.func.isRequired
+    serverSelected: PropTypes.func.isRequired,
+    toggleItemExpand: PropTypes.func.isRequired
   }
 
   getRootFolderListItem () {
-    return [
-      {
-        key: 'root',
-        treeViewSpans: [treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN],
-        itemType: treeViewItemTypes.TREE_VIEW_FOLDER_ITEM,
-        name: 'Servers'
-      }
-    ]
+    let { itemsExpandedState } = this.props.serverList
+
+    return {
+      key: appConstants.ROOT_FOLDER_KEY,
+      treeViewSpans: [treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN],
+      itemType: treeViewItemTypes.TREE_VIEW_FOLDER_ITEM,
+      name: 'Servers',
+      isExpanded: !!itemsExpandedState[appConstants.ROOT_FOLDER_KEY],
+      onToggleExpand: () => this.props.toggleItemExpand(appConstants.ROOT_FOLDER_KEY)
+    }
   }
 
   getServerListItems () {
     let serverListItems = []
 
-    let servers = this.props.serverList.servers
+    let { servers, itemsExpandedState } = this.props.serverList
     let selectedServer = this.props.serverList.selectedServer
 
     for (let server of servers) {
+      let key = server.id
+
       serverListItems.push({
-        key: server.id,
+        key,
         treeViewSpans: [
           treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN,
           servers.indexOf(server) !== servers.length - 1
@@ -41,7 +47,11 @@ export default class ServerList extends Component {
         itemType: treeViewItemTypes.TREE_VIEW_SERVER_ITEM,
         name: server.primarySettings.serverName,
         onSelected: () => this.props.serverSelected(server),
-        isSelected: selectedServer && (server.id === selectedServer.id)
+        isSelected: selectedServer && (server.id === selectedServer.id),
+        isExpanded: !!itemsExpandedState[server.id],
+        onToggleExpand: () => {
+          this.props.toggleItemExpand(key)
+        }
       })
     }
 
@@ -49,9 +59,11 @@ export default class ServerList extends Component {
   }
 
   render () {
+    let rootFolderItem = this.getRootFolderListItem()
+
     let serverListItems = [
-      ...this.getRootFolderListItem(),
-      ...this.getServerListItems()
+      rootFolderItem,
+      ...(rootFolderItem.isExpanded ? this.getServerListItems() : [])
     ]
 
     return (<div className='server-list-container'>

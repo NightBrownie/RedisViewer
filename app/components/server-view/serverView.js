@@ -11,7 +11,8 @@ export default class ServerView extends Component {
       editServerRequested: PropTypes.bool.isRequired,
       serverList: PropTypes.object.isRequired,
       serverSelected: PropTypes.func.isRequired,
-      selectedServer: PropTypes.object
+      selectedServer: PropTypes.object,
+      toggleServerListItemExpand: PropTypes.func.isRequired
     };
 
     static defaultProps = {
@@ -33,6 +34,7 @@ export default class ServerView extends Component {
         <ServerList
           serverList={this.props.serverList}
           serverSelected={this.props.serverSelected}
+          toggleItemExpand={this.props.toggleServerListItemExpand}
         />
       </div>);
     }

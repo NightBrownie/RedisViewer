@@ -7,7 +7,8 @@ export default class TreeViewSpan extends Component {
     static propTypes = {
         spanType: PropTypes.oneOf(Object.values(treeViewSpanTypes)).isRequired,
         isExpandable: PropTypes.bool.isRequired,
-        isExpanded: PropTypes.bool.isRequired
+        isExpanded: PropTypes.bool.isRequired,
+        onToggleExpand: PropTypes.func
     }
 
     static defaultProps = {
@@ -41,6 +42,11 @@ export default class TreeViewSpan extends Component {
                         this.props.isExpanded
                             ? 'tree-view-expander-open fa fa-minus-square-o'
                             : 'tree-view-expander-closed fa fa-plus-square-o')}
+                    onClick={(event) => {
+                      this.props.onToggleExpand && this.props.onToggleExpand()
+                      event.preventDefault()
+                      event.stopPropagation()
+                    }}
                 />
               </span>
             </span>)

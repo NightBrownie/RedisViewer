@@ -14,9 +14,14 @@ export const serverListChanged = (servers) => ({
   servers
 })
 
+export const toggleServerListItemExpand = (itemKey) => ({
+  type: types.SERVER_TOGGLE_SERVER_LIST_ITEM_EXPAND,
+  itemKey
+})
+
 /* Server toolbox */
 export const requestEditServer = (server) => ({
-  type: types.SERVER_REQUEST_EDIT_SERVER,
+  type: types.SERVER_EDIT_SERVER,
   server
 })
 
@@ -25,9 +30,21 @@ export const requestRemoveServer = (server) => ({
   server
 })
 
+/* Server view */
 export const serverSelected = (server) => ({
   type: types.SERVER_SERVER_SELECTED,
   server
+})
+
+export const requestKeys = (server) => ({
+  type: types.SERVER_REQUEST_KEYS,
+  server
+})
+
+export const keysLoaded = (server, keys) => ({
+  type: types.SERVER_KEYS_LOADED,
+  server,
+  keys
 })
 
 /* Server settings */
