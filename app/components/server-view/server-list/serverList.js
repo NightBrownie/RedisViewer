@@ -55,7 +55,8 @@ export default class ServerList extends Component {
         isExpanded: !!itemsExpandedState[server.id],
         onToggleExpand: () => {
           this.props.toggleItemExpand(key)
-          !currentServerKeys && !currentServerKeysLoading && this.props.requestServerKeys(server)
+          !itemsExpandedState[server.id] && !currentServerKeys && !currentServerKeysLoading &&
+            this.props.requestServerKeys(server)
         }
       })
     }

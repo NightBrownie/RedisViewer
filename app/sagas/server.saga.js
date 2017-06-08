@@ -1,5 +1,7 @@
 import { put, takeLatest, call } from 'redux-saga/effects'
 
+import * as redisService from '../services/redis.service'
+
 import * as actionTypes from '../constants/actionTypes'
 import * as serverActions from '../actions/serverActions'
 import * as serverConfigService from '../services/serverConfig.service'
@@ -30,9 +32,12 @@ function * removeServer (action) {
 }
 
 function * requestKeys (action) {
-  let serverConfig = action.server
-  let loadedKeys = []
-  yield put(serverActions.keysLoaded(serverConfig, loadedKeys))
+  try {
+    let loadedKeys = yield call(redisService.getServerKeys, action.server)
+    yield put(serverActions.keysLoaded(action.server, loadedKeys))
+  } catch (error) {
+    yield put(serverActions.keysLoadFailed(action.server, error))
+  }
 }
 
 export default function * saga () {

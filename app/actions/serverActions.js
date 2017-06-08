@@ -47,6 +47,12 @@ export const keysLoaded = (server, keys) => ({
   keys
 })
 
+export const keysLoadFailed = (server, error) => ({
+  type: types.SERVER_KEYS_LOAD_FAILED,
+  server,
+  error
+})
+
 /* Server settings */
 export const requestConnectionTest = (server) => ({
   type: types.SERVER_REQUEST_CONNECTION_TEST,

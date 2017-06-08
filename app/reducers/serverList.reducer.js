@@ -40,6 +40,14 @@ const serverListReducer = (state = defaultState, action) => {
           [action.server.id]: true
         }
       }
+    case actionTypes.SERVER_KEYS_LOAD_FAILED:
+      return {
+        ...state,
+        loadingServerKeys: {
+          ...state.loadingServerKeys,
+          [action.server.id]: false
+        }
+      }
     case actionTypes.SERVER_KEYS_LOADED:
       return {
         ...state,
