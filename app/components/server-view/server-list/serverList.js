@@ -8,6 +8,10 @@ import * as treeViewItemTypes from '../../../constants/treeViewItemTypes'
 import * as appConstants from '../../../constants/appConstants'
 import * as defaultServerConfig from '../../../constants/defaultServerConfig'
 
+const ROOT_FOLDER_NAME = 'Servers'
+const KEY_PATH_TYPE_FOLDER = 'folder'
+const KEY_PATH_TYPE_KEY = 'key'
+
 export default class ServerList extends Component {
   static propTypes = {
     serverList: PropTypes.object.isRequired,
@@ -17,13 +21,13 @@ export default class ServerList extends Component {
   }
 
   getRootFolderListItem () {
-    let { itemsExpandedState } = this.props.serverList
+    let {itemsExpandedState} = this.props.serverList
 
     return {
       key: appConstants.ROOT_FOLDER_KEY,
       treeViewSpans: [treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN],
       itemType: treeViewItemTypes.TREE_VIEW_FOLDER_ITEM,
-      name: 'Servers',
+      name: ROOT_FOLDER_NAME,
       isExpanded: !!itemsExpandedState[appConstants.ROOT_FOLDER_KEY],
       onToggleExpand: () => this.props.toggleItemExpand(appConstants.ROOT_FOLDER_KEY)
     }
@@ -32,7 +36,7 @@ export default class ServerList extends Component {
   getServerListItems () {
     let serverListItems = []
 
-    let { servers, itemsExpandedState, serverKeys, loadingServerKeys } =
+    let {servers, itemsExpandedState, serverKeys, loadingServerKeys} =
       this.props.serverList
     let selectedServer = this.props.serverList.selectedServer
 
@@ -58,14 +62,14 @@ export default class ServerList extends Component {
         onToggleExpand: () => {
           this.props.toggleItemExpand(key)
           !itemsExpandedState[server.id] && !currentServerKeys && !currentServerKeysLoading &&
-            this.props.requestServerKeys(server)
+          this.props.requestServerKeys(server)
         }
       })
 
       if (currentServerExpanded && currentServerKeys) {
         serverListItems = [
           ...serverListItems,
-          ...this.getServerKeysListItems(currentServerKeys,
+          ...this.getServerKeysListItems(key, currentServerKeys,
             (server.advancedSettings && server.advancedSettings.keysFolderSeparator) ||
             defaultServerConfig.KEYS_FOLDER_SEPARATOR)
         ]
@@ -75,10 +79,69 @@ export default class ServerList extends Component {
     return serverListItems
   }
 
-  getServerKeysListItems (keys, separator) {
-    let splittedKeys = keys.map((key) => key.split(separator))
+  getServerKeysListItems (serverKey, keys, separator) {
+    let splitKeys = keys.map((key) => ({
+      key,
+      splitKeys: key.split(separator)
+    }))
 
-    return []
+    let keyTree
+    for (let splitKey of splitKeys) {
+      keyTree = this.addKeyToTree(keyTree, splitKey.key, splitKeys.splitKeys)
+    }
+
+    return this.generateKeyTreeListItems(serverKey, keyTree)
+  }
+
+  addKeyToTree (keysTree = {}, key, keyParts) {
+    if (!keyParts.length) {
+      return
+    }
+
+    if (!keysTree.nodes) {
+      keysTree.nodes = []
+    }
+
+    let pathPart = keysTree.nodes.find(part => part.name === keyParts[0])
+    if (!pathPart) {
+      pathPart = {
+        key: key,
+        name: keyParts[0],
+        type: keyParts.length > 1
+          ? KEY_PATH_TYPE_FOLDER
+          : KEY_PATH_TYPE_KEY
+      }
+
+      keysTree.nodes.push(pathPart)
+    }
+
+    this.addKeyToTree(pathPart, key, keyParts.slice(1))
+
+    return keysTree
+  }
+
+  generateKeyTreeListItems (treeNode = {}, serverKey) {
+    let nodeKey = serverKey + treeNode.key
+
+    let result = [{
+      key: nodeKey,
+      treeViewSpans: [
+        treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN
+      ],
+      itemType: keytreetreeViewItemTypes.TREE_VIEW_FOLDER_ITEM,
+      name: treeNode.name,
+      isExpanded: !!itemsExpandedState[appConstants.ROOT_FOLDER_KEY],
+      onToggleExpand: () => this.props.toggleItemExpand(nodeKey)
+    }]
+
+    if (treeNode.nodes) {
+      result = [
+        ...result,
+        ...treeNode.nodes.map(node => this.generateKeyTreeListItems(node))
+      ]
+    }
+
+    return result
   }
 
   render () {
