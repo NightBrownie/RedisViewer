@@ -6,6 +6,7 @@ import ServerListItem from './serverListItem'
 import * as treeViewSpanTypes from '../../../constants/treeViewSpanTypes'
 import * as treeViewItemTypes from '../../../constants/treeViewItemTypes'
 import * as appConstants from '../../../constants/appConstants'
+import * as defaultServerConfig from '../../../constants/defaultServerConfig'
 
 export default class ServerList extends Component {
   static propTypes = {
@@ -39,6 +40,7 @@ export default class ServerList extends Component {
       let key = server.id
       let currentServerKeys = serverKeys[key]
       let currentServerKeysLoading = loadingServerKeys[key]
+      let currentServerExpanded = !!itemsExpandedState[server.id]
 
       serverListItems.push({
         key,
@@ -59,9 +61,24 @@ export default class ServerList extends Component {
             this.props.requestServerKeys(server)
         }
       })
+
+      if (currentServerExpanded && currentServerKeys) {
+        serverListItems = [
+          ...serverListItems,
+          ...this.getServerKeysListItems(currentServerKeys,
+            (server.advancedSettings && server.advancedSettings.keysFolderSeparator) ||
+            defaultServerConfig.KEYS_FOLDER_SEPARATOR)
+        ]
+      }
     }
 
     return serverListItems
+  }
+
+  getServerKeysListItems (keys, separator) {
+    let splittedKeys = keys.map((key) => key.split(separator))
+
+    return []
   }
 
   render () {
