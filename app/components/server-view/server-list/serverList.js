@@ -7,6 +7,7 @@ import * as treeViewSpanTypes from '../../../constants/treeViewSpanTypes'
 import * as treeViewItemTypes from '../../../constants/treeViewItemTypes'
 import * as appConstants from '../../../constants/appConstants'
 import * as defaultServerConfig from '../../../constants/defaultServerConfig'
+import VirtualList from '../../controls/VirtualizedList/VirtualList'
 
 const ROOT_FOLDER_NAME = 'Servers'
 const KEY_PATH_NODE_TYPE_FOLDER = 'folder'
@@ -63,7 +64,7 @@ export default class ServerList extends Component {
         isExpanded: !!itemsExpandedState[server.id],
         onToggleExpand: () => {
           this.props.toggleItemExpand(key)
-          !itemsExpandedState[server.id] && !currentServerKeys && !currentServerKeysLoading &&
+          !currentServerExpanded && !currentServerKeys && !currentServerKeysLoading &&
           this.props.requestServerKeys(server)
         }
       })
@@ -206,16 +207,24 @@ export default class ServerList extends Component {
       ...(rootFolderItem.isExpanded ? this.getServerListItems() : [])
     ]
 
-    return (<div className='server-list-container'>
-      <ul className='server-list'>
-        {
-          serverListItems.map((serverListItem) => (
+    return (<div
+      ref={(serverListContainer) => this.serverListContainer = serverListContainer}
+      className='server-list-container'
+    >
+      {
+        this.serverListContainer && <VirtualList
+          className='server-list'
+          items={serverListItems}
+          itemFactory={(item) => (
             <ServerListItem
-              {...serverListItem}
+              {...item}
             />
-          ))
-        }
-      </ul>
+          )}
+          itemHeight={23}
+          bufferSize={5}
+          viewport={this.serverListContainer}
+        />
+      }
     </div>)
   }
 }
