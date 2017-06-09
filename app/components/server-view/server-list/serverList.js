@@ -1,18 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import VirtualList from '../../controls/VirtualizedList/VirtualList'
 import ServerListItem from './serverListItem'
 
 import * as treeViewSpanTypes from '../../../constants/treeViewSpanTypes'
 import * as treeViewItemTypes from '../../../constants/treeViewItemTypes'
 import * as appConstants from '../../../constants/appConstants'
 import * as defaultServerConfig from '../../../constants/defaultServerConfig'
-import VirtualList from '../../controls/VirtualizedList/VirtualList'
+import * as serverTreeViewNodeType from '../../../constants/serverTreeViewNodeType'
 
-const ROOT_FOLDER_NAME = 'Servers'
-const KEY_PATH_NODE_TYPE_FOLDER = 'folder'
-const KEY_PATH_NODE_TYPE_KEY = 'key'
-const KEY_PATH_NODE_TYPE_SERVER = 'server'
+export const ROOT_FOLDER_NAME = 'Servers'
 
 export default class ServerList extends Component {
   static propTypes = {
@@ -72,8 +70,7 @@ export default class ServerList extends Component {
       if (currentServerExpanded && currentServerKeys) {
         serverListItems = [
           ...serverListItems,
-          ...this.getServerKeysListItems(
-            key,
+          ...this.generateKeyTreeListItems(currentServerKeys,
             [
               treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN,
               servers.indexOf(server) !== servers.length - 1
@@ -81,7 +78,7 @@ export default class ServerList extends Component {
                 : treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN
             ],
             isLastItem,
-            currentServerKeys.sort(),
+            key,
             (server.advancedSettings && server.advancedSettings.keysFolderSeparator) ||
               defaultServerConfig.KEYS_FOLDER_SEPARATOR)
         ]
@@ -91,47 +88,6 @@ export default class ServerList extends Component {
     return serverListItems
   }
 
-  getServerKeysListItems (serverKey, treeViewSpans, isLastItem, keys, separator) {
-    let splitKeys = keys.map((key) => ({
-      key,
-      splitKeys: key.split(separator)
-    }))
-
-    let keyTree
-    for (let splitKey of splitKeys) {
-      keyTree = this.addKeyToTree(keyTree, splitKey.key, splitKey.splitKeys)
-    }
-
-    return this.generateKeyTreeListItems(keyTree, treeViewSpans, isLastItem, serverKey, separator)
-  }
-
-  addKeyToTree (keysTree = { type: KEY_PATH_NODE_TYPE_SERVER }, key, keyParts) {
-    if (!keyParts.length) {
-      return
-    }
-
-    if (!keysTree.nodes) {
-      keysTree.nodes = []
-    }
-
-    let pathPart = keysTree.nodes.find(part => part.name === keyParts[0])
-    if (!pathPart) {
-      pathPart = {
-        key: key,
-        name: keyParts[0],
-        type: keyParts.length > 1
-          ? KEY_PATH_NODE_TYPE_FOLDER
-          : KEY_PATH_NODE_TYPE_KEY
-      }
-
-      keysTree.nodes.push(pathPart)
-    }
-
-    this.addKeyToTree(pathPart, key, keyParts.slice(1))
-
-    return keysTree
-  }
-
   generateKeyTreeListItems (treeNode = {}, parentTreeViewSpans = [], isLastItem, parentNodeKey, separator) {
     let {itemsExpandedState} = this.props.serverList
     let nodeKey = parentNodeKey + (treeNode.key ? separator + treeNode.key : '')
@@ -139,7 +95,7 @@ export default class ServerList extends Component {
 
     let result = []
 
-    if (treeNode.type === KEY_PATH_NODE_TYPE_FOLDER) {
+    if (treeNode.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_FOLDER) {
       result.push({
         key: nodeKey,
         treeViewSpans: [
@@ -153,7 +109,7 @@ export default class ServerList extends Component {
         isExpanded: nodeExpanded,
         onToggleExpand: () => this.props.toggleItemExpand(nodeKey)
       })
-    } else if (treeNode.type === KEY_PATH_NODE_TYPE_KEY) {
+    } else if (treeNode.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_KEY) {
       result.push({
         key: nodeKey,
         treeViewSpans: [
@@ -173,11 +129,11 @@ export default class ServerList extends Component {
       result = [
         ...result,
         ...[
-          ...treeNode.nodes.filter(node => node.type === KEY_PATH_NODE_TYPE_FOLDER),
-          ...treeNode.nodes.filter(node => node.type === KEY_PATH_NODE_TYPE_KEY)
+          ...treeNode.nodes.filter(node => node.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_FOLDER),
+          ...treeNode.nodes.filter(node => node.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_KEY)
         ].map((node, index, collection) => this.generateKeyTreeListItems(
           node,
-          treeNode.type === KEY_PATH_NODE_TYPE_SERVER
+          treeNode.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_SERVER
             ? parentTreeViewSpans
             : [
             ...parentTreeViewSpans,
