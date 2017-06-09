@@ -24,7 +24,6 @@ export default class ServerListItem extends Component {
 
     static defaultProps = {
       treeViewSpans: treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN,
-      isExpandable: false,
       isExpanded: false,
       isSelected: false,
       name: ''
@@ -34,6 +33,7 @@ export default class ServerListItem extends Component {
         const spanTypes = this.props.treeViewSpans.length !== undefined
             ? this.props.treeViewSpans
             : [this.props.treeViewSpans]
+        const isExpandable = this.props.itemType !== treeViewItemTypes.TREE_VIEW_KEY_ITEM
 
         return (<li
           className={classNames(
@@ -44,16 +44,14 @@ export default class ServerListItem extends Component {
           )}
           tabIndex={0}
           onClick={() => this.props.onSelected && this.props.onSelected()}
+          onDoubleClick={() => isExpandable && this.props.onToggleExpand()}
         >
             { spanTypes.map((spanType, spanTypeIndex) => (
                 <TreeViewSpan
                     // eslint-disable-next-line react/no-array-index-key
                     key={spanType + spanTypeIndex}
                     spanType={spanType}
-                    isExpandable={
-                        this.props.itemType !== treeViewItemTypes.TREE_VIEW_KEY_ITEM
-                        && (spanTypeIndex === spanTypes.length - 1)
-                    }
+                    isExpandable={isExpandable && (spanTypeIndex === spanTypes.length - 1)}
                     isExpanded={this.props.isExpanded}
                     onToggleExpand={this.props.onToggleExpand}
                 />
