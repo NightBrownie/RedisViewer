@@ -9,8 +9,9 @@ import * as appConstants from '../../../constants/appConstants'
 import * as defaultServerConfig from '../../../constants/defaultServerConfig'
 
 const ROOT_FOLDER_NAME = 'Servers'
-const KEY_PATH_TYPE_FOLDER = 'folder'
-const KEY_PATH_TYPE_KEY = 'key'
+const KEY_PATH_NODE_TYPE_FOLDER = 'folder'
+const KEY_PATH_NODE_TYPE_KEY = 'key'
+const KEY_PATH_NODE_TYPE_SERVER = 'server'
 
 export default class ServerList extends Component {
   static propTypes = {
@@ -45,14 +46,15 @@ export default class ServerList extends Component {
       let currentServerKeys = serverKeys[key]
       let currentServerKeysLoading = loadingServerKeys[key]
       let currentServerExpanded = !!itemsExpandedState[server.id]
+      let isLastItem = servers.indexOf(server) === servers.length - 1
 
       serverListItems.push({
         key,
         treeViewSpans: [
           treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN,
-          servers.indexOf(server) !== servers.length - 1
-            ? treeViewSpanTypes.TREE_VIEW_NODE_SPAN
-            : treeViewSpanTypes.TREE_VIEW_LAST_NODE_SPAN
+          isLastItem
+            ? treeViewSpanTypes.TREE_VIEW_LAST_NODE_SPAN
+            : treeViewSpanTypes.TREE_VIEW_NODE_SPAN
         ],
         itemType: treeViewItemTypes.TREE_VIEW_SERVER_ITEM,
         name: server.primarySettings.serverName,
@@ -69,9 +71,18 @@ export default class ServerList extends Component {
       if (currentServerExpanded && currentServerKeys) {
         serverListItems = [
           ...serverListItems,
-          ...this.getServerKeysListItems(key, currentServerKeys,
+          ...this.getServerKeysListItems(
+            key,
+            [
+              treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN,
+              servers.indexOf(server) !== servers.length - 1
+                ? treeViewSpanTypes.TREE_VIEW_NODELESS_SPAN
+                : treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN
+            ],
+            isLastItem,
+            currentServerKeys.sort(),
             (server.advancedSettings && server.advancedSettings.keysFolderSeparator) ||
-            defaultServerConfig.KEYS_FOLDER_SEPARATOR)
+              defaultServerConfig.KEYS_FOLDER_SEPARATOR)
         ]
       }
     }
@@ -79,7 +90,7 @@ export default class ServerList extends Component {
     return serverListItems
   }
 
-  getServerKeysListItems (serverKey, keys, separator) {
+  getServerKeysListItems (serverKey, treeViewSpans, isLastItem, keys, separator) {
     let splitKeys = keys.map((key) => ({
       key,
       splitKeys: key.split(separator)
@@ -87,13 +98,13 @@ export default class ServerList extends Component {
 
     let keyTree
     for (let splitKey of splitKeys) {
-      keyTree = this.addKeyToTree(keyTree, splitKey.key, splitKeys.splitKeys)
+      keyTree = this.addKeyToTree(keyTree, splitKey.key, splitKey.splitKeys)
     }
 
-    return this.generateKeyTreeListItems(serverKey, keyTree)
+    return this.generateKeyTreeListItems(keyTree, treeViewSpans, isLastItem, serverKey, separator)
   }
 
-  addKeyToTree (keysTree = {}, key, keyParts) {
+  addKeyToTree (keysTree = { type: KEY_PATH_NODE_TYPE_SERVER }, key, keyParts) {
     if (!keyParts.length) {
       return
     }
@@ -108,8 +119,8 @@ export default class ServerList extends Component {
         key: key,
         name: keyParts[0],
         type: keyParts.length > 1
-          ? KEY_PATH_TYPE_FOLDER
-          : KEY_PATH_TYPE_KEY
+          ? KEY_PATH_NODE_TYPE_FOLDER
+          : KEY_PATH_NODE_TYPE_KEY
       }
 
       keysTree.nodes.push(pathPart)
@@ -120,24 +131,67 @@ export default class ServerList extends Component {
     return keysTree
   }
 
-  generateKeyTreeListItems (treeNode = {}, serverKey) {
-    let nodeKey = serverKey + treeNode.key
+  generateKeyTreeListItems (treeNode = {}, parentTreeViewSpans = [], isLastItem, parentNodeKey, separator) {
+    let {itemsExpandedState} = this.props.serverList
+    let nodeKey = parentNodeKey + (treeNode.key ? separator + treeNode.key : '')
+    let nodeExpanded = !!itemsExpandedState[nodeKey]
 
-    let result = [{
-      key: nodeKey,
-      treeViewSpans: [
-        treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN
-      ],
-      itemType: keytreetreeViewItemTypes.TREE_VIEW_FOLDER_ITEM,
-      name: treeNode.name,
-      isExpanded: !!itemsExpandedState[appConstants.ROOT_FOLDER_KEY],
-      onToggleExpand: () => this.props.toggleItemExpand(nodeKey)
-    }]
+    let result = []
 
-    if (treeNode.nodes) {
+    if (treeNode.type === KEY_PATH_NODE_TYPE_FOLDER) {
+      result.push({
+        key: nodeKey,
+        treeViewSpans: [
+          ...parentTreeViewSpans,
+          isLastItem
+            ? treeViewSpanTypes.TREE_VIEW_LAST_NODE_SPAN
+            : treeViewSpanTypes.TREE_VIEW_NODE_SPAN
+        ],
+        itemType: treeViewItemTypes.TREE_VIEW_FOLDER_ITEM,
+        name: treeNode.name,
+        isExpanded: nodeExpanded,
+        onToggleExpand: () => this.props.toggleItemExpand(nodeKey)
+      })
+    } else if (treeNode.type === KEY_PATH_NODE_TYPE_KEY) {
+      result.push({
+        key: nodeKey,
+        treeViewSpans: [
+          ...parentTreeViewSpans,
+          isLastItem
+            ? treeViewSpanTypes.TREE_VIEW_LAST_NODE_SPAN
+            : treeViewSpanTypes.TREE_VIEW_NODE_SPAN
+        ],
+        itemType: treeViewItemTypes.TREE_VIEW_KEY_ITEM,
+        name: treeNode.name,
+        isExpanded: nodeExpanded,
+        onToggleExpand: () => this.props.toggleItemExpand(nodeKey)
+      })
+    }
+
+    if (treeNode.nodes && nodeExpanded) {
       result = [
         ...result,
-        ...treeNode.nodes.map(node => this.generateKeyTreeListItems(node))
+        ...[
+          ...treeNode.nodes.filter(node => node.type === KEY_PATH_NODE_TYPE_FOLDER),
+          ...treeNode.nodes.filter(node => node.type === KEY_PATH_NODE_TYPE_KEY)
+        ].map((node, index, collection) => this.generateKeyTreeListItems(
+          node,
+          treeNode.type === KEY_PATH_NODE_TYPE_SERVER
+            ? parentTreeViewSpans
+            : [
+            ...parentTreeViewSpans,
+            isLastItem
+              ? treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN
+              : treeViewSpanTypes.TREE_VIEW_NODELESS_SPAN],
+          index === collection.length - 1,
+          nodeKey,
+          separator)
+        )
+          .reduce((nodeResult, results = []) => [
+              ...nodeResult,
+              ...results
+            ]
+          )
       ]
     }
 
