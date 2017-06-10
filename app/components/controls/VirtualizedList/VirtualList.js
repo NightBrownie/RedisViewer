@@ -55,7 +55,7 @@ let VerticalList = React.createClass({
       return true
     }
 
-    if (this.state.items.length !== nextState.items.length) {
+    if (this.state.items !== nextState.items) {
       return true
     }
 

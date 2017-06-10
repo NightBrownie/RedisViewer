@@ -80,7 +80,7 @@ export default class ServerList extends Component {
             isLastItem,
             key,
             (server.advancedSettings && server.advancedSettings.keysFolderSeparator) ||
-              defaultServerConfig.KEYS_FOLDER_SEPARATOR)
+            defaultServerConfig.KEYS_FOLDER_SEPARATOR)
         ]
       }
     }
@@ -95,7 +95,8 @@ export default class ServerList extends Component {
 
     let result = []
 
-    if (treeNode.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_FOLDER) {
+    if (treeNode.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_FOLDER
+      || treeNode.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_KEY) {
       result.push({
         key: nodeKey,
         treeViewSpans: [
@@ -104,21 +105,9 @@ export default class ServerList extends Component {
             ? treeViewSpanTypes.TREE_VIEW_LAST_NODE_SPAN
             : treeViewSpanTypes.TREE_VIEW_NODE_SPAN
         ],
-        itemType: treeViewItemTypes.TREE_VIEW_FOLDER_ITEM,
-        name: treeNode.name,
-        isExpanded: nodeExpanded,
-        onToggleExpand: () => this.props.toggleItemExpand(nodeKey)
-      })
-    } else if (treeNode.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_KEY) {
-      result.push({
-        key: nodeKey,
-        treeViewSpans: [
-          ...parentTreeViewSpans,
-          isLastItem
-            ? treeViewSpanTypes.TREE_VIEW_LAST_NODE_SPAN
-            : treeViewSpanTypes.TREE_VIEW_NODE_SPAN
-        ],
-        itemType: treeViewItemTypes.TREE_VIEW_KEY_ITEM,
+        itemType: treeNode.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_FOLDER
+          ? treeViewItemTypes.TREE_VIEW_FOLDER_ITEM
+          : treeViewItemTypes.TREE_VIEW_KEY_ITEM,
         name: treeNode.name,
         isExpanded: nodeExpanded,
         onToggleExpand: () => this.props.toggleItemExpand(nodeKey)
@@ -177,7 +166,7 @@ export default class ServerList extends Component {
             />
           )}
           itemHeight={23}
-          bufferSize={5}
+          bufferSize={0}
           viewport={this.serverListContainer}
         />
       }
