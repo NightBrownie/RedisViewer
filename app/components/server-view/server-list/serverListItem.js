@@ -19,7 +19,8 @@ export default class ServerListItem extends Component {
       onSelected: PropTypes.func,
       isSelected: PropTypes.bool,
       itemType: PropTypes.oneOf(Object.values(treeViewItemTypes)).isRequired,
-      name: PropTypes.string
+      name: PropTypes.string,
+      title: PropTypes.string
     }
 
     static defaultProps = {
@@ -42,6 +43,7 @@ export default class ServerListItem extends Component {
               ? 'selected'
               : ''
           )}
+          title={this.props.title}
           tabIndex={0}
           onClick={() => this.props.onSelected && this.props.onSelected()}
           onDoubleClick={() => isExpandable && this.props.onToggleExpand()}

@@ -11,4 +11,4 @@ export const CONFIG_ENCRYPTION_PASSPHRASE_LENGTH_BYTES = 32
 export const DEFAULT_SERVER_CONFIG_LIST = []
 
 /* Server list */
-export const ROOT_FOLDER_KEY = 'root'
+export const ROOT_FOLDER_NAME = 'Servers'
