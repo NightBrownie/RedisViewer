@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware from 'redux-saga'
+import createDebounceMiddleware from 'redux-debounced'
 import { createMemoryHistory as createHistory } from 'history'
 import { routerMiddleware, routerActions } from 'react-router-redux'
 import { createLogger } from 'redux-logger'
@@ -15,6 +16,10 @@ export const configureStore = (initialState) => {
   // Redux Configuration
   const middleware = []
   const enhancers = []
+
+  // Debounce Middleware
+  const debounceMiddleware = createDebounceMiddleware()
+  middleware.push(debounceMiddleware)
 
   // Logging Middleware
   const logger = createLogger({

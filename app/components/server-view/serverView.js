@@ -13,7 +13,8 @@ export default class ServerView extends Component {
       serverSelected: PropTypes.func.isRequired,
       selectedServer: PropTypes.object,
       toggleServerListItemExpand: PropTypes.func.isRequired,
-      requestKeys: PropTypes.func.isRequired
+      requestKeys: PropTypes.func.isRequired,
+      filterChanged: PropTypes.func
     };
 
     static defaultProps = {
@@ -31,6 +32,7 @@ export default class ServerView extends Component {
           requestRemoveServer={this.props.requestRemoveServer}
           editServerRequested={this.props.editServerRequested}
           selectedServer={this.props.selectedServer}
+          filterChanged={this.props.filterChanged}
         />
         <ServerList
           serverList={this.props.serverList}

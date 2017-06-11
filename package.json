@@ -192,6 +192,7 @@
     "react-router-redux": "next",
     "react-split-pane": "^0.1.63",
     "redux": "^3.6.0",
+    "redux-debounced": "^0.4.0",
     "redux-form": "^6.7.0",
     "redux-form-validators": "^1.0.2",
     "redux-saga": "^0.14.8",

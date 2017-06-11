@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware } from 'redux'
+import createDebounceMiddleware from 'redux-debounced'
 import createSagaMiddleware from 'redux-saga'
 import { routerMiddleware } from 'react-router-redux'
 import rootReducer from '../reducers/root.reducer'
@@ -8,10 +9,11 @@ import rootSaga from '../sagas/root.saga'
 
 export const history = createHistory()
 
+const debounceMiddleware = createDebounceMiddleware()
 const router = routerMiddleware(history)
 const sagaMiddleware = createSagaMiddleware()
 
-const enhancer = applyMiddleware(sagaMiddleware, router)
+const enhancer = applyMiddleware(sagaMiddleware, router, debounceMiddleware)
 
 export const configureStore = (initialState) => {
   let store = createStore(rootReducer, initialState, enhancer) // eslint-disable-line

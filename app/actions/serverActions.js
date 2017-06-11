@@ -30,6 +30,16 @@ export const requestRemoveServer = (server) => ({
   server
 })
 
+export const filterChanged = (filterTerm) => ({
+  type: types.SERVER_FILTER_CHANGED,
+  filterTerm,
+  meta: {
+    debounce: {
+      time: 200
+    }
+  }
+})
+
 /* Server view */
 export const serverSelected = (server) => ({
   type: types.SERVER_SERVER_SELECTED,

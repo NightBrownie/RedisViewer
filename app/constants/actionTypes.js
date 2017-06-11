@@ -23,6 +23,7 @@ export const SERVER_TOGGLE_SERVER_LIST_ITEM_EXPAND = 'server/TOGGLE_SERVER_LIST_
 /* Server toolbox */
 export const SERVER_EDIT_SERVER = 'server/EDIT_SERVER'
 export const SERVER_REMOVE_SERVER = 'server/REMOVE_SERVER'
+export const SERVER_FILTER_CHANGED = 'server/FILTER_CHANGED'
 
 /* Server settings */
 export const SERVER_REQUEST_CONNECTION_TEST = 'server/REQUEST_CONNECTION_TEST'

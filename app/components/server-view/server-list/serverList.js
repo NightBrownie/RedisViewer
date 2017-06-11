@@ -34,7 +34,7 @@ export default class ServerList extends Component {
   getServerListItems () {
     let serverListItems = []
 
-    let {servers, itemsExpandedState, serverKeys, loadingServerKeys} =
+    let {servers, itemsExpandedState, filteredServerKeys, loadingServerKeys, filterTerm} =
       this.props.serverList
     let selectedServer = this.props.serverList.selectedServer
 
@@ -42,46 +42,51 @@ export default class ServerList extends Component {
       let separator = (server.advancedSettings && server.advancedSettings.keysFolderSeparator) ||
         defaultServerConfig.KEYS_FOLDER_SEPARATOR
       let key = server.id
-      let currentServerKeys = serverKeys[key]
+      let currentServerKeys = filteredServerKeys[key]
       let currentServerKeysLoading = loadingServerKeys[key]
       let currentServerExpanded = !!itemsExpandedState[server.id]
       let isLastItem = servers.indexOf(server) === servers.length - 1
 
-      serverListItems.push({
-        key,
-        treeViewSpans: [
-          treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN,
-          isLastItem
-            ? treeViewSpanTypes.TREE_VIEW_LAST_NODE_SPAN
-            : treeViewSpanTypes.TREE_VIEW_NODE_SPAN
-        ],
-        itemType: treeViewItemTypes.TREE_VIEW_SERVER_ITEM,
-        name: server.primarySettings.serverName,
-        onSelected: () => this.props.serverSelected(server),
-        isSelected: selectedServer && (server.id === selectedServer.id),
-        isExpanded: !!itemsExpandedState[server.id],
-        onToggleExpand: () => {
-          this.props.toggleItemExpand(key)
-          !currentServerExpanded && !currentServerKeys && !currentServerKeysLoading &&
-          this.props.requestServerKeys(server)
-        }
-      })
+      if (!filterTerm ||
+        server.primarySettings.serverName.toLowerCase().indexOf(filterTerm.toLowerCase()) >= 0 ||
+        (currentServerKeys && currentServerKeys.nodes.length)) {
 
-      if (currentServerExpanded && currentServerKeys) {
-        serverListItems = [
-          ...serverListItems,
-          ...this.generateKeyTreeListItems(currentServerKeys,
-            [
-              treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN,
-              servers.indexOf(server) !== servers.length - 1
-                ? treeViewSpanTypes.TREE_VIEW_NODELESS_SPAN
-                : treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN
-            ],
-            isLastItem,
-            key,
-            server.primarySettings.serverName,
-            separator)
-        ]
+        serverListItems.push({
+          key,
+          treeViewSpans: [
+            treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN,
+            isLastItem
+              ? treeViewSpanTypes.TREE_VIEW_LAST_NODE_SPAN
+              : treeViewSpanTypes.TREE_VIEW_NODE_SPAN
+          ],
+          itemType: treeViewItemTypes.TREE_VIEW_SERVER_ITEM,
+          name: server.primarySettings.serverName,
+          onSelected: () => this.props.serverSelected(server),
+          isSelected: selectedServer && (server.id === selectedServer.id),
+          isExpanded: !!itemsExpandedState[server.id],
+          onToggleExpand: () => {
+            this.props.toggleItemExpand(key)
+            !currentServerExpanded && !currentServerKeys && !currentServerKeysLoading &&
+            this.props.requestServerKeys(server)
+          }
+        })
+
+        if (currentServerExpanded && currentServerKeys) {
+          serverListItems = [
+            ...serverListItems,
+            ...this.generateKeyTreeListItems(currentServerKeys,
+              [
+                treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN,
+                servers.indexOf(server) !== servers.length - 1
+                  ? treeViewSpanTypes.TREE_VIEW_NODELESS_SPAN
+                  : treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN
+              ],
+              isLastItem,
+              key,
+              server.primarySettings.serverName,
+              separator)
+          ]
+        }
       }
     }
 

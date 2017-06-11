@@ -6,7 +6,9 @@ const defaultState = {
   servers: [],
   itemsExpandedState: {},
   serverKeys: {},
-  loadingServerKeys: {}
+  filteredServerKeys: {},
+  loadingServerKeys: {},
+  filterTerm: ''
 }
 
 const addKeyToTree = (
@@ -14,7 +16,8 @@ const addKeyToTree = (
     type: serverTreeViewNodeType.KEY_PATH_NODE_TYPE_SERVER
   },
   key,
-  keyParts) => {
+  keyParts
+) => {
   if (!keyParts.length) {
     return
   }
@@ -26,7 +29,7 @@ const addKeyToTree = (
   let pathPart = keysTree.nodes.find(part => part.name === keyParts[0])
   if (!pathPart) {
     pathPart = {
-      key: key,
+      key,
       name: keyParts[0],
       type: keyParts.length > 1
         ? serverTreeViewNodeType.KEY_PATH_NODE_TYPE_FOLDER
@@ -39,6 +42,34 @@ const addKeyToTree = (
   addKeyToTree(pathPart, key, keyParts.slice(1))
 
   return keysTree
+}
+
+const filterTree = (keyTree, filterTerm) => {
+  if (!filterTerm) {
+    return keyTree
+  }
+
+  if (keyTree.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_KEY) {
+    if (keyTree.key.toLowerCase().indexOf(filterTerm.toLowerCase()) >= 0) {
+      return keyTree
+    }
+  } else if (keyTree.nodes) {
+    if (keyTree.name && keyTree.name.toLowerCase().indexOf(filterTerm.toLowerCase()) >= 0) {
+      return keyTree
+    }
+
+    let innerFilteredTrees = keyTree.nodes
+      .filter(node => node)
+      .map(innerTree => filterTree(innerTree, filterTerm))
+      .filter(filteredTree => filteredTree)
+
+    if (innerFilteredTrees.length) {
+      return {
+        ...keyTree,
+        nodes: innerFilteredTrees
+      }
+    }
+  }
 }
 
 const serverListReducer = (state = defaultState, action) => {
@@ -104,10 +135,28 @@ const serverListReducer = (state = defaultState, action) => {
           ...state.serverKeys,
           [action.server.id]: keyTree
         },
+        filteredServerKeys: {
+          ...state.filteredServerKeys,
+          [action.server.id]: filterTree(keyTree, state.filterTerm)
+        },
         loadingServerKeys: {
           ...state.loadingServerKeys,
           [action.server.id]: false
         }
+      }
+    case actionTypes.SERVER_FILTER_CHANGED:
+      return {
+        ...state,
+        filterTerm: action.filterTerm,
+        filteredServerKeys: Object.keys(state.serverKeys)
+          .map((serverId) => ({
+            serverId,
+            keyTree: filterTree(state.serverKeys[serverId], action.filterTerm)
+          }))
+          .reduce((accumulator, currentResult) => ({
+            ...accumulator,
+            [currentResult.serverId]: currentResult.keyTree
+          }), {})
       }
     default:
       return state

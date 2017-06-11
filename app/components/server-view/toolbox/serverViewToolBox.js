@@ -11,7 +11,8 @@ export default class ServerViewToolBox extends Component {
     requestEditServer: PropTypes.func.isRequired,
     requestRemoveServer: PropTypes.func.isRequired,
     selectedServer: PropTypes.object,
-    editServerRequested: PropTypes.bool.isRequired
+    editServerRequested: PropTypes.bool.isRequired,
+    filterChanged: PropTypes.func
   }
 a
   static defaultProps = {
@@ -24,7 +25,9 @@ a
     }
 
     return (<div className='server-view-toolbox'>
-      <ServerViewSearchTool />
+      <ServerViewSearchTool
+        onSearchTermChanged={this.props.filterChanged}
+      />
       <Button
         className='add-server-btn'
         isInactiveTransparentBorder
