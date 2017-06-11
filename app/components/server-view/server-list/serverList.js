@@ -14,6 +14,8 @@ export default class ServerList extends Component {
   static propTypes = {
     serverList: PropTypes.object.isRequired,
     serverSelected: PropTypes.func.isRequired,
+    keySelected: PropTypes.func.isRequired,
+    openKey: PropTypes.func.isRequired,
     toggleItemExpand: PropTypes.func.isRequired,
     requestServerKeys: PropTypes.func.isRequired
   }
@@ -34,9 +36,14 @@ export default class ServerList extends Component {
   getServerListItems () {
     let serverListItems = []
 
-    let {servers, itemsExpandedState, filteredServerKeys, loadingServerKeys, filterTerm} =
-      this.props.serverList
-    let selectedServer = this.props.serverList.selectedServer
+    let {
+      servers,
+      itemsExpandedState,
+      filteredServerKeys,
+      loadingServerKeys,
+      filterTerm,
+      selectedServer
+    } = this.props.serverList
 
     for (let server of servers) {
       let separator = (server.advancedSettings && server.advancedSettings.keysFolderSeparator) ||
@@ -84,7 +91,8 @@ export default class ServerList extends Component {
               isLastItem,
               key,
               server.primarySettings.serverName,
-              separator)
+              separator,
+              server)
           ]
         }
       }
@@ -99,9 +107,15 @@ export default class ServerList extends Component {
     isLastItem,
     parentNodeKey,
     parentNodeTitle,
-    separator
+    separator,
+    server
   ) {
-    let {itemsExpandedState} = this.props.serverList
+    let {
+      itemsExpandedState,
+      selectedServer,
+      selectedKey
+    } = this.props.serverList
+
     let nodeKey = parentNodeKey + (treeNode.key ? separator + treeNode.key : '')
     let nodeTitle = parentNodeTitle + (treeNode.key ? separator + treeNode.key : '')
     let nodeExpanded = !!itemsExpandedState[nodeKey]
@@ -124,6 +138,14 @@ export default class ServerList extends Component {
           : treeViewItemTypes.TREE_VIEW_KEY_ITEM,
         name: treeNode.name,
         isExpanded: nodeExpanded,
+        isSelected: selectedServer && (selectedServer.id === server.id)
+          && selectedKey && (selectedKey === nodeKey),
+        onSelected: treeNode.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_KEY
+          ? () => {
+              this.props.keySelected(server, nodeKey)
+              this.props.openKey(server, nodeKey)
+            }
+          : null,
         onToggleExpand: () => this.props.toggleItemExpand(nodeKey)
       })
     }
@@ -146,7 +168,8 @@ export default class ServerList extends Component {
           index === collection.length - 1,
           nodeKey,
           nodeTitle,
-          separator)
+          separator,
+          server)
         )
           .reduce((nodeResult, results = []) => [
               ...nodeResult,

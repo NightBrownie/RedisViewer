@@ -79,10 +79,21 @@ const serverListReducer = (state = defaultState, action) => {
         ...state,
         selectedServer: action.server
       }
+    case actionTypes.SERVER_KEY_SELECTED:
+      return {
+        ...state,
+        selectedServer: action.server,
+        selectedKey: action.key
+      }
     case actionTypes.SERVER_SERVER_REMOVED:
       return {
         ...state,
-        selectedServer: null
+        selectedServer: state.selectedServer && state.selectedServer.id === action.server.id
+          ? null
+          : state.selectedServer,
+        selectedKey: state.selectedServer && state.selectedServer.id === action.server.id
+          ? null
+          : state.selectedKey
       }
     case actionTypes.SERVER_SERVER_LIST_CHANGED:
       return {

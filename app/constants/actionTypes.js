@@ -15,10 +15,12 @@ export const SERVER_SERVER_LIST_CHANGED = 'server/SERVER_LIST_CHANGED'
 
 /* Server list */
 export const SERVER_SERVER_SELECTED = 'server/SERVER_SELECTED'
+export const SERVER_KEY_SELECTED = 'server/KEY_SELECTED'
+export const SERVER_TOGGLE_SERVER_LIST_ITEM_EXPAND = 'server/TOGGLE_SERVER_LIST_ITEM_EXPAND'
+export const SERVER_OPEN_KEY = 'server/OPEN_KEY'
 export const SERVER_REQUEST_KEYS = 'server/REQUEST_KEYS'
 export const SERVER_KEYS_LOADED = 'server/KEYS_LOADED'
 export const SERVER_KEYS_LOAD_FAILED = 'server/SERVER_KEYS_LOAD_FAILED'
-export const SERVER_TOGGLE_SERVER_LIST_ITEM_EXPAND = 'server/TOGGLE_SERVER_LIST_ITEM_EXPAND'
 
 /* Server toolbox */
 export const SERVER_EDIT_SERVER = 'server/EDIT_SERVER'
@@ -28,3 +30,12 @@ export const SERVER_FILTER_CHANGED = 'server/FILTER_CHANGED'
 /* Server settings */
 export const SERVER_REQUEST_CONNECTION_TEST = 'server/REQUEST_CONNECTION_TEST'
 export const SERVER_SET_SERVER = 'server/SET_SERVER'
+
+/* Key view */
+export const KEY_REQUEST_DATA = 'key/REQUEST_DATA'
+export const KEY_DATA_RECEIVED = 'key/DATA_RECEIVED'
+
+export const KEY_SUBSCRIBE = 'key/SUBSCRIBE'
+export const KEY_SUBSCRIBED = 'key/SUBSCRIBED'
+export const KEY_SUBSCRIPTION_FAILED = 'key/SUBSCRIPTION_FAILED'
+export const KEY_UNSUBSCRIBE = 'key/UNSUBSCRIBE'
