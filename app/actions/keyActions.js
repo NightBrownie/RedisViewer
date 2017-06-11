@@ -7,8 +7,15 @@ export const requestData = (server, key) => ({
   key
 })
 
-export const dataRequested = (server, key) => ({
+export const dataReceived = (server, key, data) => ({
   type: actionTypes.KEY_DATA_RECEIVED,
+  server,
+  key,
+  data
+})
+
+export const dataRequestFailed = (server, key) => ({
+  type: actionTypes.KEY_DATA_REQUEST_FAILED,
   server,
   key
 })

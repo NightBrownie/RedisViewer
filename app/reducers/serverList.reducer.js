@@ -1,6 +1,7 @@
 import * as actionTypes from '../constants/actionTypes'
 import * as defaultServerConfig from '../constants/defaultServerConfig'
 import * as serverTreeViewNodeType from '../constants/serverTreeViewNodeType'
+import { LOCATION_CHANGE } from 'react-router-redux'
 
 const defaultState = {
   servers: [],
@@ -169,6 +170,16 @@ const serverListReducer = (state = defaultState, action) => {
             ...accumulator,
             [currentResult.serverId]: currentResult.keyTree
           }), {})
+      }
+    case actionTypes.SERVER_OPEN_KEY:
+      return {
+        ...state,
+        shouldRedirectToKeyView: true
+      }
+    case LOCATION_CHANGE:
+      return {
+        ...state,
+        shouldRedirectToKeyView: false
       }
     default:
       return state

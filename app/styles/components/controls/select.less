@@ -1,0 +1,26 @@
+select {
+  position:relative;
+
+  padding: 5px 15px 5px 5px;
+
+  border: @control-border-thickness solid @control-border-color;
+  border-radius: @control-border-radius;
+
+  outline: none;
+  background: @control-default-background-color none;
+}
+
+select > option {
+  border: @control-border-thickness solid @control-border-color;
+  border-radius: @control-border-radius;
+
+  outline: none;
+
+  background: @control-default-background-color none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background: @control-active-background-color;
+  }
+}

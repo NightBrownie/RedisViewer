@@ -34,6 +34,7 @@ export const SERVER_SET_SERVER = 'server/SET_SERVER'
 /* Key view */
 export const KEY_REQUEST_DATA = 'key/REQUEST_DATA'
 export const KEY_DATA_RECEIVED = 'key/DATA_RECEIVED'
+export const KEY_DATA_REQUEST_FAILED = 'key/DATA_REQUEST_FAILED'
 
 export const KEY_SUBSCRIBE = 'key/SUBSCRIBE'
 export const KEY_SUBSCRIBED = 'key/SUBSCRIBED'

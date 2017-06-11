@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { Redirect } from 'react-router'
+
 import VirtualList from '../../controls/VirtualizedList/VirtualList'
 import ServerListItem from './serverListItem'
 
@@ -9,6 +11,7 @@ import * as treeViewItemTypes from '../../../constants/treeViewItemTypes'
 import * as appConstants from '../../../constants/appConstants'
 import * as defaultServerConfig from '../../../constants/defaultServerConfig'
 import * as serverTreeViewNodeType from '../../../constants/serverTreeViewNodeType'
+import * as routes from '../../../constants/routes'
 
 export default class ServerList extends Component {
   static propTypes = {
@@ -71,7 +74,7 @@ export default class ServerList extends Component {
           name: server.primarySettings.serverName,
           onSelected: () => this.props.serverSelected(server),
           isSelected: selectedServer && (server.id === selectedServer.id)
-            && !selectedKey,
+          && !selectedKey,
           isExpanded: !!itemsExpandedState[server.id],
           onToggleExpand: () => {
             this.props.toggleItemExpand(key)
@@ -103,15 +106,13 @@ export default class ServerList extends Component {
     return serverListItems
   }
 
-  generateKeyTreeListItems (
-    treeNode = {},
-    parentTreeViewSpans = [],
-    isLastItem,
-    parentNodeKey,
-    parentNodeTitle,
-    separator,
-    server
-  ) {
+  generateKeyTreeListItems (treeNode = {},
+                            parentTreeViewSpans = [],
+                            isLastItem,
+                            parentNodeKey,
+                            parentNodeTitle,
+                            separator,
+                            server) {
     let {
       itemsExpandedState,
       selectedServer,
@@ -141,12 +142,12 @@ export default class ServerList extends Component {
         name: treeNode.name,
         isExpanded: nodeExpanded,
         isSelected: selectedServer && (selectedServer.id === server.id)
-          && selectedKey && (selectedKey === nodeKey),
+        && selectedKey && (selectedKey === nodeKey),
         onSelected: treeNode.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_KEY
           ? () => {
-              this.props.keySelected(server, nodeKey)
-              this.props.openKey(server, nodeKey)
-            }
+            this.props.keySelected(server, treeNode.key)
+            this.props.openKey(server, treeNode.key)
+          }
           : null,
         onToggleExpand: () => this.props.toggleItemExpand(nodeKey)
       })
@@ -185,6 +186,8 @@ export default class ServerList extends Component {
   }
 
   render () {
+    let {shouldRedirectToKeyView} = this.props.serverList
+
     let rootFolderItem = this.getRootFolderListItem()
 
     let serverListItems = [
@@ -196,6 +199,8 @@ export default class ServerList extends Component {
       ref={(serverListContainer) => this.serverListContainer = serverListContainer}
       className='server-list-container'
     >
+      { shouldRedirectToKeyView && <Redirect to={routes.KEY_VIEW}/> }
+
       {
         this.serverListContainer && <VirtualList
           className='server-list'

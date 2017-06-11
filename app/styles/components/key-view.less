@@ -1,0 +1,84 @@
+.key-view-container {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+
+  padding: 0 5px;
+
+  & > .key-name {
+    display: flex;
+    flex-direction: row;
+
+    margin: 15px 0 0;
+    padding-bottom: 9px;
+
+    border-bottom: @default-border-thickness solid @default-border-color;
+
+    & > .key-name-label {
+      color: @label-text-color;
+    }
+
+    & > .key-name-text {
+      flex: 1;
+      margin-left: 10px;
+    }
+  }
+
+  & > .key-content {
+    flex: 1;
+  }
+
+  & > .key-settings {
+    display: flex;
+    flex-direction: row;
+
+    margin: 0 0 5px;
+    padding-top: 5px;
+
+    align-items: center;
+
+    border-top: @default-border-thickness solid @default-border-color;
+
+    & > .key-display-type {
+      & > .display-type-label {
+        color: @label-text-color;
+      }
+
+      & > .key-display-type-select {
+        margin-left: 5px;
+
+        color: @control-active-text-color;
+      }
+    }
+
+    & > .content-last-updated-timestamp {
+      margin-left: auto;
+
+      & > .last-updated-timestamp-label {
+        color: @label-text-color;
+      }
+
+      & > .last-updated-timestamp-text {
+        margin-left: 5px;
+      }
+    }
+
+    & > .show-content-updates {
+      display: flex;
+      flex-direction: row;
+
+      align-items: center;
+
+      margin-left: 10px;
+
+      & > .show-updates-label {
+        margin-left: 5px;
+
+        user-select: none;
+
+        color: @label-text-color;
+      }
+    }
+  }
+}
