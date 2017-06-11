@@ -42,7 +42,8 @@ export default class ServerList extends Component {
       filteredServerKeys,
       loadingServerKeys,
       filterTerm,
-      selectedServer
+      selectedServer,
+      selectedKey
     } = this.props.serverList
 
     for (let server of servers) {
@@ -69,7 +70,8 @@ export default class ServerList extends Component {
           itemType: treeViewItemTypes.TREE_VIEW_SERVER_ITEM,
           name: server.primarySettings.serverName,
           onSelected: () => this.props.serverSelected(server),
-          isSelected: selectedServer && (server.id === selectedServer.id),
+          isSelected: selectedServer && (server.id === selectedServer.id)
+            && !selectedKey,
           isExpanded: !!itemsExpandedState[server.id],
           onToggleExpand: () => {
             this.props.toggleItemExpand(key)

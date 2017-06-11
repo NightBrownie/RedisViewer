@@ -77,7 +77,8 @@ const serverListReducer = (state = defaultState, action) => {
     case actionTypes.SERVER_SERVER_SELECTED:
       return {
         ...state,
-        selectedServer: action.server
+        selectedServer: action.server,
+        selectedKey: null
       }
     case actionTypes.SERVER_KEY_SELECTED:
       return {

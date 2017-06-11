@@ -13,6 +13,7 @@ export default class ServerView extends Component {
       keySelected: PropTypes.func.isRequired,
       openKey: PropTypes.func.isRequired,
       serverSelected: PropTypes.func.isRequired,
+      selectedKey: PropTypes.string,
       selectedServer: PropTypes.object,
       toggleServerListItemExpand: PropTypes.func.isRequired,
       requestKeys: PropTypes.func.isRequired,
@@ -33,7 +34,7 @@ export default class ServerView extends Component {
           requestEditServer={this.props.requestEditServer}
           requestRemoveServer={this.props.requestRemoveServer}
           editServerRequested={this.props.editServerRequested}
-          selectedServer={this.props.selectedServer}
+          selectedServer={!this.props.selectedKey ? this.props.selectedServer : null}
           filterChanged={this.props.filterChanged}
         />
         <ServerList
