@@ -159,7 +159,7 @@ export default class KeyView extends Component {
             type='checkbox'
           />
           <span className='show-updates-label'>
-            Track updates
+            Auto track updates
           </span>
         </label>
       </div>
