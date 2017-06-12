@@ -12,3 +12,7 @@ export const DEFAULT_SERVER_CONFIG_LIST = []
 
 /* Server list */
 export const ROOT_FOLDER_NAME = 'Servers'
+
+/* Output format */
+export const JSON_FORMAT_LEADING_SPACE = 2
+export const KEY_DATA_LAST_UPDATE_DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss.SSS'

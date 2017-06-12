@@ -30,3 +30,8 @@ export const getServerKeys = async (server) => {
   await redis.connect()
   return redis.keys(server.primarySettings.keysRootPattern || defaultServerConfig.KEYS_ROOT_PATTERN)
 }
+
+export const getKeyData = async (server, key) => {
+  let redis = getRedisInstance(server)
+  return redis.get(key)
+}

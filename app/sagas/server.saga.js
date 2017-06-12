@@ -1,4 +1,4 @@
-import { put, takeLatest, call } from 'redux-saga/effects'
+import { put, takeLatest, takeEvery, call } from 'redux-saga/effects'
 
 import * as redisService from '../services/redis.service'
 
@@ -46,6 +46,6 @@ export default function * saga () {
     takeLatest(actionTypes.SERVER_SERVER_LIST_REQUESTED, serverListRequested),
     takeLatest(actionTypes.SERVER_SET_SERVER, setServer),
     takeLatest(actionTypes.SERVER_REMOVE_SERVER, removeServer),
-    takeLatest(actionTypes.SERVER_REQUEST_KEYS, requestKeys)
+    takeEvery(actionTypes.SERVER_REQUEST_KEYS, requestKeys)
   ]
 }

@@ -6,27 +6,55 @@
 
   padding: 0 5px;
 
-  & > .key-name {
+  & > .key-view-header {
     display: flex;
     flex-direction: row;
 
-    margin: 15px 0 0;
-    padding-bottom: 9px;
+    align-items: center;
 
     border-bottom: @default-border-thickness solid @default-border-color;
 
-    & > .key-name-label {
-      color: @label-text-color;
-    }
+    & > .key-name {
+      display: flex;
+      flex-direction: row;
 
-    & > .key-name-text {
       flex: 1;
-      margin-left: 10px;
+
+      margin: 15px 0 0;
+      padding-bottom: 9px;
+
+      & > .key-name-label {
+        color: @label-text-color;
+      }
+
+      & > .key-name-text {
+        flex: 1;
+        margin-left: 10px;
+      }
     }
   }
 
   & > .key-content {
     flex: 1;
+    display: flex;
+
+    .key-data {
+      flex: 1;
+
+      margin: 10px;
+
+      overflow: auto;
+
+      .webkit-scrollbar;
+
+      & > .addition {
+        background-color: @diff-addition-background-color;
+      }
+
+      & > .deletion {
+        background-color: @diff-deletion-background-color;
+      }
+    }
   }
 
   & > .key-settings {

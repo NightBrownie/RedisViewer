@@ -145,7 +145,7 @@ export default class ServerList extends Component {
         && selectedKey && (selectedKey === nodeKey),
         onSelected: treeNode.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_KEY
           ? () => {
-            this.props.keySelected(server, treeNode.key)
+            this.props.keySelected(server, nodeKey)
             this.props.openKey(server, treeNode.key)
           }
           : null,
