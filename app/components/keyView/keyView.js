@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 
 import { Redirect } from 'react-router'
 
+import Diff from '../controls/diff'
+
 import * as routes from '../../constants/routes'
 import * as keyContentType from '../../constants/keyContentType'
 
@@ -10,7 +12,9 @@ export default class KeyView extends Component {
   static propTypes = {
     shouldRedirectToTheRoot: PropTypes.bool,
     server: PropTypes.object,
-    keyName: PropTypes.string
+    keyName: PropTypes.string,
+    previousValue: PropTypes.string,
+    currentValue: PropTypes.string
   }
 
   static defaultProps = {
@@ -23,6 +27,14 @@ export default class KeyView extends Component {
     this.state = {
       keyDisplayType: keyContentType.PLAIN_TEXT
     }
+  }
+
+  componentDidMount () {
+    //TODO: request data for the first time if component did update haven't fired
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    //TODO: request data for each update, check appropriate props changed
   }
 
   render () {
@@ -45,7 +57,14 @@ export default class KeyView extends Component {
       </h3>
 
       <div className='key-content'>
-        test key content
+        <Diff
+          inputA={this.props.previousValue}
+          inputB={this.props.currentValue}
+          type={this.state.keyDisplayType === keyContentType.JSON
+            ? 'json'
+            : 'chars'
+          }
+        />
       </div>
 
       <div className='key-settings'>
