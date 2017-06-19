@@ -44,3 +44,15 @@ export const unsubscribe = (server, key) => ({
   server,
   key
 })
+
+export const unsubscribed = (server, key) => ({
+  type: actionTypes.KEY_UNSUBSCRIBED,
+  server,
+  key
+})
+
+export const unsubscriptionFailed = (server, key) => ({
+  type: actionTypes.KEY_UNSUBSCRIPTION_FAILED,
+  server,
+  key
+})

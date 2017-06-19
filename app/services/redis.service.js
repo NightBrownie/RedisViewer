@@ -4,6 +4,7 @@ import winston from 'winston'
 import * as defaultServerConfig from '../constants/defaultServerConfig'
 
 const KEYSPASE_SUBSCRIPTION_STREAM_PREFIX = '__keyspace*__:'
+const SUPPORTED_KEY_UPDATE_EVENTS = ['set', 'incrby']
 
 const redisInstances = {}
 const redisSubscriptionInstances = {}
@@ -40,8 +41,28 @@ const getRedisSubscriptionInstance = (serverConfig) => {
 }
 
 const createServerKeyUpdateSubscriber = (server) => {
-  return (message) => {
-    return 1
+  return async (pattern, channel, message) => {
+    console.log(pattern, channel, message)
+
+    // TODO: filter messages
+
+    if (redisServerKeyUpdateCallbacks[server.id]) {
+      let subscriptionCallbackKeys = Object.keys(redisServerKeyUpdateCallbacks[server.id])
+
+      if (subscriptionCallbackKeys.length > 0) {
+        for (let subscriptionCallbackKey of subscriptionCallbackKeys) {
+          if (redisServerKeyUpdateCallbacks[server.id][subscriptionCallbackKey] &&
+            redisServerKeyUpdateCallbacks[server.id][subscriptionCallbackKey].length) {
+            // get key updated data
+            let keyData = await getKeyData(server, subscriptionCallbackKey)
+
+            for (let subscriptionCallback of redisServerKeyUpdateCallbacks[server.id][subscriptionCallbackKey]) {
+              subscriptionCallback && subscriptionCallback(keyData)
+            }
+          }
+        }
+      }
+    }
   }
 }
 
@@ -69,20 +90,40 @@ export const subscribeForKeyUpdates = async (server, key, callback) => {
     redisServerKeyUpdateCallbacks[server.id][key] = []
   }
 
-  if (redisServerKeyUpdateCallbacks[server.id][key].indexOf(callback) > -1) {
-    return
+  // register each callback only once
+  if (redisServerKeyUpdateCallbacks[server.id][key].indexOf(callback) !== -1) {
+    redisServerKeyUpdateCallbacks[key].push(callback)
   }
 
-  redisServerKeyUpdateCallbacks[key].push(callback)
-
+  // subscribe for key updates one per server
   if (!redisServerKeyUpdateSubscribers[server.id]) {
     redisServerKeyUpdateSubscribers[server.id] = createServerKeyUpdateSubscriber(server)
-    redis.addListener('message', redisServerKeyUpdateSubscribers[server.id])
+    redis.addListener('pmessage', redisServerKeyUpdateSubscribers[server.id])
   }
 }
 
 export const unsubscribeFromKeyUpdates = async (server, key, callback) => {
   let redis = getRedisSubscriptionInstance(server)
   redis.punsubscribe(KEYSPASE_SUBSCRIPTION_STREAM_PREFIX + key)
-  redis.removeListener('message', callback)
+
+  if (redisServerKeyUpdateCallbacks[server.id] && redisServerKeyUpdateCallbacks[server.id][key] &&
+    redisServerKeyUpdateCallbacks[server.id][key].indexOf(callback) > -1
+  ) {
+    // unregister callback
+    redisServerKeyUpdateCallbacks[server.id][key] = redisServerKeyUpdateCallbacks[server.id][key]
+      .filter(storedCallback => callback !== storedCallback)
+
+    // clean key-specific callback collection
+    if (redisServerKeyUpdateCallbacks[server.id][key].length === 0) {
+      delete redisServerKeyUpdateCallbacks[server.id][key]
+    }
+
+    // clean server-specific callback container
+    if (Object.keys(redisServerKeyUpdateCallbacks[server.id]).length === 0) {
+      delete redisServerKeyUpdateCallbacks[server.id]
+      // unsubscribe from updates for server keys
+      redis.removeListener('message', redisServerKeyUpdateSubscribers[server.id])
+      delete redisServerKeyUpdateSubscribers[server.id]
+    }
+  }
 }
