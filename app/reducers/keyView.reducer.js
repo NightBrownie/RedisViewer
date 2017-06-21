@@ -5,6 +5,8 @@ import * as actionTypes from '../constants/actionTypes'
 const defaultState = {
   shouldRedirectToTheRoot: false,
   loadingKeyData: false,
+  isUpdatesAutoTrackEnabled: false,
+  isUpdatesAutoTrackToggling: false
 }
 
 export default (state = defaultState, action) => {
@@ -51,6 +53,30 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         shouldRedirectToTheRoot: false
+      }
+    case actionTypes.KEY_SUBSCRIBE:
+    case actionTypes.KEY_UNSUBSCRIBE:
+      return {
+        ...state,
+        isUpdatesAutoTrackToggling: true
+      }
+    case actionTypes.KEY_SUBSCRIBED:
+      return {
+        ...state,
+        isUpdatesAutoTrackToggling: false,
+        isUpdatesAutoTrackEnabled: true
+      }
+    case actionTypes.KEY_UNSUBSCRIBED:
+      return {
+        ...state,
+        isUpdatesAutoTrackToggling: false,
+        isUpdatesAutoTrackEnabled: false
+      }
+    case actionTypes.KEY_SUBSCRIPTION_FAILED:
+    case actionTypes.KEY_UNSUBSCRIPTION_FAILED:
+      return {
+        ...state,
+        isUpdatesAutoTrackToggling: false
       }
     default:
       return state

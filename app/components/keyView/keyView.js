@@ -22,12 +22,16 @@ export default class KeyView extends Component {
     previousData: PropTypes.string,
     currentData: PropTypes.string,
     lastUpdateTime: PropTypes.object,
-    loadingKeyData: PropTypes.bool
+    loadingKeyData: PropTypes.bool,
+    toggleKeyUpdatesAutoTrack: PropTypes.func.isRequired,
+    isUpdatesAutoTrackEnabled: PropTypes.bool,
+    isUpdatesAutoTrackToggling: PropTypes.bool
   }
 
   static defaultProps = {
     shouldRedirectToTheRoot: false,
-    loadingKeyData: false
+    loadingKeyData: false,
+    isUpdatesAutoTrackEnabled: false
   }
 
   constructor (props) {
@@ -157,6 +161,12 @@ export default class KeyView extends Component {
           <input
             className='show-updates-switch'
             type='checkbox'
+            checked={this.props.isUpdatesAutoTrackEnabled}
+            onChange={() => !this.props.isUpdatesAutoTrackToggling &&
+              this.props.toggleKeyUpdatesAutoTrack(
+                  this.props.server,
+                  this.props.keyName,
+                  !this.props.isUpdatesAutoTrackEnabled)}
           />
           <span className='show-updates-label'>
             Auto track updates

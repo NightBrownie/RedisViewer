@@ -17,7 +17,6 @@ const getRedisInstance = (serverConfig) => {
     let redis = redisInstances[serverConfig.id] = new Redis({
       host: serverConfig.primarySettings.host || defaultServerConfig.HOST,
       port: serverConfig.primarySettings.port || defaultServerConfig.PORT,
-      connectionName: serverConfig.primarySettings.serverName,
       password: serverConfig.primarySettings.password,
       connectTimeout: ((serverConfig.advancedSettings && serverConfig.advancedSettings.connectionTimeout) ||
         defaultServerConfig.CONNECTION_TIMEOUT_SECONDS) * 1000,
@@ -32,7 +31,7 @@ const getRedisInstance = (serverConfig) => {
 
 const getRedisSubscriptionInstance = (serverConfig) => {
   if (!redisSubscriptionInstances[serverConfig.id]) {
-    let redis = redisInstances[serverConfig.id] =
+    let redis = redisSubscriptionInstances[serverConfig.id] =
       getRedisInstance(serverConfig).duplicate()
     redis.on('error', (err) => winston.error(err))
   }
@@ -42,9 +41,11 @@ const getRedisSubscriptionInstance = (serverConfig) => {
 
 const createServerKeyUpdateSubscriber = (server) => {
   return async (pattern, channel, message) => {
-    console.log(pattern, channel, message)
+    if (SUPPORTED_KEY_UPDATE_EVENTS.indexOf(message) < 0) {
+      return
+    }
 
-    // TODO: filter messages
+    console.log(pattern, channel, message)
 
     if (redisServerKeyUpdateCallbacks[server.id]) {
       let subscriptionCallbackKeys = Object.keys(redisServerKeyUpdateCallbacks[server.id])
@@ -91,8 +92,8 @@ export const subscribeForKeyUpdates = async (server, key, callback) => {
   }
 
   // register each callback only once
-  if (redisServerKeyUpdateCallbacks[server.id][key].indexOf(callback) !== -1) {
-    redisServerKeyUpdateCallbacks[key].push(callback)
+  if (redisServerKeyUpdateCallbacks[server.id][key].indexOf(callback) === -1) {
+    redisServerKeyUpdateCallbacks[server.id][key].push(callback)
   }
 
   // subscribe for key updates one per server
