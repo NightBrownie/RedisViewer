@@ -1,3 +1,4 @@
+import { eventChannel, END } from 'redux-saga'
 import { put, takeEvery, call } from 'redux-saga/effects'
 
 import * as actionTypes from '../constants/actionTypes'
@@ -15,6 +16,7 @@ function * requestData (action) {
 
 function * subscribe (action) {
   try {
+    // TODO: add channel subscription
     yield call(redisService.subscribeForKeyUpdates, action.server, action.key, () => ({}))
     yield put(keyActions.subscribed(action.server, action.key))
   } catch (error) {
@@ -24,6 +26,7 @@ function * subscribe (action) {
 
 function * unsubscribe (action) {
   try {
+    // TODO: add channel unsubscription
     yield call(redisService.unsubscribeFromKeyUpdates, action.server, action.key, () => ({}))
     yield put(keyActions.unsubscribed(action.server, action.key))
   } catch (error) {
