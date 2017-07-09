@@ -3,6 +3,7 @@ import winston from 'winston'
 
 import * as defaultServerConfig from '../constants/defaultServerConfig'
 
+const REDIS_SUBSCRIPTION_UPDATE_EVENT = 'pmessage'
 const KEYSPASE_SUBSCRIPTION_STREAM_PREFIX = '__keyspace*__:'
 const SUPPORTED_KEY_UPDATE_EVENTS = ['set', 'incrby']
 
@@ -98,7 +99,7 @@ export const subscribeForKeyUpdates = async (server, key, callback) => {
   // subscribe for key updates once per server
   if (!redisServerKeyUpdateSubscribers[server.id]) {
     redisServerKeyUpdateSubscribers[server.id] = createServerKeyUpdateSubscriber(server)
-    redis.addListener('pmessage', redisServerKeyUpdateSubscribers[server.id])
+    redis.addListener(REDIS_SUBSCRIPTION_UPDATE_EVENT, redisServerKeyUpdateSubscribers[server.id])
   }
 
   redis.psubscribe(subscriptionPattern)
@@ -129,7 +130,7 @@ export const unsubscribeFromKeyUpdates = async (server, key, callback) => {
     if (Object.keys(redisServerKeyUpdateCallbacks[server.id]).length === 0) {
       delete redisServerKeyUpdateCallbacks[server.id]
       // unsubscribe from updates for server keys
-      redis.removeListener('message', redisServerKeyUpdateSubscribers[server.id])
+      redis.removeListener(REDIS_SUBSCRIPTION_UPDATE_EVENT, redisServerKeyUpdateSubscribers[server.id])
       delete redisServerKeyUpdateSubscribers[server.id]
     }
   }

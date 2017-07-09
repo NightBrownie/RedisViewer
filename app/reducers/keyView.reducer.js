@@ -69,6 +69,7 @@ export default (state = defaultState, action) => {
     case actionTypes.KEY_UNSUBSCRIBED:
       return {
         ...state,
+        previousData: state.currentData,
         isUpdatesAutoTrackToggling: false,
         isUpdatesAutoTrackEnabled: false
       }
