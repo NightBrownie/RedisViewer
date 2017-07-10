@@ -13,7 +13,17 @@ export default connect(
     previousData: state.keyView.previousData,
     currentData: state.keyView.currentData,
     lastUpdateTime: state.keyView.lastUpdateTime,
-    loadingKeyData: state.keyView.loadingKeyData
+    loadingKeyData: state.keyView.loadingKeyData,
+    isUpdatesTrackEnabled: state.keyView.isUpdatesTrackEnabled,
+    isUpdatesTrackToggling: state.keyView.isUpdatesTrackToggling
   }),
-  dispatch => bindActionCreators(keyActions, dispatch)
+  dispatch =>
+    ({
+      ...bindActionCreators(keyActions, dispatch),
+      toggleKeyUpdatesTrack: (server, key, enableTrack) => {
+        enableTrack
+          ? dispatch(keyActions.subscribe(server, key))
+          : dispatch(keyActions.unsubscribe(server, key))
+      }
+    })
 )(KeyView)

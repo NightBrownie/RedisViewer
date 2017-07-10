@@ -22,12 +22,16 @@ export default class KeyView extends Component {
     previousData: PropTypes.string,
     currentData: PropTypes.string,
     lastUpdateTime: PropTypes.object,
-    loadingKeyData: PropTypes.bool
+    loadingKeyData: PropTypes.bool,
+    toggleKeyUpdatesTrack: PropTypes.func.isRequired,
+    isUpdatesTrackEnabled: PropTypes.bool,
+    isUpdatesTrackToggling: PropTypes.bool
   }
 
   static defaultProps = {
     shouldRedirectToTheRoot: false,
-    loadingKeyData: false
+    loadingKeyData: false,
+    isUpdatesTrackEnabled: false
   }
 
   constructor (props) {
@@ -44,10 +48,33 @@ export default class KeyView extends Component {
     }
   }
 
-  componentDidUpdate (prevProps, prevState) {
-    if (this.props.server && this.props.keyName && (!prevProps.keyName || prevProps.keyName !== this.props.keyName)
+  componentWillUpdate (nextProps, nextState) {
+    if (this.props.server !== nextProps.server || this.props.keyName !== nextProps.keyName) {
+      if (this.props.isUpdatesTrackEnabled && !this.props.isUpdatesTrackToggling) {
+        this.props.toggleKeyUpdatesTrack(
+          this.props.server,
+          this.props.keyName,
+          false)
+
+        this.props.toggleKeyUpdatesTrack(
+          nextProps.server,
+          nextProps.keyName,
+          true)
+      }
+
+      this.props.requestData(nextProps.server, nextProps.keyName)
+    }
+  }
+
+  componentWillUnmount () {
+    if (this.props.server && this.props.keyName &&
+      this.props.isUpdatesTrackEnabled &&
+      !this.props.isUpdatesTrackToggling
     ) {
-      this.props.requestData(this.props.server, this.props.keyName)
+      this.props.toggleKeyUpdatesTrack(
+        this.props.server,
+        this.props.keyName,
+        false)
     }
   }
 
@@ -157,9 +184,15 @@ export default class KeyView extends Component {
           <input
             className='show-updates-switch'
             type='checkbox'
+            checked={this.props.isUpdatesTrackEnabled}
+            onChange={() => !this.props.isUpdatesTrackToggling &&
+              this.props.toggleKeyUpdatesTrack(
+                  this.props.server,
+                  this.props.keyName,
+                  !this.props.isUpdatesTrackEnabled)}
           />
           <span className='show-updates-label'>
-            Auto track updates
+            Track updates
           </span>
         </label>
       </div>
