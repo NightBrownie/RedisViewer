@@ -58,26 +58,26 @@ export default (state = defaultState, action) => {
     case actionTypes.KEY_UNSUBSCRIBE:
       return {
         ...state,
-        isUpdatesAutoTrackToggling: true
+        isUpdatesTrackToggling: true
       }
     case actionTypes.KEY_SUBSCRIBED:
       return {
         ...state,
-        isUpdatesAutoTrackToggling: false,
-        isUpdatesAutoTrackEnabled: true
+        isUpdatesTrackToggling: false,
+        isUpdatesTrackEnabled: true
       }
     case actionTypes.KEY_UNSUBSCRIBED:
       return {
         ...state,
         previousData: state.currentData,
-        isUpdatesAutoTrackToggling: false,
-        isUpdatesAutoTrackEnabled: false
+        isUpdatesTrackToggling: false,
+        isUpdatesTrackEnabled: false
       }
     case actionTypes.KEY_SUBSCRIPTION_FAILED:
     case actionTypes.KEY_UNSUBSCRIPTION_FAILED:
       return {
         ...state,
-        isUpdatesAutoTrackToggling: false
+        isUpdatesTrackToggling: false
       }
     default:
       return state

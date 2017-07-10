@@ -7,11 +7,11 @@ import * as redisService from '../services/redis.service'
 
 const serverKeyUpdateSubscriptionChannels = {}
 
-function createKeySubscriptionChannel(server, key) {
+function createKeySubscriptionChannel (server, key) {
   return eventChannel(emitter => {
-      redisService.subscribeForKeyUpdates(server, key, emitter)
-      return () => redisService.unsubscribeFromKeyUpdates(server, key, emitter)
-    },
+    redisService.subscribeForKeyUpdates(server, key, emitter)
+    return () => redisService.unsubscribeFromKeyUpdates(server, key, emitter)
+  },
     // Sliding buffer will result in processing of only newest updates
     // TODO: replace with buffers.expanding(1) if needed
     buffers.sliding(1))
@@ -26,7 +26,7 @@ function * requestData (action) {
   }
 }
 
-function * processKeyDataUpdates(server, key, channel) {
+function * processKeyDataUpdates (server, key, channel) {
   while (true) {
     const keyData = yield take(channel)
     yield put(keyActions.dataReceived(server, key, keyData))
