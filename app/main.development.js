@@ -1,5 +1,4 @@
 import {app, BrowserWindow} from 'electron'
-import MenuBuilder from './menu'
 
 let mainWindow = null
 
@@ -30,9 +29,9 @@ const installExtensions = async() => {
 
     const forceDownload = !!process.env.UPGRADE_EXTENSIONS
 
-        // TODO: Use async interation statement.
-        //       Waiting on https://github.com/tc39/proposal-async-iteration
-        //       Promises will fail silently, which isn't what we want in development
+    // TODO: Use async interation statement.
+    //       Waiting on https://github.com/tc39/proposal-async-iteration
+    //       Promises will fail silently, which isn't what we want in development
     return Promise
             .all(extensions.map(name => installer.default(installer[name], forceDownload)))
             .catch(console.log)
@@ -41,6 +40,8 @@ const installExtensions = async() => {
 
 app.on('ready', async() => {
   await installExtensions()
+
+  app.on('browser-window-created', (e, window) => window.setMenu(null))
 
   mainWindow = new BrowserWindow({
     show: false,
@@ -51,8 +52,6 @@ app.on('ready', async() => {
   })
 
   mainWindow.loadURL(`file://${__dirname}/app.html`)
-
-  mainWindow.setAutoHideMenuBar(true)
 
   mainWindow.webContents.on('did-finish-load', () => {
     if (!mainWindow) {
@@ -65,7 +64,4 @@ app.on('ready', async() => {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
-
-  const menuBuilder = new MenuBuilder(mainWindow)
-  menuBuilder.buildMenu()
 })
