@@ -171,6 +171,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "debug-menu": "^0.6.0",
     "diff": "^3.2.0",
     "dot-prop": "^4.1.1",
     "electron-debug": "^1.1.0",

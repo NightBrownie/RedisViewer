@@ -1,9 +1,12 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 
 export default class AppMainInfo extends Component {
-    render() {
-        return (<div className="app-main-info">
-            <h1>Hey, there will be some useful info and links soon... I swear :)</h1>
-        </div>);
-    }
+  render () {
+    return (<div className='app-main-info'>
+      <h1>RedisViewer</h1>
+      <svg>
+        <use href='/resources/images/logo.svg' />
+      </svg>
+    </div>)
+  }
 }

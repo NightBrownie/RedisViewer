@@ -9,6 +9,11 @@ import App from './containers/app'
 
 const store = configureStore()
 
+if (process.env.NODE_ENV === 'development') {
+  const debugMenu = require('debug-menu')
+  debugMenu.install()
+}
+
 render(
   <AppContainer>
     <Root store={store} history={history}>
