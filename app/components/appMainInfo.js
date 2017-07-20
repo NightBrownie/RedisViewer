@@ -5,8 +5,11 @@ export default class AppMainInfo extends Component {
   render () {
     return (<div className='app-main-info'>
       <h1>RedisViewer</h1>
-      <svg>
-        <use href={logo} />
+      <svg
+        viewBox='0 0 100 100'
+        className='app-icon'
+      >
+        <use xlinkHref={`${logo}#layer1`} />
       </svg>
     </div>)
   }
