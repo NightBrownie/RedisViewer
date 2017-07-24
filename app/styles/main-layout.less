@@ -1,19 +1,24 @@
 .main-layout-container {
-    height: 100%;
+  height: 100%;
+  display: flex;
+
+  background-color: @default-background-color;
+  color: @default-text-color;
+
+  & > .Pane {
     display: flex;
+  }
 
-    background-color: @default-background-color;
-    color: @default-text-color;
+  .right-panel {
+    position: absolute;
 
-    & > .Pane {
-        display: flex;
-    }
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
 
-    .right-panel {
-        width: 100%;
+    overflow: auto;
 
-        overflow: auto;
-
-        .webkit-scrollbar;
-    }
+    .webkit-scrollbar;
+  }
 }

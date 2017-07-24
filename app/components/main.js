@@ -4,7 +4,7 @@ import mainRoutes from '../routing/mainRoutes'
 
 import SplitPane from 'react-split-pane'
 import ServerView from '../containers/serverView'
-import { SERVER_VIEW_MIN_SIZE } from '../constants/defaultSettings'
+import { SERVER_VIEW_MIN_SIZE, RIGHT_PANEL_MIN_SIZE } from '../constants/defaultSettings'
 
 export default class Main extends Component {
   static propTypes = {
@@ -25,7 +25,7 @@ export default class Main extends Component {
         minSize={SERVER_VIEW_MIN_SIZE}
         defaultSize={this.props.serverViewWidth}
         onChange={this.props.serverViewWidthChanged}
-        maxSize={-SERVER_VIEW_MIN_SIZE}
+        maxSize={-RIGHT_PANEL_MIN_SIZE}
       >
         <ServerView />
         <div className="right-panel">
