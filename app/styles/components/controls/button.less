@@ -19,29 +19,35 @@
   background-color @control-color-transition-time ease,
   border-color @control-border-color-transition-time ease;
 
-  &:hover,
-  &:focus {
-    border-color: @control-border-active-color;
-  }
-
-  &.inactive-transparent-border {
-    border-color: transparent;
-
-    &:hover {
-      border-color: @control-border-color;
-    }
-
+  &:not(:disabled) {
+    &:hover,
     &:focus {
       border-color: @control-border-active-color;
     }
   }
 
+  &.inactive-transparent-border {
+    border-color: transparent;
+
+    &:not(:disabled) {
+      &:hover {
+        border-color: @control-border-color;
+      }
+
+      &:focus {
+        border-color: @control-border-active-color;
+      }
+    }
+  }
+
   &:disabled,
   &.inactive-transparent-border:disabled {
-    background-color: @control-disabled-background-color;
-    border-color: @control-border-color;
-
     color: @control-disabled-text-color;
+
     cursor: not-allowed;
+  }
+
+  &:not(.inactive-transparent-border):disabled {
+    border-color: @control-disabled-border-color;
   }
 }
