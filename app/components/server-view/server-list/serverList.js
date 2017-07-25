@@ -26,9 +26,17 @@ export default class ServerList extends Component {
   getRootFolderListItem () {
     let {itemsExpandedState} = this.props.serverList
 
-    return {
+    /*return {
       key: appConstants.ROOT_FOLDER_NAME,
       treeViewSpans: [treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN],
+      itemType: treeViewItemTypes.TREE_VIEW_FOLDER_ITEM,
+      name: appConstants.ROOT_FOLDER_NAME,
+      isExpanded: !!itemsExpandedState[appConstants.ROOT_FOLDER_NAME],
+      onToggleExpand: () => this.props.toggleItemExpand(appConstants.ROOT_FOLDER_NAME)
+    }*/
+
+    return {
+      key: appConstants.ROOT_FOLDER_NAME,
       itemType: treeViewItemTypes.TREE_VIEW_FOLDER_ITEM,
       name: appConstants.ROOT_FOLDER_NAME,
       isExpanded: !!itemsExpandedState[appConstants.ROOT_FOLDER_NAME],
@@ -106,13 +114,15 @@ export default class ServerList extends Component {
     return serverListItems
   }
 
-  generateKeyTreeListItems (treeNode = {},
-                            parentTreeViewSpans = [],
-                            isLastItem,
-                            parentNodeKey,
-                            parentNodeTitle,
-                            separator,
-                            server) {
+  generateKeyTreeListItems (
+    treeNode = {},
+    parentTreeViewSpans = [],
+    isLastItem,
+    parentNodeKey,
+    parentNodeTitle,
+    separator,
+    server
+  ) {
     let {
       itemsExpandedState,
       selectedServer,
@@ -192,7 +202,7 @@ export default class ServerList extends Component {
 
     let serverListItems = [
       rootFolderItem,
-      ...(rootFolderItem.isExpanded ? this.getServerListItems() : [])
+      ...(rootFolderItem.isExpanded ? this.getServerListItems(rootFolderItem) : [])
     ]
 
     return (<div
