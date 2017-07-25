@@ -23,25 +23,29 @@ export default class ServerList extends Component {
     requestServerKeys: PropTypes.func.isRequired
   }
 
-  getRootFolderListItem () {
+  getListItems () {
+    let listItemsTree = this.getListItemsTree()
+
+    // TODO: replace with tree to list conversion
+    return []
+  }
+
+  getListItemsTree () {
     let {itemsExpandedState} = this.props.serverList
 
     /*return {
-      key: appConstants.ROOT_FOLDER_NAME,
       treeViewSpans: [treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN],
-      itemType: treeViewItemTypes.TREE_VIEW_FOLDER_ITEM,
-      name: appConstants.ROOT_FOLDER_NAME,
-      isExpanded: !!itemsExpandedState[appConstants.ROOT_FOLDER_NAME],
-      onToggleExpand: () => this.props.toggleItemExpand(appConstants.ROOT_FOLDER_NAME)
     }*/
 
-    return {
+    let rootFolderListItem = {
       key: appConstants.ROOT_FOLDER_NAME,
       itemType: treeViewItemTypes.TREE_VIEW_FOLDER_ITEM,
       name: appConstants.ROOT_FOLDER_NAME,
       isExpanded: !!itemsExpandedState[appConstants.ROOT_FOLDER_NAME],
       onToggleExpand: () => this.props.toggleItemExpand(appConstants.ROOT_FOLDER_NAME)
     }
+
+    let serverListItems = this.getServerListItems()
   }
 
   getServerListItems () {
@@ -198,12 +202,14 @@ export default class ServerList extends Component {
   render () {
     let {shouldRedirectToKeyView} = this.props.serverList
 
-    let rootFolderItem = this.getRootFolderListItem()
+    /*let rootFolderItem = this.getListItems()*/
 
-    let serverListItems = [
+    /*let serverListItems = [
       rootFolderItem,
       ...(rootFolderItem.isExpanded ? this.getServerListItems(rootFolderItem) : [])
-    ]
+    ]*/
+
+    let serverListItems = this.getListItems()
 
     return (<div
       ref={(serverListContainer) => this.serverListContainer = serverListContainer}
