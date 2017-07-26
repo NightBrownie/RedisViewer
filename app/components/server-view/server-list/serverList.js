@@ -24,32 +24,59 @@ export default class ServerList extends Component {
   }
 
   getListItems () {
-    let listItemsTree = this.getListItemsTree()
+    return this.getNodeListItems(this.getListItemsTree())
+  }
 
-    // TODO: replace with tree to list conversion
-    return []
+  getNodeListItems(node, parentListItemSpans = [], isLast = true) {
+    let childNodes = node.nodes || []
+    let childNodeListItems = childNodes
+      .map(childNode =>
+        this.getNodeListItems(childNode,
+          [
+            ...parentListItemSpans,
+            isLast
+              ? treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN
+              : treeViewSpanTypes.TREE_VIEW_NODELESS_SPAN
+          ],
+        ))
+      .reduce((accumulator, nodeListItems) => [
+        ...accumulator,
+        ...nodeListItems
+      ], [])
+
+    return [
+      {
+        ...node.listItem,
+        treeViewSpans: [
+          ...parentListItemSpans,
+          parentListItemSpans.length
+            ? isLast
+              ? treeViewSpanTypes.TREE_VIEW_LAST_NODE_SPAN
+              : treeViewSpanTypes.TREE_VIEW_NODE_SPAN
+            : treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN
+        ]
+      },
+      ...childNodeListItems
+    ]
   }
 
   getListItemsTree () {
     let {itemsExpandedState} = this.props.serverList
 
-    /*return {
-      treeViewSpans: [treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN],
-    }*/
-
-    let rootFolderListItem = {
-      key: appConstants.ROOT_FOLDER_NAME,
-      itemType: treeViewItemTypes.TREE_VIEW_FOLDER_ITEM,
-      name: appConstants.ROOT_FOLDER_NAME,
-      isExpanded: !!itemsExpandedState[appConstants.ROOT_FOLDER_NAME],
-      onToggleExpand: () => this.props.toggleItemExpand(appConstants.ROOT_FOLDER_NAME)
+    return {
+      listItem: {
+        key: appConstants.ROOT_FOLDER_NAME,
+        itemType: treeViewItemTypes.TREE_VIEW_FOLDER_ITEM,
+        name: appConstants.ROOT_FOLDER_NAME,
+        isExpanded: !!itemsExpandedState[appConstants.ROOT_FOLDER_NAME],
+        onToggleExpand: () => this.props.toggleItemExpand(appConstants.ROOT_FOLDER_NAME)
+      },
+      nodes: this.getServerListItemsNodes()
     }
-
-    let serverListItems = this.getServerListItems()
   }
 
-  getServerListItems () {
-    let serverListItems = []
+  getServerListItemsNodes () {
+    let serverListItemsNodes = []
 
     let {
       servers,
@@ -68,20 +95,13 @@ export default class ServerList extends Component {
       let currentServerKeys = filteredServerKeys[key]
       let currentServerKeysLoading = loadingServerKeys[key]
       let currentServerExpanded = !!itemsExpandedState[server.id]
-      let isLastItem = servers.indexOf(server) === servers.length - 1
 
       if (!filterTerm ||
         server.primarySettings.serverName.toLowerCase().indexOf(filterTerm.toLowerCase()) >= 0 ||
         (currentServerKeys && currentServerKeys.nodes.length)) {
 
-        serverListItems.push({
+        let serverListItem = {
           key,
-          treeViewSpans: [
-            treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN,
-            isLastItem
-              ? treeViewSpanTypes.TREE_VIEW_LAST_NODE_SPAN
-              : treeViewSpanTypes.TREE_VIEW_NODE_SPAN
-          ],
           itemType: treeViewItemTypes.TREE_VIEW_SERVER_ITEM,
           name: server.primarySettings.serverName,
           onSelected: () => this.props.serverSelected(server),
@@ -93,40 +113,40 @@ export default class ServerList extends Component {
             !currentServerExpanded && !currentServerKeys && !currentServerKeysLoading &&
             this.props.requestServerKeys(server)
           }
-        })
+        }
+
+        let serverListItemNode = {
+          listItem: serverListItem
+        }
 
         if (currentServerExpanded && currentServerKeys) {
-          serverListItems = [
-            ...serverListItems,
-            ...this.generateKeyTreeListItems(currentServerKeys,
-              [
-                treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN,
-                servers.indexOf(server) !== servers.length - 1
-                  ? treeViewSpanTypes.TREE_VIEW_NODELESS_SPAN
-                  : treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN
-              ],
-              isLastItem,
-              key,
-              server.primarySettings.serverName,
-              separator,
-              server)
-          ]
+          serverListItemNode.nodes = this.getServerKeysListItemsNodes(currentServerKeys,
+            key,
+            server.primarySettings.serverName,
+            separator,
+            server)
         }
+
+        serverListItemsNodes.push(serverListItemNode)
       }
     }
 
-    return serverListItems
+    return serverListItemsNodes
   }
 
-  generateKeyTreeListItems (
+  getServerKeysListItemsNodes (
+    serverListNode,
     treeNode = {},
-    parentTreeViewSpans = [],
-    isLastItem,
     parentNodeKey,
     parentNodeTitle,
     separator,
     server
   ) {
+    if (!serverListNode)
+    {
+      return
+    }
+
     let {
       itemsExpandedState,
       selectedServer,
@@ -137,19 +157,13 @@ export default class ServerList extends Component {
     let nodeTitle = parentNodeTitle + (treeNode.key ? separator + treeNode.key : '')
     let nodeExpanded = !!itemsExpandedState[nodeKey]
 
-    let result = []
+    let serverKeysListItemsNodes = []
 
     if (treeNode.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_FOLDER
       || treeNode.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_KEY) {
-      result.push({
+      serverKeysListItemsNodes.push({
         key: nodeKey,
         title: nodeTitle,
-        treeViewSpans: [
-          ...parentTreeViewSpans,
-          isLastItem
-            ? treeViewSpanTypes.TREE_VIEW_LAST_NODE_SPAN
-            : treeViewSpanTypes.TREE_VIEW_NODE_SPAN
-        ],
         itemType: treeNode.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_FOLDER
           ? treeViewItemTypes.TREE_VIEW_FOLDER_ITEM
           : treeViewItemTypes.TREE_VIEW_KEY_ITEM,
@@ -165,49 +179,34 @@ export default class ServerList extends Component {
           : null,
         onToggleExpand: () => this.props.toggleItemExpand(nodeKey)
       })
-    }
 
-    if (treeNode.nodes && nodeExpanded) {
-      result = [
-        ...result,
-        ...[
-          ...treeNode.nodes.filter(node => node.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_FOLDER),
-          ...treeNode.nodes.filter(node => node.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_KEY)
-        ].map((node, index, collection) => this.generateKeyTreeListItems(
-          node,
-          treeNode.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_SERVER
-            ? parentTreeViewSpans
-            : [
-            ...parentTreeViewSpans,
-            isLastItem
-              ? treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN
-              : treeViewSpanTypes.TREE_VIEW_NODELESS_SPAN],
-          index === collection.length - 1,
-          nodeKey,
-          nodeTitle,
-          separator,
-          server)
-        )
-          .reduce((nodeResult, results = []) => [
-              ...nodeResult,
-              ...results
-            ]
+      if (treeNode.nodes && nodeExpanded) {
+        serverKeysListItemsNodes = [
+          ...serverKeysListItemsNodes,
+          ...[
+            ...treeNode.nodes.filter(node => node.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_FOLDER),
+            ...treeNode.nodes.filter(node => node.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_KEY)
+          ].map((node, index, collection) => this.getServerKeysListItemsNodes(
+            node,
+            nodeKey,
+            nodeTitle,
+            separator,
+            server)
           )
-      ]
+            .reduce((nodeResult, results = []) => [
+                ...nodeResult,
+                ...results
+              ]
+            )
+        ]
+      }
     }
 
-    return result
+    return serverKeysListItemsNodes
   }
 
   render () {
     let {shouldRedirectToKeyView} = this.props.serverList
-
-    /*let rootFolderItem = this.getListItems()*/
-
-    /*let serverListItems = [
-      rootFolderItem,
-      ...(rootFolderItem.isExpanded ? this.getServerListItems(rootFolderItem) : [])
-    ]*/
 
     let serverListItems = this.getListItems()
 
