@@ -9,7 +9,7 @@ export default class AppMainInfo extends Component {
         viewBox='0 0 100 100'
         className='app-icon'
       >
-        <use xlinkHref={`${logo}#layer1`} />
+        <use xlinkHref={`${logo}#redis-viewer-icon`} />
       </svg>
     </div>)
   }
