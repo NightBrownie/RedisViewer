@@ -157,8 +157,8 @@ export default class ServerList extends Component {
         ...parentNode.nodes.filter(node => node.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_FOLDER),
         ...parentNode.nodes.filter(node => node.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_KEY)
       ].map((node) => {
-          let nodeKey = parentNodeKey + (node.key ? separator + node.key : '')
-          let nodeTitle = parentNodeTitle + (node.key ? separator + node.key : '')
+          let nodeKey = parentNodeKey + (node.name ? separator + node.name : '')
+          let nodeTitle = parentNodeTitle + (node.name ? separator + node.name : '')
           let nodeExpanded = !!itemsExpandedState[nodeKey]
 
           return {
