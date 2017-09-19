@@ -6,12 +6,12 @@ import { Redirect } from 'react-router'
 import VirtualList from '../../controls/VirtualizedList/VirtualList'
 import ServerListItem from './serverListItem'
 
-import * as treeViewSpanTypes from '../../../constants/treeViewSpanTypes'
-import * as treeViewItemTypes from '../../../constants/treeViewItemTypes'
-import * as appConstants from '../../../constants/appConstants'
-import * as defaultServerConfig from '../../../constants/defaultServerConfig'
-import * as serverTreeViewNodeType from '../../../constants/serverTreeViewNodeType'
-import * as routes from '../../../constants/routes'
+import treeViewSpanTypes from '../../../constants/treeViewSpanTypes'
+import treeViewItemTypes from '../../../constants/treeViewItemTypes'
+import appConstants from '../../../constants/appConstants'
+import defaultServerConfig from '../../../constants/defaultServerConfig'
+import serverTreeViewNodeType from '../../../constants/serverTreeViewNodeType'
+import routes from '../../../constants/routes'
 
 export default class ServerList extends Component {
   static propTypes = {
@@ -51,9 +51,7 @@ export default class ServerList extends Component {
         treeViewSpans: [
           ...parentListItemSpans,
           parentListItemSpans.length
-            ? isLast
-            ? treeViewSpanTypes.TREE_VIEW_LAST_NODE_SPAN
-            : treeViewSpanTypes.TREE_VIEW_NODE_SPAN
+            ? (isLast ? treeViewSpanTypes.TREE_VIEW_LAST_NODE_SPAN : treeViewSpanTypes.TREE_VIEW_NODE_SPAN)
             : treeViewSpanTypes.TREE_VIEW_EMPTY_SPAN
         ]
       },

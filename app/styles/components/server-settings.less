@@ -1,70 +1,67 @@
 .server-settings {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 
-    height: 100%;
+  justify-content: center;
+  align-items: center;
 
-    justify-content: center;
-    align-items: center;
+  .server-settings-form-label {
+    margin: 0;
 
-    .server-settings-form-label {
-        margin: 0;
+    user-select: none;
+    pointer-events: none;
 
-        user-select: none;
-        pointer-events: none;
+    cursor: default;
+  }
 
-        cursor: default;
+  .server-settings-form {
+    min-width: 500px;
+    width: 50%;
+    max-width: 700px;
+
+    margin-top: 10px;
+
+    .primary-server-settings,
+    .advanced-server-settings {
+      .labeled-input {
+        margin-top: 5px;
+
+        .input-label {
+          min-width: 150px;
+        }
+
+        &:first-child {
+          margin-top: 0;
+        }
+      }
     }
 
-    .server-settings-form {
-        min-width: 500px;
-        width: 50%;
-        max-width: 700px;
+    .advanced-server-setting-expander {
+      margin-top: 10px;
 
-        margin-top: 10px;
+      .advanced-server-settings {
+        padding-bottom: 10px;
 
-        .primary-server-settings,
-        .advanced-server-settings {
-            .labeled-input {
-                margin-top: 5px;
+        border-bottom: @default-border-thickness solid @default-border-color;
+      }
 
-                .input-label {
-                    min-width: 150px;
-                }
-
-
-
-                &:first-child {
-                    margin-top: 0;
-                }
-            }
-        }
-
-        .advanced-server-setting-expander {
-            margin-top: 10px;
-
-            .advanced-server-settings {
-                padding-bottom: 10px;
-
-                border-bottom: @default-border-thickness solid @default-border-color;
-            }
-
-            &.expanded .advanced-server-settings {
-                margin-bottom: 10px;
-            }
-        }
-
-        .buttons-container {
-            display: flex;
-            flex-direction: row;
-
-            .test-connection-button {
-                margin-right: auto;
-            }
-
-            .cancel-server-settings-changes-button {
-                margin-left: 5px;
-            }
-        }
+      &.expanded .advanced-server-settings {
+        margin-bottom: 10px;
+      }
     }
+
+    .buttons-container {
+      display: flex;
+      flex-direction: row;
+
+      .test-connection-button {
+        margin-right: auto;
+      }
+
+      .cancel-server-settings-changes-button {
+        margin-left: 5px;
+      }
+    }
+  }
 }
