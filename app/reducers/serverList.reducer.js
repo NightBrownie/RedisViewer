@@ -1,4 +1,4 @@
-import * as actionTypes from '../constants/actionTypes'
+import * as actionTypes from '../constants/actionTypes/index'
 import * as defaultServerConfig from '../constants/defaultServerConfig'
 import * as serverTreeViewNodeType from '../constants/serverTreeViewNodeType'
 import { LOCATION_CHANGE } from 'react-router-redux'

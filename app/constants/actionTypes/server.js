@@ -1,0 +1,7 @@
+export const SERVER_SERVER_SAVED = 'server/SERVER_SAVED'
+export const SERVER_SERVER_REMOVED = 'server/SERVER_REMOVED'
+
+export default{
+  SERVER_SERVER_SAVED,
+  SERVER_SERVER_REMOVED
+}

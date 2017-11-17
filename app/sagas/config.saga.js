@@ -1,7 +1,7 @@
 import { put, takeLatest, call } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 
-import * as actionTypes from '../constants/actionTypes'
+import * as actionTypes from '../constants/actionTypes/index'
 import * as mainLayoutActions from '../actions/mainLayoutActions'
 import * as layoutConfigService from '../services/layoutConfig.service'
 

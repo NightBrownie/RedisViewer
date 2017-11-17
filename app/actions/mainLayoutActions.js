@@ -1,4 +1,4 @@
-import * as types from '../constants/actionTypes'
+import * as types from '../constants/actionTypes/index'
 
 export const serverViewWidthChanged = (width) => ({
   type: types.MAIN_LAYOUT_SERVER_VIEW_WIDTH_CHANGED,

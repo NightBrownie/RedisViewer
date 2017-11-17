@@ -1,0 +1,9 @@
+export const SERVER_EDIT_SERVER = 'server/EDIT_SERVER'
+export const SERVER_REMOVE_SERVER = 'server/REMOVE_SERVER'
+export const SERVER_FILTER_CHANGED = 'server/FILTER_CHANGED'
+
+export default {
+  SERVER_EDIT_SERVER,
+  SERVER_REMOVE_SERVER,
+  SERVER_FILTER_CHANGED
+}

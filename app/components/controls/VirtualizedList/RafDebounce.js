@@ -9,7 +9,7 @@ export default function rafDebounce (fn) {
   return {
     request () {
       if (!rafScheduled) {
-        requestAnimationFrame(fnWrapper)
+        window.requestAnimationFrame(fnWrapper)
         rafScheduled = true
       }
     }

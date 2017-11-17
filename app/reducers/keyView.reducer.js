@@ -1,6 +1,6 @@
 import {LOCATION_CHANGE} from 'react-router-redux'
 
-import * as actionTypes from '../constants/actionTypes'
+import * as actionTypes from '../constants/actionTypes/index'
 
 const defaultState = {
   shouldRedirectToTheRoot: false,

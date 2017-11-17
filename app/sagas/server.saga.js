@@ -2,7 +2,7 @@ import { put, takeLatest, takeEvery, call } from 'redux-saga/effects'
 
 import * as redisService from '../services/redis.service'
 
-import * as actionTypes from '../constants/actionTypes'
+import * as actionTypes from '../constants/actionTypes/index'
 import * as serverActions from '../actions/serverActions'
 import * as serverConfigService from '../services/serverConfig.service'
 

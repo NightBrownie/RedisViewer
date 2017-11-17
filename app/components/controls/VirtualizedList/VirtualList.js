@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import rafDebounce from './rafDebounce'
+import rafDebounce from './RafDebounce'
 import VirtualState from './VirtualState'
 
 let VerticalList = React.createClass({

@@ -1,7 +1,7 @@
 import { put, takeEvery, take, call, fork } from 'redux-saga/effects'
 import { eventChannel, buffers } from 'redux-saga'
 
-import * as actionTypes from '../constants/actionTypes'
+import * as actionTypes from '../constants/actionTypes/index'
 import * as keyActions from '../actions/keyActions'
 import * as redisService from '../services/redis.service'
 
