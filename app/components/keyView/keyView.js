@@ -6,7 +6,7 @@ import { Redirect } from 'react-router'
 
 import classNames from 'classnames'
 
-import Diff from '../controls/diff'
+import Diff from '../controls/Diff'
 import Button from '../controls/button'
 
 import * as routes from '../../constants/routes'

@@ -1,7 +1,7 @@
 import * as appConstants from '../constants/appConstants'
 import * as configKeys from '../constants/configKeys'
 
-import * as cryptoHelper from '../helpers/crypto.helper'
+import * as cryptoHelper from '../helpers/crypto'
 
 const {app} = (require('electron').remote || require('electron'))
 const keytar = require('keytar')
