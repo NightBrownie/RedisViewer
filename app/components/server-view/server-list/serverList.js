@@ -23,10 +23,6 @@ export default class ServerList extends Component {
     requestServerKeys: PropTypes.func.isRequired
   }
 
-  getListItems () {
-    return this.getNodeListItems(this.getListItemsTree())
-  }
-
   getNodeListItems (node, parentListItemSpans = [], isLast = true) {
     let childNodes = (node.listItem.isExpanded && node.nodes) || []
     let childNodeListItems = childNodes
@@ -194,7 +190,7 @@ export default class ServerList extends Component {
   render () {
     let {shouldRedirectToKeyView} = this.props.serverList
 
-    let serverListItems = this.getListItems()
+    let serverListItems = this.getNodeListItems(this.getListItemsTree())
 
     return (<div
       ref={(serverListContainer) => this.serverListContainer = serverListContainer}
