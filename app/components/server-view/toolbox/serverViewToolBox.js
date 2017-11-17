@@ -14,7 +14,7 @@ export default class ServerViewToolBox extends Component {
     editServerRequested: PropTypes.bool.isRequired,
     filterChanged: PropTypes.func
   }
-a
+
   static defaultProps = {
     editServerRequested: false
   }
@@ -33,7 +33,7 @@ a
         isInactiveTransparentBorder
         onClick={() => this.props.requestEditServer()}
       >
-        <i className='add-server-icon fa fa-server fa-fw fa-lg'/>
+        <i className='add-server-icon fa fa-plus fa-fw fa-lg' />
       </Button>
       <Button
         className='settings-btn'
@@ -41,7 +41,7 @@ a
         onClick={() => this.props.requestEditServer(this.props.selectedServer)}
         disabled={!this.props.selectedServer}
       >
-        <i className='settings-icon fa fa-cog fa-fw fa-lg'/>
+        <i className='settings-icon fa fa-ellipsis-v fa-fw fa-lg' />
       </Button>
       <Button
         className='remove-btn'
@@ -49,7 +49,7 @@ a
         onClick={() => this.props.requestRemoveServer(this.props.selectedServer)}
         disabled={!this.props.selectedServer}
       >
-        <i className='remove-icon fa fa-trash-o fa-fw fa-lg'/>
+        <i className='remove-icon fa fa-trash-o fa-fw fa-lg' />
       </Button>
     </div>)
   }
