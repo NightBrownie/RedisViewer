@@ -8,12 +8,12 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case actionTypes.SERVER_EDIT_SERVER:
+    case actionTypes.server.SERVER_EDIT_SERVER:
       return {
         ...state,
         initialServerSettings: action.server
       }
-    case actionTypes.SERVER_SERVER_REMOVED:
+    case actionTypes.server.SERVER_SERVER_REMOVED:
       return {
         ...state,
         shouldRedirectToTheRoot: state.initialServerSettings &&
@@ -24,7 +24,7 @@ export default (state = defaultState, action) => {
         ...state,
         shouldRedirectToTheRoot: false
       }
-    case actionTypes.SERVER_SERVER_SAVED:
+    case actionTypes.server.SERVER_SERVER_SAVED:
       return {
         ...state,
         shouldRedirectToTheRoot: true

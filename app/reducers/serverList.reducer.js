@@ -75,19 +75,19 @@ const filterTree = (keyTree, filterTerm) => {
 
 const serverListReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case actionTypes.SERVER_SERVER_SELECTED:
+    case actionTypes.server.SERVER_SERVER_SELECTED:
       return {
         ...state,
         selectedServer: action.server,
         selectedKey: null
       }
-    case actionTypes.SERVER_KEY_SELECTED:
+    case actionTypes.server.SERVER_KEY_SELECTED:
       return {
         ...state,
         selectedServer: action.server,
         selectedKey: action.key
       }
-    case actionTypes.SERVER_SERVER_REMOVED:
+    case actionTypes.server.SERVER_SERVER_REMOVED:
       return {
         ...state,
         selectedServer: state.selectedServer && state.selectedServer.id === action.server.id
@@ -97,12 +97,12 @@ const serverListReducer = (state = defaultState, action) => {
           ? null
           : state.selectedKey
       }
-    case actionTypes.SERVER_SERVER_LIST_CHANGED:
+    case actionTypes.server.SERVER_SERVER_LIST_CHANGED:
       return {
         ...state,
         servers: action.servers
       }
-    case actionTypes.SERVER_TOGGLE_SERVER_LIST_ITEM_EXPAND:
+    case actionTypes.server.SERVER_TOGGLE_SERVER_LIST_ITEM_EXPAND:
       return {
         ...state,
         itemsExpandedState: {
@@ -110,7 +110,7 @@ const serverListReducer = (state = defaultState, action) => {
           [action.itemKey]: !state.itemsExpandedState[action.itemKey]
         }
       }
-    case actionTypes.SERVER_REQUEST_KEYS:
+    case actionTypes.server.SERVER_REQUEST_KEYS:
       return {
         ...state,
         loadingServerKeys: {
@@ -118,7 +118,7 @@ const serverListReducer = (state = defaultState, action) => {
           [action.server.id]: true
         }
       }
-    case actionTypes.SERVER_KEYS_LOAD_FAILED:
+    case actionTypes.server.SERVER_KEYS_LOAD_FAILED:
       return {
         ...state,
         loadingServerKeys: {
@@ -126,7 +126,7 @@ const serverListReducer = (state = defaultState, action) => {
           [action.server.id]: false
         }
       }
-    case actionTypes.SERVER_KEYS_LOADED:
+    case actionTypes.server.SERVER_KEYS_LOADED:
       let separator = (action.server.advancedSettings && action.server.advancedSettings.keysFolderSeparator) ||
         defaultServerConfig.KEYS_FOLDER_SEPARATOR
 
@@ -157,7 +157,7 @@ const serverListReducer = (state = defaultState, action) => {
           [action.server.id]: false
         }
       }
-    case actionTypes.SERVER_FILTER_CHANGED:
+    case actionTypes.server.SERVER_FILTER_CHANGED:
       return {
         ...state,
         filterTerm: action.filterTerm,
@@ -171,7 +171,7 @@ const serverListReducer = (state = defaultState, action) => {
             [currentResult.serverId]: currentResult.keyTree
           }), {})
       }
-    case actionTypes.SERVER_OPEN_KEY:
+    case actionTypes.server.SERVER_OPEN_KEY:
       return {
         ...state,
         shouldRedirectToKeyView: true

@@ -42,10 +42,10 @@ function * requestKeys (action) {
 
 export default function * saga () {
   yield [
-    takeLatest(actionTypes.SERVER_REQUEST_SERVER_LIST, requestServerList),
-    takeLatest(actionTypes.SERVER_SERVER_LIST_REQUESTED, serverListRequested),
-    takeLatest(actionTypes.SERVER_SET_SERVER, setServer),
-    takeLatest(actionTypes.SERVER_REMOVE_SERVER, removeServer),
-    takeEvery(actionTypes.SERVER_REQUEST_KEYS, requestKeys)
+    takeLatest(actionTypes.serverView.SERVER_REQUEST_SERVER_LIST, requestServerList),
+    takeLatest(actionTypes.serverView.SERVER_SERVER_LIST_REQUESTED, serverListRequested),
+    takeLatest(actionTypes.serverSettings.SERVER_SET_SERVER, setServer),
+    takeLatest(actionTypes.serverToolbox.SERVER_REMOVE_SERVER, removeServer),
+    takeEvery(actionTypes.serverList.SERVER_REQUEST_KEYS, requestKeys)
   ]
 }

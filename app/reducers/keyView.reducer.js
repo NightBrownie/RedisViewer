@@ -11,12 +11,12 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case actionTypes.KEY_REQUEST_DATA:
+    case actionTypes.keyView.KEY_REQUEST_DATA:
       return {
         ...state,
         loadingKeyData: true
       }
-    case actionTypes.KEY_DATA_RECEIVED:
+    case actionTypes.keyView.KEY_DATA_RECEIVED:
       return {
         ...state,
         loadingKeyData: false,
@@ -24,12 +24,12 @@ export default (state = defaultState, action) => {
         currentData: action.data,
         lastUpdateTime: new Date()
       }
-    case actionTypes.KEY_DATA_REQUEST_FAILED:
+    case actionTypes.keyView.KEY_DATA_REQUEST_FAILED:
       return {
         ...state,
         loadingKeyData: false
       }
-    case actionTypes.SERVER_OPEN_KEY:
+    case actionTypes.keyView.SERVER_OPEN_KEY:
       return {
         ...state,
         server: action.server,
@@ -44,7 +44,7 @@ export default (state = defaultState, action) => {
           ? state.lastUpdateTime
           : null
       }
-    case actionTypes.SERVER_SERVER_REMOVED:
+    case actionTypes.server.SERVER_SERVER_REMOVED:
       return {
         ...state,
         shouldRedirectToTheRoot: state.server && (state.server.id === action.server.id)
@@ -54,27 +54,27 @@ export default (state = defaultState, action) => {
         ...state,
         shouldRedirectToTheRoot: false
       }
-    case actionTypes.KEY_SUBSCRIBE:
-    case actionTypes.KEY_UNSUBSCRIBE:
+    case actionTypes.keyView.KEY_SUBSCRIBE:
+    case actionTypes.keyView.KEY_UNSUBSCRIBE:
       return {
         ...state,
         isUpdatesTrackToggling: true
       }
-    case actionTypes.KEY_SUBSCRIBED:
+    case actionTypes.keyView.KEY_SUBSCRIBED:
       return {
         ...state,
         isUpdatesTrackToggling: false,
         isUpdatesTrackEnabled: true
       }
-    case actionTypes.KEY_UNSUBSCRIBED:
+    case actionTypes.keyView.KEY_UNSUBSCRIBED:
       return {
         ...state,
         previousData: state.currentData,
         isUpdatesTrackToggling: false,
         isUpdatesTrackEnabled: false
       }
-    case actionTypes.KEY_SUBSCRIPTION_FAILED:
-    case actionTypes.KEY_UNSUBSCRIPTION_FAILED:
+    case actionTypes.keyView.KEY_SUBSCRIPTION_FAILED:
+    case actionTypes.keyView.KEY_UNSUBSCRIPTION_FAILED:
       return {
         ...state,
         isUpdatesTrackToggling: false

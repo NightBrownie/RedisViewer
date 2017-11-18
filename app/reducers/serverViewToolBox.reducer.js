@@ -8,12 +8,12 @@ const defaultState = {
 
 const serverViewToolBoxReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case actionTypes.SERVER_FILTER_CHANGED:
+    case actionTypes.server.SERVER_FILTER_CHANGED:
       return {
         ...state,
         filterTerm: action.filterTerm
       }
-    case actionTypes.SERVER_EDIT_SERVER:
+    case actionTypes.server.SERVER_EDIT_SERVER:
       return {
         ...state,
         editServerRequested: true

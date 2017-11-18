@@ -21,8 +21,8 @@ function * saveTreeViewWidth (action) {
 
 export default function * saga () {
   yield [
-    takeLatest(actionTypes.MAIN_LAYOUT_SERVER_VIEW_REQUEST_WIDTH_RESTORE, requestServerViewWidthRestore),
-    takeLatest(actionTypes.MAIN_LAYOUT_SERVER_VIEW_WIDTH_RESTORE_REQUESTED, restoreTreeViewWidth),
-    takeLatest(actionTypes.MAIN_LAYOUT_SERVER_VIEW_WIDTH_CHANGED, saveTreeViewWidth)
+    takeLatest(actionTypes.mainLayout.MAIN_LAYOUT_SERVER_VIEW_REQUEST_WIDTH_RESTORE, requestServerViewWidthRestore),
+    takeLatest(actionTypes.mainLayout.MAIN_LAYOUT_SERVER_VIEW_WIDTH_RESTORE_REQUESTED, restoreTreeViewWidth),
+    takeLatest(actionTypes.mainLayout.MAIN_LAYOUT_SERVER_VIEW_WIDTH_CHANGED, saveTreeViewWidth)
   ]
 }
