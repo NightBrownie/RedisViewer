@@ -7,15 +7,15 @@ import * as keyActions from '../actions/keyActions'
 
 export default connect(
   state => ({
-    server: state.keyView.server,
-    keyName: state.keyView.key,
-    shouldRedirectToTheRoot: state.keyView.shouldRedirectToTheRoot,
-    previousData: state.keyView.previousData,
-    currentData: state.keyView.currentData,
-    lastUpdateTime: state.keyView.lastUpdateTime,
-    loadingKeyData: state.keyView.loadingKeyData,
-    isUpdatesTrackEnabled: state.keyView.isUpdatesTrackEnabled,
-    isUpdatesTrackToggling: state.keyView.isUpdatesTrackToggling
+    server: state.key.server,
+    keyName: state.key.key,
+    shouldRedirectToTheRoot: state.key.shouldRedirectToTheRoot,
+    previousData: state.key.previousData,
+    currentData: state.key.currentData,
+    lastUpdateTime: state.key.lastUpdateTime,
+    loadingKeyData: state.key.loadingKeyData,
+    isUpdatesTrackEnabled: state.key.isUpdatesTrackEnabled,
+    isUpdatesTrackToggling: state.key.isUpdatesTrackToggling
   }),
   dispatch =>
     ({

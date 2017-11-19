@@ -1,58 +1,58 @@
-import * as actionTypes from '../constants/actionTypes/index'
+import * as actionTypes from '../constants/actionTypes/key'
 
 /* Key data */
 export const requestData = (server, key) => ({
-  type: actionTypes.keyView.KEY_REQUEST_DATA,
+  type: actionTypes.REQUEST_DATA,
   server,
   key
 })
 
 export const dataReceived = (server, key, data) => ({
-  type: actionTypes.keyView.KEY_DATA_RECEIVED,
+  type: actionTypes.DATA_RECEIVED,
   server,
   key,
   data
 })
 
 export const dataRequestFailed = (server, key) => ({
-  type: actionTypes.keyView.KEY_DATA_REQUEST_FAILED,
+  type: actionTypes.DATA_REQUEST_FAILED,
   server,
   key
 })
 
 /* Key subscription */
 export const subscribe = (server, key) => ({
-  type: actionTypes.keyView.KEY_SUBSCRIBE,
+  type: actionTypes.SUBSCRIBE,
   server,
   key
 })
 
 export const subscribed = (server, key) => ({
-  type: actionTypes.keyView.KEY_SUBSCRIBED,
+  type: actionTypes.SUBSCRIBED,
   server,
   key
 })
 
 export const subscriptionFailed = (server, key) => ({
-  type: actionTypes.keyView.KEY_SUBSCRIPTION_FAILED,
+  type: actionTypes.SUBSCRIPTION_FAILED,
   server,
   key
 })
 
 export const unsubscribe = (server, key) => ({
-  type: actionTypes.keyView.KEY_UNSUBSCRIBE,
+  type: actionTypes.UNSUBSCRIBE,
   server,
   key
 })
 
 export const unsubscribed = (server, key) => ({
-  type: actionTypes.keyView.KEY_UNSUBSCRIBED,
+  type: actionTypes.UNSUBSCRIBED,
   server,
   key
 })
 
 export const unsubscriptionFailed = (server, key) => ({
-  type: actionTypes.keyView.KEY_UNSUBSCRIPTION_FAILED,
+  type: actionTypes.UNSUBSCRIPTION_FAILED,
   server,
   key
 })

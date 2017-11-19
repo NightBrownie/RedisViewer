@@ -1,19 +1,19 @@
-import * as actionTypes from '../constants/actionTypes/index'
+import * as actionTypes from '../constants/actionTypes/mainLayout'
 
 export const serverViewWidthChanged = (width) => ({
-  type: actionTypes.mainLayout.MAIN_LAYOUT_SERVER_VIEW_WIDTH_CHANGED,
+  type: actionTypes.SERVER_KEY_TREE_VIEW_WIDTH_CHANGED,
   width
 })
 
 export const serverViewRequestWidthRestore = () => ({
-  type: actionTypes.mainLayout.MAIN_LAYOUT_SERVER_VIEW_REQUEST_WIDTH_RESTORE
+  type: actionTypes.SERVER_KEY_TREE_VIEW_REQUEST_WIDTH_RESTORE
 })
 
 export const serverViewWidthRestoreRequested = () => ({
-  type: actionTypes.mainLayout.MAIN_LAYOUT_SERVER_VIEW_WIDTH_RESTORE_REQUESTED
+  type: actionTypes.SERVER_KEY_TREE_VIEW_WIDTH_RESTORE_REQUESTED
 })
 
 export const serverViewWidthRestored = (width) => ({
-  type: actionTypes.mainLayout.MAIN_LAYOUT_SERVER_VIEW_WIDTH_RESTORED,
+  type: actionTypes.SERVER_KEY_TREE_VIEW_WIDTH_RESTORED,
   width
 })

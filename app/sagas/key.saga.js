@@ -72,8 +72,8 @@ function * unsubscribe (action) {
 
 export default function * saga () {
   yield [
-    takeEvery(actionTypes.keyView.KEY_REQUEST_DATA, requestData),
-    takeEvery(actionTypes.keyView.KEY_SUBSCRIBE, subscribe),
-    takeEvery(actionTypes.keyView.KEY_UNSUBSCRIBE, unsubscribe)
+    takeEvery(actionTypes.key.REQUEST_DATA, requestData),
+    takeEvery(actionTypes.key.SUBSCRIBE, subscribe),
+    takeEvery(actionTypes.key.UNSUBSCRIBE, unsubscribe)
   ]
 }

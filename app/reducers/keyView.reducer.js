@@ -11,12 +11,12 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case actionTypes.keyView.KEY_REQUEST_DATA:
+    case actionTypes.key.REQUEST_DATA:
       return {
         ...state,
         loadingKeyData: true
       }
-    case actionTypes.keyView.KEY_DATA_RECEIVED:
+    case actionTypes.key.DATA_RECEIVED:
       return {
         ...state,
         loadingKeyData: false,
@@ -24,12 +24,12 @@ export default (state = defaultState, action) => {
         currentData: action.data,
         lastUpdateTime: new Date()
       }
-    case actionTypes.keyView.KEY_DATA_REQUEST_FAILED:
+    case actionTypes.key.DATA_REQUEST_FAILED:
       return {
         ...state,
         loadingKeyData: false
       }
-    case actionTypes.keyView.SERVER_OPEN_KEY:
+    case actionTypes.key.SERVER_OPEN_KEY:
       return {
         ...state,
         server: action.server,
@@ -54,27 +54,27 @@ export default (state = defaultState, action) => {
         ...state,
         shouldRedirectToTheRoot: false
       }
-    case actionTypes.keyView.KEY_SUBSCRIBE:
-    case actionTypes.keyView.KEY_UNSUBSCRIBE:
+    case actionTypes.key.SUBSCRIBE:
+    case actionTypes.key.UNSUBSCRIBE:
       return {
         ...state,
         isUpdatesTrackToggling: true
       }
-    case actionTypes.keyView.KEY_SUBSCRIBED:
+    case actionTypes.key.SUBSCRIBED:
       return {
         ...state,
         isUpdatesTrackToggling: false,
         isUpdatesTrackEnabled: true
       }
-    case actionTypes.keyView.KEY_UNSUBSCRIBED:
+    case actionTypes.key.UNSUBSCRIBED:
       return {
         ...state,
         previousData: state.currentData,
         isUpdatesTrackToggling: false,
         isUpdatesTrackEnabled: false
       }
-    case actionTypes.keyView.KEY_SUBSCRIPTION_FAILED:
-    case actionTypes.keyView.KEY_UNSUBSCRIPTION_FAILED:
+    case actionTypes.key.SUBSCRIPTION_FAILED:
+    case actionTypes.key.UNSUBSCRIPTION_FAILED:
       return {
         ...state,
         isUpdatesTrackToggling: false

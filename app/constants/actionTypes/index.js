@@ -4,7 +4,7 @@ import serverView from './serverView'
 import serverList from './serverList'
 import serverToolbox from './serverToolbox'
 import serverSettings from './serverSettings'
-import keyView from './keyView'
+import key from './key'
 
 export mainLayout from './mainLayout'
 export server from './server'
@@ -12,7 +12,7 @@ export serverView from './serverView'
 export serverList from './serverList'
 export serverToolbox from './serverToolbox'
 export serverSettings from './serverSettings'
-export keyView from './keyView'
+export key from './key'
 
 export default {
   mainLayout,
@@ -21,5 +21,5 @@ export default {
   serverList,
   serverToolbox,
   serverSettings,
-  keyView
+  key
 }
