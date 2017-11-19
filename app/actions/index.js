@@ -8,12 +8,12 @@ export mainLayout from './mainLayout'
 export key from './key'
 export server from './server'
 export serverKeyTree from './serverKeyTree'
-export serverToolbox from './serverToolbox'
+export serverToolbox from './serverToolbox
 
 export default {
   mainLayout,
+  key,
   server,
   serverKeyTree,
-  serverToolbox,
-  key
+  serverToolbox
 }

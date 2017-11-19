@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import { routerActions } from 'react-router-redux'
 
-import * as serverActions from '../actions/serverActions'
+import * as serverActions from '../actions/server'
 import * as routes from '../constants/routes'
 
 import ServerSettings from '../components/server-settings/serverSettings'

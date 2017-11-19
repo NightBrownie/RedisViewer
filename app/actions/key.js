@@ -20,6 +20,24 @@ export const dataRequestFailed = (server, key) => ({
   key
 })
 
+/* Keys list */
+export const loadKeys = (server) => ({
+  type: actionTypes.LOAD_KEYS,
+  server
+})
+
+export const keysLoaded = (server, keys) => ({
+  type: actionTypes.KEYS_LOADED,
+  server,
+  keys
+})
+
+export const keysLoadFailed = (server, error) => ({
+  type: actionTypes.KEYS_LOAD_FAILED,
+  server,
+  error
+})
+
 /* Key subscription */
 export const subscribe = (server, key) => ({
   type: actionTypes.SUBSCRIBE,
@@ -39,6 +57,7 @@ export const subscriptionFailed = (server, key) => ({
   key
 })
 
+/* Key unsubscription */
 export const unsubscribe = (server, key) => ({
   type: actionTypes.UNSUBSCRIBE,
   server,
@@ -56,3 +75,21 @@ export const unsubscriptionFailed = (server, key) => ({
   server,
   key
 })
+
+export default {
+  requestData,
+  dataReceived,
+  dataRequestFailed,
+
+  loadKeys,
+  keysLoaded,
+  keysLoadFailed,
+
+  subscribe,
+  subscribed,
+  subscriptionFailed,
+
+  unsubscribe,
+  unsubscribed,
+  unsubscriptionFailed
+}

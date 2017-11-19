@@ -1,22 +1,22 @@
-import * as actionTypes from '../constants/actionTypes/index'
+import * as actionTypes from '../constants/actionTypes/server'
 
 /* Server list */
 export const requestServerList = () => ({
-  type: actionTypes.server.SERVER_REQUEST_SERVER_LIST
+  type: actionTypes.SERVER_REQUEST_SERVER_LIST
 })
 
 export const serverListRequested = () => ({
-  type: actionTypes.server.SERVER_SERVER_LIST_REQUESTED
+  type: actionTypes.SERVER_SERVER_LIST_REQUESTED
 })
 
 export const serverListChanged = (servers) => ({
-  type: actionTypes.server.SERVER_SERVER_LIST_CHANGED,
-  servers
+  type: actionTypes.SERVER_SERVER_LIST_CHANGED,
+  servers1q
 })
 
 /* Server toolbox */
 export const requestEditServer = (server) => ({
-  type: actionTypes.server.SERVER_EDIT_SERVER,
+  type: actionTypes.SERVER_EDIT_SERVER,
   server
 })
 
@@ -56,23 +56,6 @@ export const openKey = (server, key) => ({
   type: actionTypes.server.SERVER_OPEN_KEY,
   server,
   key
-})
-
-export const requestKeys = (server) => ({
-  type: actionTypes.server.SERVER_REQUEST_KEYS,
-  server
-})
-
-export const keysLoaded = (server, keys) => ({
-  type: actionTypes.server.SERVER_KEYS_LOADED,
-  server,
-  keys
-})
-
-export const keysLoadFailed = (server, error) => ({
-  type: actionTypes.server.SERVER_KEYS_LOAD_FAILED,
-  server,
-  error
 })
 
 /* Server settings */

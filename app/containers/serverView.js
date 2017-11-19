@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 
 import ServerView from '../components/server-view/serverView'
-import * as serverActions from '../actions/serverActions'
+import * as serverActions from '../actions/server'
 
 export default connect(
   state => ({

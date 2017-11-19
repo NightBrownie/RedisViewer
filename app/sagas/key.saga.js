@@ -2,7 +2,7 @@ import { put, takeEvery, take, call, fork } from 'redux-saga/effects'
 import { eventChannel, buffers } from 'redux-saga'
 
 import * as actionTypes from '../constants/actionTypes/index'
-import * as keyActions from '../actions/keyActions'
+import * as keyActions from '../actions/key'
 import * as redisService from '../services/redis.service'
 
 const serverKeyUpdateSubscriptionChannels = {}

@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'
 
 import Main from '../components/main'
-import * as configActions from '../actions/mainLayoutActions'
+import * as configActions from '../actions/mainLayout'
 
 export default withRouter(connect(
   state => ({

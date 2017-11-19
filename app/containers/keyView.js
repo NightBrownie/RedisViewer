@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux'
 
 import KeyView from '../components/keyView/keyView'
 
-import * as keyActions from '../actions/keyActions'
+import * as keyActions from '../actions/key'
 
 export default connect(
   state => ({
