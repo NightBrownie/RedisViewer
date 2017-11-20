@@ -1,80 +1,53 @@
 import * as actionTypes from '../constants/actionTypes/server'
 
-/* Server list */
-export const requestServerList = () => ({
-  type: actionTypes.SERVER_REQUEST_SERVER_LIST
-})
-
-export const serverListRequested = () => ({
-  type: actionTypes.SERVER_SERVER_LIST_REQUESTED
-})
-
-export const serverListChanged = (servers) => ({
-  type: actionTypes.SERVER_SERVER_LIST_CHANGED,
-  servers1q
-})
-
-/* Server toolbox */
-export const requestEditServer = (server) => ({
-  type: actionTypes.SERVER_EDIT_SERVER,
+export const save = (server) => ({
+  type: actionTypes.SAVE,
   server
 })
 
-export const requestRemoveServer = (server) => ({
-  type: actionTypes.server.SERVER_REMOVE_SERVER,
+export const saved = (server) => ({
+  type: actionTypes.SAVED,
   server
 })
 
-export const filterChanged = (filterTerm) => ({
-  type: actionTypes.server.SERVER_FILTER_CHANGED,
-  filterTerm,
-  meta: {
-    debounce: {
-      time: 200
-    }
-  }
-})
-
-/* Server view */
-export const serverSelected = (server) => ({
-  type: actionTypes.server.SERVER_SERVER_SELECTED,
+export const remove = (server) => ({
+  type: actionTypes.REMOVE,
   server
 })
 
-export const keySelected = (server, key) => ({
-  type: actionTypes.server.SERVER_KEY_SELECTED,
-  server,
-  key
+export const removed = (server) => ({
+  type: actionTypes.REMOVED,
+  server
 })
 
-export const toggleServerListItemExpand = (itemKey) => ({
-  type: actionTypes.server.SERVER_TOGGLE_SERVER_LIST_ITEM_EXPAND,
-  itemKey
+export const requestList = () => ({
+  type: actionTypes.REQUEST_LIST
 })
 
-export const openKey = (server, key) => ({
-  type: actionTypes.server.SERVER_OPEN_KEY,
-  server,
-  key
+export const listRequested = () => ({
+  type: actionTypes.LIST_REQUESTED
 })
 
-/* Server settings */
+export const listChanged = (servers) => ({
+  type: actionTypes.LIST_CHANGED,
+  servers
+})
+
 export const requestConnectionTest = (server) => ({
-  type: actionTypes.server.SERVER_REQUEST_CONNECTION_TEST,
+  type: actionTypes.REQUEST_CONNECTION_TEST,
   server
 })
 
-export const setServer = (server) => ({
-  type: actionTypes.server.SERVER_SET_SERVER,
-  server
-})
+export default {
+  save,
+  saved,
 
-export const serverSaved = (server) => ({
-  type: actionTypes.server.SERVER_SERVER_SAVED,
-  server
-})
+  remove,
+  removed,
 
-export const serverRemoved = (server) => ({
-  type: actionTypes.server.SERVER_SERVER_REMOVED,
-  server
-})
+  requestList,
+  listRequested,
+  listChanged,
+
+  requestConnectionTest
+}

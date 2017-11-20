@@ -2,9 +2,9 @@ export const REQUEST_DATA = 'key/REQUEST_DATA'
 export const DATA_RECEIVED = 'key/DATA_RECEIVED'
 export const DATA_REQUEST_FAILED = 'key/DATA_REQUEST_FAILED'
 
-export const LOAD_KEYS = 'server/LOAD_KEYS'
-export const KEYS_LOADED = 'server/KEYS_LOADED'
-export const KEYS_LOAD_FAILED = 'server/KEYS_LOAD_FAILED'
+export const LOAD_KEYS = 'key/LOAD_KEYS'
+export const KEYS_LOADED = 'key/KEYS_LOADED'
+export const KEYS_LOAD_FAILED = 'key/KEYS_LOAD_FAILED'
 
 export const SUBSCRIBE = 'key/SUBSCRIBE'
 export const SUBSCRIBED = 'key/SUBSCRIBED'
