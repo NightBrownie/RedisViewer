@@ -78,7 +78,7 @@ export const getKeyData = async (server, key) => {
   return redis.get(key)
 }
 
-export const subscribeForKeyUpdates = async (server, key, callback) => {
+export const subscribeForKeyUpdates = (server, key, callback) => {
   if (!redisServerKeyUpdateCallbacks[server.id]) {
     redisServerKeyUpdateCallbacks[server.id] = {}
   }
@@ -105,7 +105,7 @@ export const subscribeForKeyUpdates = async (server, key, callback) => {
   redis.psubscribe(subscriptionPattern)
 }
 
-export const unsubscribeFromKeyUpdates = async (server, key, callback) => {
+export const unsubscribeFromKeyUpdates = (server, key, callback) => {
   let subscriptionPattern = getKeySubscriptionPattern(key)
 
   let redis = getRedisSubscriptionInstance(server)

@@ -1,3 +1,5 @@
+// @flow
+
 export const SAVE = 'server/SAVE'
 export const SAVED = 'server/SAVED'
 

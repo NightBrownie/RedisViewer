@@ -15,7 +15,7 @@ import routes from '../../../constants/routes'
 
 export default class ServerList extends Component {
   static propTypes = {
-    serverList: PropTypes.object.isRequired,
+    serverKeyTree: PropTypes.object.isRequired,
     serverSelected: PropTypes.func.isRequired,
     keySelected: PropTypes.func.isRequired,
     openKey: PropTypes.func.isRequired,
@@ -24,7 +24,7 @@ export default class ServerList extends Component {
   }
 
   getListItemsTree () {
-    let {itemsExpandedState} = this.props.serverList
+    let {itemsExpandedState} = this.props.serverKeyTree
 
     return {
       listItem: {
@@ -81,7 +81,7 @@ export default class ServerList extends Component {
       filterTerm,
       selectedServer,
       selectedKey
-    } = this.props.serverList
+    } = this.props.serverKeyTree
 
     for (let server of servers) {
       let separator = (server.advancedSettings && server.advancedSettings.keysFolderSeparator) ||
@@ -141,7 +141,7 @@ export default class ServerList extends Component {
       itemsExpandedState,
       selectedServer,
       selectedKey
-    } = this.props.serverList
+    } = this.props.serverKeyTree
 
     let serverKeysListItemsNodes
 
@@ -188,7 +188,7 @@ export default class ServerList extends Component {
   }
 
   render () {
-    let {shouldRedirectToKeyView} = this.props.serverList
+    let {shouldRedirectToKeyView} = this.props.serverKeyTree
 
     let serverListItems = this.getNodeListItems(this.getListItemsTree())
 

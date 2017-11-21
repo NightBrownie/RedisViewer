@@ -1,4 +1,4 @@
-import * as actionTypes from '../constants/actionTypes/index'
+import serverKeyTreeToolBoxActionTypes from '../constants/actionTypes/serverKeyTreeToolBox'
 
 import {LOCATION_CHANGE} from 'react-router-redux'
 
@@ -8,21 +8,23 @@ const defaultState = {
 
 const serverViewToolBoxReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case actionTypes.server.SERVER_FILTER_CHANGED:
+    case serverKeyTreeToolBoxActionTypes.FILTER_CHANGED:
       return {
         ...state,
         filterTerm: action.filterTerm
       }
-    case actionTypes.server.SERVER_EDIT_SERVER:
+    case serverKeyTreeToolBoxActionTypes.REQUEST_EDIT_SERVER:
       return {
         ...state,
         editServerRequested: true
       }
+
     case LOCATION_CHANGE:
       return {
         ...state,
         editServerRequested: false
       }
+
     default:
       return state
   }

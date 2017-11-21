@@ -1,4 +1,4 @@
-import actionTypes from '../constants/actionTypes/serverToolbox'
+import actionTypes from '../constants/actionTypes/serverKeyTreeToolBox'
 
 export const requestEditServer = (server) => ({
   type: actionTypes.REQUEST_EDIT_SERVER,

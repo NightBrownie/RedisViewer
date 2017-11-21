@@ -1,3 +1,5 @@
+// @flow
+
 export const SERVER_SELECTED = 'serverKeyTree/SERVER_SELECTED'
 export const KEY_SELECTED = 'serverKeyTree/KEY_SELECTED'
 export const TOGGLE_ITEM_EXPAND = 'serverKeyTree/TOGGLE_ITEM_EXPAND'

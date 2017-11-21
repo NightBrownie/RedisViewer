@@ -1,6 +1,7 @@
 import {LOCATION_CHANGE} from 'react-router-redux'
 
-import * as actionTypes from '../constants/actionTypes/index'
+import serverActionTypes from '../constants/actionTypes/server'
+import serverKeyTreeToolBoxActionTypes from '../constants/actionTypes/serverKeyTreeToolBox'
 
 const defaultState = {
   shouldRedirectToTheRoot: false
@@ -8,27 +9,31 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case actionTypes.server.SERVER_EDIT_SERVER:
+    // todo: try to replace with routing params
+    case serverKeyTreeToolBoxActionTypes.REQUEST_EDIT_SERVER:
       return {
         ...state,
         initialServerSettings: action.server
       }
-    case actionTypes.server.SERVER_SERVER_REMOVED:
+
+    case serverActionTypes.REMOVED:
       return {
         ...state,
         shouldRedirectToTheRoot: state.initialServerSettings &&
           (state.initialServerSettings.id === action.server.id)
       }
+    case serverActionTypes.SAVED:
+      return {
+        ...state,
+        shouldRedirectToTheRoot: true
+      }
+
     case LOCATION_CHANGE:
       return {
         ...state,
         shouldRedirectToTheRoot: false
       }
-    case actionTypes.server.SERVER_SERVER_SAVED:
-      return {
-        ...state,
-        shouldRedirectToTheRoot: true
-      }
+
     default:
       return state
   }

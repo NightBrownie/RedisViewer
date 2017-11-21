@@ -1,3 +1,5 @@
+// @flow
+
 export const REQUEST_DATA = 'key/REQUEST_DATA'
 export const DATA_RECEIVED = 'key/DATA_RECEIVED'
 export const DATA_REQUEST_FAILED = 'key/DATA_REQUEST_FAILED'

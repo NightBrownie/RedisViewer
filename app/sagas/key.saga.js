@@ -1,8 +1,10 @@
 import { put, takeEvery, take, call, fork } from 'redux-saga/effects'
 import { eventChannel, buffers } from 'redux-saga'
 
-import * as actionTypes from '../constants/actionTypes/index'
+import keyActionTypes from '../constants/actionTypes/key'
+
 import * as keyActions from '../actions/key'
+
 import * as redisService from '../services/redis.service'
 
 const serverKeyUpdateSubscriptionChannels = {}
@@ -72,8 +74,8 @@ function * unsubscribe (action) {
 
 export default function * saga () {
   yield [
-    takeEvery(actionTypes.key.REQUEST_DATA, requestData),
-    takeEvery(actionTypes.key.SUBSCRIBE, subscribe),
-    takeEvery(actionTypes.key.UNSUBSCRIBE, unsubscribe)
+    takeEvery(keyActionTypes.REQUEST_DATA, requestData),
+    takeEvery(keyActionTypes.SUBSCRIBE, subscribe),
+    takeEvery(keyActionTypes.UNSUBSCRIBE, unsubscribe)
   ]
 }

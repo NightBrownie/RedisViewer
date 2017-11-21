@@ -1,3 +1,5 @@
+// todo: refactor this
+
 import * as actionTypes from '../constants/actionTypes/index'
 import * as defaultServerConfig from '../constants/defaultServerConfig'
 import * as serverTreeViewNodeType from '../constants/serverTreeViewNodeType'
@@ -181,6 +183,7 @@ const serverListReducer = (state = defaultState, action) => {
         ...state,
         shouldRedirectToKeyView: false
       }
+
     default:
       return state
   }

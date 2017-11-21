@@ -1,11 +1,11 @@
 import {combineReducers} from 'redux'
 
-import serverViewToolBox from './serverViewToolBox.reducer'
-import serverList from './serverList.reducer'
+import serverKeyTreeToolBox from './serverKeyTreeToolBox.reducer'
+import serverKeyTree from './serverKeyTree.reducer'
 
 const serverViewReducer = combineReducers({
-  serverViewToolBox,
-  serverList
+  serverKeyTreeToolBox,
+  serverKeyTree
 })
 
 export default serverViewReducer

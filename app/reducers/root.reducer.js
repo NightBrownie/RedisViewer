@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   layout,
   serverView,
   serverSettings,
-  key: keyView
+  keyView
 })
 
 export default rootReducer

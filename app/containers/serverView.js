@@ -7,10 +7,10 @@ import * as serverActions from '../actions/server'
 
 export default connect(
   state => ({
-    editServerRequested: state.serverView.serverViewToolBox.editServerRequested,
-    serverList: state.serverView.serverList,
-    selectedServer: state.serverView.serverList.selectedServer,
-    selectedKey: state.serverView.serverList.selectedKey
+    editServerRequested: state.serverView.serverKeyTreeToolBox.editServerRequested,
+    serverKeyTree: state.serverView.serverKeyTree,
+    selectedServer: state.serverView.serverKeyTree.selectedServer,
+    selectedKey: state.serverView.serverKeyTree.selectedKey
   }),
   dispatch => bindActionCreators(serverActions, dispatch)
 )(ServerView)
