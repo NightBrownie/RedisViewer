@@ -1,8 +1,11 @@
-// todo: refactor this
+import serverKeyTreeActionTypes from '../constants/actionTypes/serverKeyTree'
+import serverActionTypes from '../constants/actionTypes/server'
+import serverKeyTreeToolBoxActionTypes from '../constants/actionTypes/serverKeyTreeToolBox'
+import keyActionTypes from '../constants/actionTypes/key'
 
-import * as actionTypes from '../constants/actionTypes/index'
-import * as defaultServerConfig from '../constants/defaultServerConfig'
 import * as serverTreeViewNodeType from '../constants/serverTreeViewNodeType'
+import * as defaultServerConfig from '../constants/defaultServerConfig'
+
 import { LOCATION_CHANGE } from 'react-router-redux'
 
 const defaultState = {
@@ -77,19 +80,48 @@ const filterTree = (keyTree, filterTerm) => {
 
 const serverListReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case actionTypes.server.SERVER_SERVER_SELECTED:
+    case serverKeyTreeActionTypes.SERVER_SELECTED:
       return {
         ...state,
         selectedServer: action.server,
         selectedKey: null
       }
-    case actionTypes.server.SERVER_KEY_SELECTED:
+    case serverKeyTreeActionTypes.KEY_SELECTED:
       return {
         ...state,
         selectedServer: action.server,
         selectedKey: action.key
       }
-    case actionTypes.server.SERVER_SERVER_REMOVED:
+    case serverKeyTreeActionTypes.TOGGLE_ITEM_EXPAND:
+      return {
+        ...state,
+        itemsExpandedState: {
+          ...state.itemsExpandedState,
+          [action.itemKey]: !state.itemsExpandedState[action.itemKey]
+        }
+      }
+    case serverKeyTreeActionTypes.OPEN_KEY:
+      return {
+        ...state,
+        shouldRedirectToKeyView: true
+      }
+
+    case serverKeyTreeToolBoxActionTypes.FILTER_CHANGED:
+      return {
+        ...state,
+        filterTerm: action.filterTerm,
+        filteredServerKeys: Object.keys(state.serverKeys)
+          .map((serverId) => ({
+            serverId,
+            keyTree: filterTree(state.serverKeys[serverId], action.filterTerm)
+          }))
+          .reduce((accumulator, currentResult) => ({
+            ...accumulator,
+            [currentResult.serverId]: currentResult.keyTree
+          }), {})
+      }
+
+    case serverActionTypes.REMOVED:
       return {
         ...state,
         selectedServer: state.selectedServer && state.selectedServer.id === action.server.id
@@ -99,20 +131,13 @@ const serverListReducer = (state = defaultState, action) => {
           ? null
           : state.selectedKey
       }
-    case actionTypes.server.SERVER_SERVER_LIST_CHANGED:
+    case serverActionTypes.LIST_CHANGED:
       return {
         ...state,
         servers: action.servers
       }
-    case actionTypes.server.SERVER_TOGGLE_SERVER_LIST_ITEM_EXPAND:
-      return {
-        ...state,
-        itemsExpandedState: {
-          ...state.itemsExpandedState,
-          [action.itemKey]: !state.itemsExpandedState[action.itemKey]
-        }
-      }
-    case actionTypes.server.SERVER_REQUEST_KEYS:
+
+    case keyActionTypes.LOAD_KEYS:
       return {
         ...state,
         loadingServerKeys: {
@@ -120,7 +145,7 @@ const serverListReducer = (state = defaultState, action) => {
           [action.server.id]: true
         }
       }
-    case actionTypes.server.SERVER_KEYS_LOAD_FAILED:
+    case keyActionTypes.KEYS_LOAD_FAILED:
       return {
         ...state,
         loadingServerKeys: {
@@ -128,7 +153,7 @@ const serverListReducer = (state = defaultState, action) => {
           [action.server.id]: false
         }
       }
-    case actionTypes.server.SERVER_KEYS_LOADED:
+    case keyActionTypes.KEYS_LOADED:
       let separator = (action.server.advancedSettings && action.server.advancedSettings.keysFolderSeparator) ||
         defaultServerConfig.KEYS_FOLDER_SEPARATOR
 
@@ -159,25 +184,7 @@ const serverListReducer = (state = defaultState, action) => {
           [action.server.id]: false
         }
       }
-    case actionTypes.server.SERVER_FILTER_CHANGED:
-      return {
-        ...state,
-        filterTerm: action.filterTerm,
-        filteredServerKeys: Object.keys(state.serverKeys)
-          .map((serverId) => ({
-            serverId,
-            keyTree: filterTree(state.serverKeys[serverId], action.filterTerm)
-          }))
-          .reduce((accumulator, currentResult) => ({
-            ...accumulator,
-            [currentResult.serverId]: currentResult.keyTree
-          }), {})
-      }
-    case actionTypes.server.SERVER_OPEN_KEY:
-      return {
-        ...state,
-        shouldRedirectToKeyView: true
-      }
+
     case LOCATION_CHANGE:
       return {
         ...state,
