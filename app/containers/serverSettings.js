@@ -13,7 +13,7 @@ export default connect(
     initialServerSettings: state.serverSettings.initialServerSettings
   }),
   dispatch => ({
-    saveServer: (server) => dispatch(serverActions.setServer(server)),
+    saveServer: (server) => dispatch(serverActions.save(server)),
     cancelEdit: () => dispatch(routerActions.push(routes.ROOT)),
     requestConnectionTest: (server) => dispatch(serverActions.requestConnectionTest(server))
   })

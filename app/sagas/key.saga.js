@@ -3,7 +3,7 @@ import { eventChannel, buffers } from 'redux-saga'
 
 import keyActionTypes from '../constants/actionTypes/key'
 
-import * as keyActions from '../actions/key'
+import keyActions from '../actions/key'
 
 import * as redisService from '../services/redis.service'
 
@@ -72,10 +72,20 @@ function * unsubscribe (action) {
   }
 }
 
+function * loadKeys (action) {
+  try {
+    let loadedKeys = yield call(redisService.getServerKeys, action.server)
+    yield put(keyActions.keysLoaded(action.server, loadedKeys))
+  } catch (error) {
+    yield put(keyActions.keysLoadFailed(action.server, error))
+  }
+}
+
 export default function * saga () {
   yield [
     takeEvery(keyActionTypes.REQUEST_DATA, requestData),
     takeEvery(keyActionTypes.SUBSCRIBE, subscribe),
-    takeEvery(keyActionTypes.UNSUBSCRIBE, unsubscribe)
+    takeEvery(keyActionTypes.UNSUBSCRIBE, unsubscribe),
+    takeEvery(keyActionTypes.LOAD_KEYS, loadKeys)
   ]
 }

@@ -1,15 +1,13 @@
 import { put, takeLatest, takeEvery, call } from 'redux-saga/effects'
 
 import serverActionTypes from '../constants/actionTypes/server'
-import keyActionTypes from '../constants/actionTypes/key'
 
 import serverActions from '../actions/server'
 
-import * as redisService from '../services/redis.service'
 import * as serverConfigService from '../services/serverConfig.service'
 
 function * requestServerList () {
-  yield put(serverActions.serverListRequested())
+  yield put(serverActions.listRequested())
 }
 
 function * serverListRequested () {
@@ -33,21 +31,11 @@ function * removeServer (action) {
   yield put(serverActions.listChanged(serverConfigs))
 }
 
-function * loadKeys (action) {
-  try {
-    let loadedKeys = yield call(redisService.getServerKeys, action.server)
-    yield put(serverActions.keysLoaded(action.server, loadedKeys))
-  } catch (error) {
-    yield put(serverActions.keysLoadFailed(action.server, error))
-  }
-}
-
 export default function * saga () {
   yield [
     takeLatest(serverActionTypes.REQUEST_LIST, requestServerList),
     takeLatest(serverActionTypes.LIST_REQUESTED, serverListRequested),
     takeLatest(serverActionTypes.SAVE, saveServer),
-    takeLatest(serverActionTypes.REMOVE, removeServer),
-    takeEvery(keyActionTypes.LOAD_KEYS, loadKeys)
+    takeLatest(serverActionTypes.REMOVE, removeServer)
   ]
 }
