@@ -1,10 +1,10 @@
-import { put, takeLatest, takeEvery, call } from 'redux-saga/effects'
+import { put, takeLatest, call } from 'redux-saga/effects'
 
 import serverActionTypes from '../constants/actionTypes/server'
 
 import serverActions from '../actions/server'
 
-import * as serverConfigService from '../services/serverConfig.service'
+import serverConfigService from '../services/serverConfig.service'
 
 function * requestServerList () {
   yield put(serverActions.listRequested())

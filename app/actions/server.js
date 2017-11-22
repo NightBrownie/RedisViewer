@@ -1,4 +1,4 @@
-import * as actionTypes from '../constants/actionTypes/server'
+import actionTypes from '../constants/actionTypes/server'
 
 export const save = (server) => ({
   type: actionTypes.SAVE,

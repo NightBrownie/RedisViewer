@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router'
 
-import * as routes from '../constants/routes'
+import routes from '../constants/routes'
 
 import ServerSettings from '../containers/serverSettings'
 import KeyView from '../containers/keyView'

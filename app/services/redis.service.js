@@ -1,7 +1,7 @@
 import Redis from 'ioredis'
 import winston from 'winston'
 
-import * as defaultServerConfig from '../constants/defaultServerConfig'
+import defaultServerConfig from '../constants/defaultServerConfig'
 
 const REDIS_SUBSCRIPTION_UPDATE_EVENT = 'pmessage'
 const KEYSPASE_SUBSCRIPTION_STREAM_PREFIX = '__keyspace*__:'
@@ -134,4 +134,11 @@ export const unsubscribeFromKeyUpdates = (server, key, callback) => {
       delete redisServerKeyUpdateSubscribers[server.id]
     }
   }
+}
+
+export default {
+  getServerKeys,
+  getKeyData,
+  subscribeForKeyUpdates,
+  unsubscribeFromKeyUpdates
 }

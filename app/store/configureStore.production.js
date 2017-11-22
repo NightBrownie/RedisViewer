@@ -5,7 +5,7 @@ import { routerMiddleware } from 'react-router-redux'
 import rootReducer from '../reducers/root.reducer'
 import { createMemoryHistory as createHistory } from 'history'
 
-import rootSaga from '../sagas/root.saga'
+import rootSaga from '../sagas/root'
 
 export const history = createHistory()
 

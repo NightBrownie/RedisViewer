@@ -1,8 +1,21 @@
 import uuid from 'uuid/v4'
 
-import * as configService from './config.service'
-import * as configKeys from '../constants/configKeys'
-import * as appConstants from '../constants/appConstants'
+import configService from './config.service'
+
+import configKeys from '../constants/configKeys'
+import appConstants from '../constants/appConstants'
+
+export const getServer = async (id) => {
+  let savedServerConfigs = await configService.getConfigKey(configKeys.SERVER_CONFIG_LIST,
+    appConstants.DEFAULT_SERVER_CONFIG_LIST)
+
+  if (id) {
+    return savedServerConfigs
+      .find((config) => config.id === id)
+  }
+
+  return savedServerConfigs
+}
 
 export const setServer = async (server) => {
   let serverConfig = server
@@ -36,21 +49,15 @@ export const setServer = async (server) => {
   return serverConfig
 }
 
-export const getServer = async (id) => {
-  let savedServerConfigs = await configService.getConfigKey(configKeys.SERVER_CONFIG_LIST,
-    appConstants.DEFAULT_SERVER_CONFIG_LIST)
-
-  if (id) {
-    return savedServerConfigs
-      .find((config) => config.id === id)
-  }
-
-  return savedServerConfigs
-}
-
 export const removeServer = async (server) => {
   let savedServerConfigs = await configService.getConfigKey(configKeys.SERVER_CONFIG_LIST,
     appConstants.DEFAULT_SERVER_CONFIG_LIST)
   await configService.setConfigKey(configKeys.SERVER_CONFIG_LIST,
     savedServerConfigs.filter(serverConfig => serverConfig.id !== server.id))
+}
+
+export default {
+  getServer,
+  setServer,
+  removeServer
 }

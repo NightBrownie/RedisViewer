@@ -9,9 +9,9 @@ import classNames from 'classnames'
 import Diff from '../controls/Diff'
 import Button from '../controls/button'
 
-import * as routes from '../../constants/routes'
-import * as keyContentType from '../../constants/keyContentType'
-import * as appConstants from '../../constants/appConstants'
+import routes from '../../constants/routes'
+import keyContentType from '../../constants/keyContentType'
+import appConstants from '../../constants/appConstants'
 
 export default class KeyView extends Component {
   static propTypes = {

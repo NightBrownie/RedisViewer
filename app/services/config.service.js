@@ -1,7 +1,7 @@
-import * as appConstants from '../constants/appConstants'
-import * as configKeys from '../constants/configKeys'
+import appConstants from '../constants/appConstants'
+import configKeys from '../constants/configKeys'
 
-import * as cryptoHelper from '../helpers/crypto'
+import cryptoHelper from '../helpers/crypto'
 
 const {app} = (require('electron').remote || require('electron'))
 const keytar = require('keytar')
@@ -23,27 +23,29 @@ let currentConfig
 
 const appName = app.getName()
 
-export const setConfigKey = async (key, value) => {
-  await initializeConfig()
-
-  dotProp.set(currentConfig, key, value)
-
-  await saveConfig()
-}
-
-export const getConfigKey = async (key, defaultValue) => {
-  await initializeConfig()
-
-  return dotProp.has(currentConfig, key)
-        ? dotProp.get(currentConfig, key)
-        : defaultValue
-}
-
 const initializeConfig = async () => {
   if (!currentConfig) {
     let getConfigResult = await getOrCreateConfig();
 
-    ({config: currentConfig, portable, encrypted} = getConfigResult)
+    ({ config: currentConfig, portable, encrypted } = getConfigResult)
+  }
+}
+
+const saveConfig = async () => {
+  try {
+    let configText = JSON.stringify(currentConfig)
+
+    if (portable) {
+      await fs.writeFile(portableConfigPath, configText, appConstants.CONFIG_FILE_TEXT_ENCODING)
+    } else if (encrypted) {
+      let encryptedConfigText = cryptoHelper.encrypt(configText, configEncryptionPassPhrase)
+      await await fs.writeFile(userDataAppEncryptedConfigPath,
+        encryptedConfigText, appConstants.CONFIG_FILE_TEXT_ENCODING)
+    } else {
+      await fs.writeFile(userDataAppConfigPath, configText, appConstants.CONFIG_FILE_TEXT_ENCODING)
+    }
+  } catch (err) {
+    winston.error(`An error occurred during config saving: ${err.message}`)
   }
 }
 
@@ -135,20 +137,23 @@ const getOrCreateConfig = async () => {
   }
 }
 
-const saveConfig = async () => {
-  try {
-    let configText = JSON.stringify(currentConfig)
+export const setConfigKey = async (key, value) => {
+  await initializeConfig()
 
-    if (portable) {
-      await fs.writeFile(portableConfigPath, configText, appConstants.CONFIG_FILE_TEXT_ENCODING)
-    } else if (encrypted) {
-      let encryptedConfigText = cryptoHelper.encrypt(configText, configEncryptionPassPhrase)
-      await await fs.writeFile(userDataAppEncryptedConfigPath,
-                encryptedConfigText, appConstants.CONFIG_FILE_TEXT_ENCODING)
-    } else {
-      await fs.writeFile(userDataAppConfigPath, configText, appConstants.CONFIG_FILE_TEXT_ENCODING)
-    }
-  } catch (err) {
-    winston.error(`An error occurred during config saving: ${err.message}`)
-  }
+  dotProp.set(currentConfig, key, value)
+
+  await saveConfig()
+}
+
+export const getConfigKey = async (key, defaultValue) => {
+  await initializeConfig()
+
+  return dotProp.has(currentConfig, key)
+    ? dotProp.get(currentConfig, key)
+    : defaultValue
+}
+
+export default {
+  setConfigKey,
+  getConfigKey
 }

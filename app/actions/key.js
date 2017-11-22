@@ -1,4 +1,4 @@
-import * as actionTypes from '../constants/actionTypes/key'
+import actionTypes from '../constants/actionTypes/key'
 
 /* Key data */
 export const requestData = (server, key) => ({

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import { Redirect } from 'react-router'
 
-import * as routes from '../../constants/routes'
+import routes from '../../constants/routes'
 
 import ServerSettingsForm from './serverSettingsForm'
 

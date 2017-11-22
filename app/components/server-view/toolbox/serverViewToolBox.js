@@ -4,7 +4,7 @@ import Button from '../../controls/button'
 import ServerViewSearchTool from './serverViewSearchTool'
 import { Redirect } from 'react-router'
 
-import * as routes from '../../../constants/routes'
+import routes from '../../../constants/routes'
 
 export default class ServerViewToolBox extends Component {
   static propTypes = {

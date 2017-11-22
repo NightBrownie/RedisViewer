@@ -3,8 +3,8 @@ import serverActionTypes from '../constants/actionTypes/server'
 import serverKeyTreeToolBoxActionTypes from '../constants/actionTypes/serverKeyTreeToolBox'
 import keyActionTypes from '../constants/actionTypes/key'
 
-import * as serverTreeViewNodeType from '../constants/serverTreeViewNodeType'
-import * as defaultServerConfig from '../constants/defaultServerConfig'
+import serverTreeViewNodeType from '../constants/serverTreeViewNodeType'
+import defaultServerConfig from '../constants/defaultServerConfig'
 
 import { LOCATION_CHANGE } from 'react-router-redux'
 

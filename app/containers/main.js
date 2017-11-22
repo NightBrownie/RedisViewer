@@ -3,11 +3,11 @@ import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'
 
 import Main from '../components/main'
-import * as configActions from '../actions/mainLayout'
+import mainLayoutActions from '../actions/mainLayout'
 
 export default withRouter(connect(
   state => ({
     serverViewWidth: state.layout.serverViewWidth
   }),
-  dispatch => bindActionCreators(configActions, dispatch)
+  dispatch => bindActionCreators(mainLayoutActions, dispatch)
 )(Main))

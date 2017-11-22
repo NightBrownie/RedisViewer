@@ -3,9 +3,9 @@ import { delay } from 'redux-saga'
 
 import mainLayoutActionTypes from '../constants/actionTypes/mainLayout'
 
-import * as mainLayoutActions from '../actions/mainLayout'
+import mainLayoutActions from '../actions/mainLayout'
 
-import * as layoutConfigService from '../services/layoutConfig.service'
+import layoutConfigService from '../services/layoutConfig.service'
 
 function * requestServerKeyTreeWidthRestore () {
   yield put(mainLayoutActions.serverViewWidthRestoreRequested())
