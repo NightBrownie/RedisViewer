@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import classNames from 'classnames'
 
-import treeViewSpanTypes from '../../../constants/treeViewSpanTypes'
+import treeViewSpanTypes from '../../../constants/treeViewSpanType'
 
 export default class TreeViewSpan extends Component {
   static propTypes = {

@@ -5,7 +5,7 @@ import mainLayoutActionTypes from '../constants/actionTypes/mainLayout'
 
 import mainLayoutActions from '../actions/mainLayout'
 
-import layoutConfigService from '../services/layoutConfig.service'
+import layoutConfigService from '../services/layoutConfig'
 
 function * requestServerKeyTreeWidthRestore () {
   yield put(mainLayoutActions.serverViewWidthRestoreRequested())

@@ -1,4 +1,4 @@
-import configService from './config.service'
+import configService from './config'
 import configKeys from '../constants/configKeys'
 
 export const getTreeViewSavedWidth =

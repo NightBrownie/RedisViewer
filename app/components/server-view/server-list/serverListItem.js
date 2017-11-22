@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import classNames from 'classnames'
 
-import treeViewSpanTypes from '../../../constants/treeViewSpanTypes'
-import treeViewItemTypes from '../../../constants/treeViewItemTypes'
+import treeViewSpanTypes from '../../../constants/treeViewSpanType'
+import treeViewItemTypes from '../../../constants/treeViewItemType'
 
 import TreeViewSpan from './treeViewSpan'
 import ServerListItemIcon from './serverListItemIcon'

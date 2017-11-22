@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from 'redux'
 import createDebounceMiddleware from 'redux-debounced'
 import createSagaMiddleware from 'redux-saga'
 import { routerMiddleware } from 'react-router-redux'
-import rootReducer from '../reducers/root.reducer'
+import rootReducer from '../reducers/root'
 import { createMemoryHistory as createHistory } from 'history'
 
 import rootSaga from '../sagas/root'

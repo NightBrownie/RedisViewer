@@ -4,7 +4,7 @@ import serverActionTypes from '../constants/actionTypes/server'
 
 import serverActions from '../actions/server'
 
-import serverConfigService from '../services/serverConfig.service'
+import serverConfigService from '../services/serverConfig'
 
 function * requestServerList () {
   yield put(serverActions.listRequested())

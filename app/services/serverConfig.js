@@ -1,6 +1,6 @@
 import uuid from 'uuid/v4'
 
-import configService from './config.service'
+import configService from './config'
 
 import configKeys from '../constants/configKeys'
 import appConstants from '../constants/appConstants'

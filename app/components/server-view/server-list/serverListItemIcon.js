@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import classNames from 'classnames'
 
-import treeViewItemTypes from '../../../constants/treeViewItemTypes'
+import treeViewItemTypes from '../../../constants/treeViewItemType'
 
 export default class ServerListItemIcon extends Component {
   static propTypes = {

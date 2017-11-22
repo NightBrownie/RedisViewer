@@ -3,10 +3,10 @@ import {combineReducers} from 'redux'
 import {routerReducer as router} from 'react-router-redux'
 import {reducer as form} from 'redux-form'
 
-import layout from './layout.reducer'
-import serverView from './serverView.reducer'
-import serverSettings from './serverSettings.reducer'
-import keyView from './keyView.reducer'
+import layout from './mainLayout'
+import serverView from './serverView'
+import serverSettings from './serverSettings'
+import keyView from './keyView'
 
 const rootReducer = combineReducers({
   router,

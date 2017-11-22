@@ -5,7 +5,7 @@ import keyActionTypes from '../constants/actionTypes/key'
 
 import keyActions from '../actions/key'
 
-import redisService from '../services/redis.service'
+import redisService from '../services/redis'
 
 const serverKeyUpdateSubscriptionChannels = {}
 
