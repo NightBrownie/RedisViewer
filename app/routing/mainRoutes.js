@@ -3,8 +3,8 @@ import { Route, Switch } from 'react-router'
 
 import routes from '../constants/routes'
 
-import ServerSettings from '../containers/serverSettings'
-import KeyView from '../containers/keyView'
+import ServerSettings from '../containers/ServerSettings'
+import KeyView from '../containers/KeyView'
 import AppMainInfo from '../components/appMainInfo'
 
 const mainRoutes = (<Switch>

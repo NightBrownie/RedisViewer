@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 
-import Main from '../containers/main'
+import Main from './MainLayout'
 
 export default class App extends Component {
   static propTypes = {
