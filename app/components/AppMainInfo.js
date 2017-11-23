@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import logo from '../../assets/images/logo.svg'
 
 export default class AppMainInfo extends Component {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import {diffChars, diffWords, diffSentences, diffJson} from 'diff'
+import { diffChars, diffWords, diffSentences, diffJson } from 'diff'
 import classNames from 'classnames'
 
 const fnMap = {
