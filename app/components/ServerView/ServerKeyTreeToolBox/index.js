@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
-import Button from '../../controls/button'
-import ServerViewSearchTool from './serverViewSearchTool'
+import Button from '../../controls/Button'
+import ServerViewSearchTool from './SearchTool'
 import { Redirect } from 'react-router'
 
 import routes from '../../../constants/routes'

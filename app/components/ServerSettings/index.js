@@ -4,7 +4,7 @@ import { Redirect } from 'react-router'
 
 import routes from '../../constants/routes'
 
-import ServerSettingsForm from './serverSettingsForm'
+import ServerSettingsForm from './ServerSettingsForm'
 
 export default class ServerSettings extends Component {
   static propTypes = {

@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import ServerView from '../components/server-view/serverView'
+import ServerView from '../components/ServerView'
 
 import serverActions from '../actions/server'
 import serverKeyTreeToolBoxActions from '../actions/serverKeyTreeToolBox'

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import {bindActionCreators} from 'redux'
 
-import KeyView from '../components/keyView/keyView'
+import KeyView from '../components/KeyView'
 
 import keyActions from '../actions/key'
 

@@ -5,7 +5,7 @@ import { routerActions } from 'react-router-redux'
 import serverActions from '../actions/server'
 import routes from '../constants/routes'
 
-import ServerSettings from '../components/server-settings/serverSettings'
+import ServerSettings from '../components/ServerSettings'
 
 export default connect(
   state => ({

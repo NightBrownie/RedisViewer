@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types';
 
-import Expander from '../controls/expander'
-import PrimaryServerSettings from './primaryServerSettings'
-import AdvancedServerSettings from './advancedServerSettings'
-import Button from '../controls/button'
+import Expander from '../controls/Expander'
+import PrimaryServerSettings from './PrimaryServerSettings'
+import AdvancedServerSettings from './AdvancedServerSettings'
+import Button from '../controls/Button'
 import { reduxForm } from 'redux-form'
 
 class ServerSettingsForm extends Component {

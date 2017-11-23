@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 
 import { Redirect } from 'react-router'
 
-import VirtualList from '../../controls/VirtualizedList/VirtualList'
-import ServerListItem from './serverListItem'
+import VirtualList from '../../controls/VirtualizedList'
+import ServerListItem from './ServerListItem'
 
 import treeViewSpanTypes from '../../../constants/treeViewSpanType'
 import treeViewItemTypes from '../../../constants/treeViewItemType'

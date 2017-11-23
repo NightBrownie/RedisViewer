@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import ServerViewToolBox from './toolbox/serverViewToolBox';
-import ServerList from './server-list/serverList';
+import ServerViewToolBox from './ServerKeyTreeToolBox'
+import ServerList from './ServerKeyTree'
 
 export default class ServerView extends Component {
   static propTypes = {
@@ -24,8 +24,8 @@ export default class ServerView extends Component {
     editServerRequested: false
   };
 
-  componentWillMount() {
-    this.props.requestServerList();
+  componentWillMount () {
+    this.props.requestServerList()
   }
 
   render () {

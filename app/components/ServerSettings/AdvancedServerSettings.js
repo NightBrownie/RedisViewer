@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { Field, FormSection } from 'redux-form'
 
-import LabeledInput from '../controls/labeledInput'
+import LabeledInput from '../controls/LabeledInput'
 
 const renderKeysRootPatternField = (field) => (
   <LabeledInput

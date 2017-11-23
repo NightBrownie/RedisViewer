@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import LabeledInput from '../../controls/labeledInput'
+import LabeledInput from '../../controls/LabeledInput'
 
 export default class ServerViewSearchTool extends Component {
   static propTypes = {

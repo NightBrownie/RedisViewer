@@ -4,9 +4,9 @@ import classNames from 'classnames'
 import treeViewSpanTypes from '../../../constants/treeViewSpanType'
 import treeViewItemTypes from '../../../constants/treeViewItemType'
 
-import TreeViewSpan from './treeViewSpan'
-import ServerListItemIcon from './serverListItemIcon'
-import OptionsButton from '../../optionsButton'
+import TreeViewSpan from './TreeViewSpan'
+import ServerListItemIcon from './ServerListItemIcon'
+import OptionsButton from '../../OptionsButton'
 
 export default class ServerListItem extends Component {
   static propTypes = {

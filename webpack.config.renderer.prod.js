@@ -13,7 +13,7 @@ import baseConfig from './webpack.config.base'
 export default merge(baseConfig, {
   devtool: 'cheap-module-source-map',
 
-  entry: ['babel-polyfill', './app/index'],
+  entry: ['babel-polyfill', './app'],
 
   output: {
     path: path.join(__dirname, 'app/dist'),
@@ -27,7 +27,7 @@ export default merge(baseConfig, {
         test: /\.global\.css$/,
         use: ExtractTextPlugin.extract({
           use: 'css-loader',
-          fallback: 'style-loader',
+          fallback: 'style-loader'
         })
       },
       // Pipe other styles through css modules and append to style.css
@@ -35,9 +35,9 @@ export default merge(baseConfig, {
         test: /^((?!\.global).)*\.css$/,
         use: ExtractTextPlugin.extract({
           use: {
-            loader: 'css-loader',
+            loader: 'css-loader'
           }
-        }),
+        })
       },
       // Add LESS support  - compile all .global.less files and pipe it to style.css
       {
@@ -51,7 +51,7 @@ export default merge(baseConfig, {
               loader: 'less-loader'
             }
           ],
-          fallback: 'style-loader',
+          fallback: 'style-loader'
         })
       },
       // Add LESS support  - compile all other .less files and pipe it to style.css
@@ -59,12 +59,12 @@ export default merge(baseConfig, {
         test: /^((?!\.global).)*\.less$/,
         use: ExtractTextPlugin.extract({
           use: [{
-            loader: 'css-loader',
+            loader: 'css-loader'
           },
-            {
-              loader: 'less-loader'
-            }]
-        }),
+          {
+            loader: 'less-loader'
+          }]
+        })
       },
       // WOFF Font
       {
@@ -73,9 +73,9 @@ export default merge(baseConfig, {
           loader: 'url-loader',
           options: {
             limit: 10000,
-            mimetype: 'application/font-woff',
+            mimetype: 'application/font-woff'
           }
-        },
+        }
       },
       // WOFF2 Font
       {
@@ -84,7 +84,7 @@ export default merge(baseConfig, {
           loader: 'url-loader',
           options: {
             limit: 10000,
-            mimetype: 'application/font-woff',
+            mimetype: 'application/font-woff'
           }
         }
       },
@@ -102,7 +102,7 @@ export default merge(baseConfig, {
       // EOT Font
       {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        use: 'file-loader',
+        use: 'file-loader'
       },
       // SVG Font
       {
@@ -111,14 +111,14 @@ export default merge(baseConfig, {
           loader: 'url-loader',
           options: {
             limit: 10000,
-            mimetype: 'image/svg+xml',
+            mimetype: 'image/svg+xml'
           }
         }
       },
       // Common Image Formats
       {
         test: /\.(?:ico|gif|png|jpg|jpeg|webp)$/,
-        use: 'url-loader',
+        use: 'url-loader'
       }
     ]
   },

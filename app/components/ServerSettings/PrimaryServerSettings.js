@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field, FormSection } from 'redux-form'
 import { required } from 'redux-form-validators/lib'
 
-import LabeledInput from '../controls/labeledInput'
+import LabeledInput from '../controls/LabeledInput'
 
 const renderServerNameField = (field) => (
   <LabeledInput

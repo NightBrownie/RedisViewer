@@ -7,7 +7,7 @@ import { Redirect } from 'react-router'
 import classNames from 'classnames'
 
 import Diff from '../controls/Diff'
-import Button from '../controls/button'
+import Button from '../controls/Button'
 
 import routes from '../../constants/routes'
 import keyContentType from '../../constants/keyContentType'

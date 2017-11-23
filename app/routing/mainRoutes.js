@@ -5,7 +5,7 @@ import routes from '../constants/routes'
 
 import ServerSettings from '../containers/ServerSettings'
 import KeyView from '../containers/KeyView'
-import AppMainInfo from '../components/appMainInfo'
+import AppMainInfo from '../components/AppMainInfo'
 
 const mainRoutes = (<Switch>
   <Route path={routes.EDIT_SERVER} component={ServerSettings} />
