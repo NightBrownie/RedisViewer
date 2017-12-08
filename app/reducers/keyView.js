@@ -7,7 +7,11 @@ import serverKeyTreeActionTypes from '../constants/actionTypes/serverKeyTree'
 import keyActionTypes from '../constants/actionTypes/key'
 
 const defaultState = {
-  shouldRedirectToTheRoot: false,
+  key: null,
+  server: null,
+  previousData: null,
+  currentData: null,
+  lastUpdateTime: null,
   loadingKeyData: false,
   isUpdatesAutoTrackEnabled: false,
   isUpdatesAutoTrackToggling: false
@@ -15,11 +19,11 @@ const defaultState = {
 
 export default (
   state: {
-    previousData?: any,
-    currentData?: any,
-    server?: { id: string },
-    lastUpdateTime?: Date,
-    shouldRedirectToTheRoot: boolean,
+    previousData: ?any,
+    currentData: ?any,
+    key: ?string,
+    server: ?{ id: string },
+    lastUpdateTime: ?Date,
     loadingKeyData: boolean,
     isUpdatesAutoTrackEnabled: boolean,
     isUpdatesAutoTrackToggling: boolean
@@ -88,16 +92,16 @@ export default (
           : null
       }
     case serverActionTypes.REMOVED:
-      return {
-        ...state,
-        shouldRedirectToTheRoot: state.server && (state.server.id === action.server.id)
-      }
-
-    case LOCATION_CHANGE:
-      return {
-        ...state,
-        shouldRedirectToTheRoot: false
-      }
+      return state.server && (state.server.id === action.server.id)
+        ? {
+          ...state,
+          server: null,
+          key: null,
+          previousData: null,
+          currentData: null,
+          lastUpdateTime: null
+        }
+        : state
 
     default:
       return state

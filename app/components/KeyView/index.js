@@ -15,7 +15,6 @@ import appConstants from '../../constants/appConstants'
 
 export default class KeyView extends Component {
   static propTypes = {
-    shouldRedirectToTheRoot: PropTypes.bool,
     server: PropTypes.object,
     keyName: PropTypes.string,
     requestData: PropTypes.func.isRequired,
@@ -29,7 +28,6 @@ export default class KeyView extends Component {
   }
 
   static defaultProps = {
-    shouldRedirectToTheRoot: false,
     loadingKeyData: false,
     isUpdatesTrackEnabled: false
   }
@@ -48,18 +46,20 @@ export default class KeyView extends Component {
     }
   }
 
-  componentWillUpdate (nextProps, nextState) {
+  componentWillUpdate (nextProps) {
     if (this.props.server !== nextProps.server || this.props.keyName !== nextProps.keyName) {
       if (this.props.isUpdatesTrackEnabled && !this.props.isUpdatesTrackToggling) {
         this.props.toggleKeyUpdatesTrack(
           this.props.server,
           this.props.keyName,
-          false)
+          false
+        )
 
         this.props.toggleKeyUpdatesTrack(
           nextProps.server,
           nextProps.keyName,
-          true)
+          true
+        )
       }
 
       this.props.requestData(nextProps.server, nextProps.keyName)
@@ -79,9 +79,9 @@ export default class KeyView extends Component {
   }
 
   render () {
-    if (this.props.shouldRedirectToTheRoot) {
+    if (this.props.keyName === null) {
       return (
-        <Redirect to={routes.ROOT}/>
+        <Redirect to={routes.ROOT} />
       )
     }
 

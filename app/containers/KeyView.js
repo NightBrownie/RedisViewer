@@ -9,7 +9,6 @@ export default connect(
   state => ({
     server: state.keyView.server,
     keyName: state.keyView.key,
-    shouldRedirectToTheRoot: state.keyView.shouldRedirectToTheRoot,
     previousData: state.keyView.previousData,
     currentData: state.keyView.currentData,
     lastUpdateTime: state.keyView.lastUpdateTime,

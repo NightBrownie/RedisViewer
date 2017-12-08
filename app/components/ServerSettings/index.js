@@ -24,7 +24,7 @@ export default class ServerSettings extends Component {
       ...this.props.initialServerSettings,
       ...server
     }
-    this.props.saveServer(resultServer);
+    this.props.saveServer(resultServer)
   }
 
   render () {
@@ -39,13 +39,13 @@ export default class ServerSettings extends Component {
         {
           !this.props.initialServerSettings
           ? 'Add new server'
-          :'Edit server'
+          : 'Edit server'
         }
       </h2>
 
       <ServerSettingsForm
+        enableReinitialize
         initialValues={this.props.initialServerSettings}
-        enableReinitialize={true}
         onSubmit={::this.saveServer}
         requestConnectionTest={this.props.requestConnectionTest}
         cancelEdit={this.props.cancelEdit}
