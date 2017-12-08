@@ -4,8 +4,6 @@ import Button from '../../controls/Button'
 import ServerViewSearchTool from './SearchTool'
 import { Redirect } from 'react-router'
 
-import routes from '../../../constants/routes'
-
 export default class ServerViewToolBox extends Component {
   static propTypes = {
     requestAddServer: PropTypes.func.isRequired,
@@ -21,10 +19,6 @@ export default class ServerViewToolBox extends Component {
   }
 
   render () {
-    if (this.props.editServerRequested) {
-      return <Redirect to={routes.EDIT_SERVER} />
-    }
-
     return (<div className='server-view-toolbox'>
       <ServerViewSearchTool
         onSearchTermChanged={this.props.filterChanged}

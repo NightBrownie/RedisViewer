@@ -25,7 +25,7 @@ export default class ServerSettings extends Component {
     this.props.saveServer(resultServer)
   }
 
-  // TODO: mark that settings are saved
+  // TODO: add mark that settings are saved
   render () {
     if (this.props.editingSettings === null && this.props.isEditMode) {
       return (

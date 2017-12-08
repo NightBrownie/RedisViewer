@@ -14,24 +14,6 @@ const serverViewToolBoxReducer = (state = defaultState, action) => {
         filterTerm: action.filterTerm
       }
 
-    // TODO: remove this redirect and replace with history action dispatch
-    case serverKeyTreeToolBoxActionTypes.REQUEST_ADD_SERVER:
-      return {
-        ...state,
-        editServerRequested: true
-      }
-    case serverKeyTreeToolBoxActionTypes.REQUEST_EDIT_SERVER:
-      return {
-        ...state,
-        editServerRequested: true
-      }
-
-    case LOCATION_CHANGE:
-      return {
-        ...state,
-        editServerRequested: false
-      }
-
     default:
       return state
   }
