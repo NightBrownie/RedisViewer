@@ -8,6 +8,7 @@ import routes from '../../../constants/routes'
 
 export default class ServerViewToolBox extends Component {
   static propTypes = {
+    requestAddServer: PropTypes.func.isRequired,
     requestEditServer: PropTypes.func.isRequired,
     requestRemoveServer: PropTypes.func.isRequired,
     selectedServer: PropTypes.object,
@@ -31,7 +32,7 @@ export default class ServerViewToolBox extends Component {
       <Button
         className='add-server-btn'
         isInactiveTransparentBorder
-        onClick={() => this.props.requestEditServer()}
+        onClick={() => this.props.requestAddServer()}
       >
         <i className='add-server-icon fa fa-plus fa-fw fa-lg' />
       </Button>

@@ -10,7 +10,9 @@ import ServerSettings from '../components/ServerSettings'
 export default connect(
   state => ({
     shouldRedirectToTheRoot: state.serverSettings.shouldRedirectToTheRoot,
-    initialServerSettings: state.serverSettings.initialServerSettings
+    editingSettings: state.serverSettings.editingSettings,
+    settingsSaved: state.serverSettings.settingsSaved,
+    isEditMode: state.serverSettings.isEditMode
   }),
   dispatch => ({
     saveServer: (server) => dispatch(serverActions.save(server)),

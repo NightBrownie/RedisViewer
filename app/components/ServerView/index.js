@@ -6,6 +6,7 @@ import ServerList from './ServerKeyTree'
 export default class ServerView extends Component {
   static propTypes = {
     requestServerList: PropTypes.func.isRequired,
+    requestAddServer: PropTypes.func.isRequired,
     requestEditServer: PropTypes.func.isRequired,
     requestRemoveServer: PropTypes.func.isRequired,
     editServerRequested: PropTypes.bool.isRequired,
@@ -31,6 +32,7 @@ export default class ServerView extends Component {
   render () {
     return (<div className='server-view'>
       <ServerViewToolBox
+        requestAddServer={this.props.requestAddServer}
         requestEditServer={this.props.requestEditServer}
         requestRemoveServer={this.props.requestRemoveServer}
         editServerRequested={this.props.editServerRequested}

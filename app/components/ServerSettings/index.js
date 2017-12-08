@@ -8,27 +8,26 @@ import ServerSettingsForm from './ServerSettingsForm'
 
 export default class ServerSettings extends Component {
   static propTypes = {
-    initialServerSettings: PropTypes.object,
-    shouldRedirectToTheRoot: PropTypes.bool,
+    editingSettings: PropTypes.object,
+    settingsSaved: PropTypes.bool,
+    isEditMode: PropTypes.bool,
+
     saveServer: PropTypes.func.isRequired,
     cancelEdit: PropTypes.func.isRequired,
     requestConnectionTest: PropTypes.func.isRequired
   }
 
-  static defaultProps = {
-    shouldRedirectToTheRoot: false
-  }
-
   saveServer (server) {
     let resultServer = {
-      ...this.props.initialServerSettings,
+      ...this.props.editingSettings,
       ...server
     }
     this.props.saveServer(resultServer)
   }
 
+  // TODO: mark that settings are saved
   render () {
-    if (this.props.shouldRedirectToTheRoot) {
+    if (this.props.editingSettings === null && this.props.isEditMode) {
       return (
         <Redirect to={routes.ROOT} />
       )
@@ -37,15 +36,15 @@ export default class ServerSettings extends Component {
     return (<div className='server-settings'>
       <h2 className='server-settings-form-label'>
         {
-          !this.props.initialServerSettings
-          ? 'Add new server'
-          : 'Edit server'
+          this.props.isEditMode
+            ? 'Edit server'
+            : 'Add new server'
         }
       </h2>
 
       <ServerSettingsForm
         enableReinitialize
-        initialValues={this.props.initialServerSettings}
+        initialValues={this.props.editingSettings}
         onSubmit={::this.saveServer}
         requestConnectionTest={this.props.requestConnectionTest}
         cancelEdit={this.props.cancelEdit}

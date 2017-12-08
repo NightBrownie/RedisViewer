@@ -19,6 +19,7 @@ export default connect(
     requestServerList: () => dispatch(serverActions.requestList()),
     requestRemoveServer: (server) => dispatch(serverActions.remove(server)),
 
+    requestAddServer: () => dispatch(serverKeyTreeToolBoxActions.requestAddServer()),
     requestEditServer: (server) => dispatch(serverKeyTreeToolBoxActions.requestEditServer(server)),
     filterChanged: (filterTerm) => dispatch(serverKeyTreeToolBoxActions.filterChanged(filterTerm)),
 
