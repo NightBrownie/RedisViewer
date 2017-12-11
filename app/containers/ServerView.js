@@ -23,11 +23,11 @@ export default withRouter(connect(
 
     requestAddServer: () => {
       dispatch(serverKeyTreeToolBoxActions.requestAddServer())
-      history.push(routes.ADD_OR_EDIT_SERVER_SETTINGS)
+      history.push(routes.ADD_SERVER)
     },
     requestEditServer: (server) => {
       dispatch(serverKeyTreeToolBoxActions.requestEditServer(server))
-      history.push(routes.ADD_OR_EDIT_SERVER_SETTINGS)
+      history.push(routes.EDIT_SERVER_SETTINGS)
     },
     filterChanged: (filterTerm) => dispatch(serverKeyTreeToolBoxActions.filterChanged(filterTerm)),
 

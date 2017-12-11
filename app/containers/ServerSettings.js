@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
 
 import serverActions from '../actions/server'
@@ -7,11 +8,11 @@ import routes from '../constants/routes'
 
 import ServerSettings from '../components/ServerSettings'
 
-export default withRouter(connect(
-  state => ({
+const ServerSettingsContainer = withRouter(connect(
+  (state, { isEditMode }) => ({
     editingSettings: state.serverSettings.editingSettings,
     settingsSaved: state.serverSettings.settingsSaved,
-    isEditMode: state.serverSettings.isEditMode
+    isEditMode
   }),
   (dispatch, { history }) => ({
     saveServer: (server) => dispatch(serverActions.save(server)),
@@ -19,3 +20,9 @@ export default withRouter(connect(
     requestConnectionTest: (server) => dispatch(serverActions.requestConnectionTest(server))
   })
 )(ServerSettings))
+
+ServerSettingsContainer.propTypes = {
+  isEditMode: PropTypes.bool
+}
+
+export default ServerSettingsContainer
