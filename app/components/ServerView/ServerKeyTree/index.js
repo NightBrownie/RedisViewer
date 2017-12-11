@@ -165,8 +165,7 @@ export default class ServerList extends Component {
               : treeViewItemTypes.TREE_VIEW_KEY_ITEM,
             name: node.name,
             isExpanded: nodeExpanded,
-            isSelected: selectedServer && (selectedServer.id === server.id)
-            && selectedKey && (selectedKey === nodeKey),
+            isSelected: selectedServer && (selectedServer.id === server.id) && selectedKey && (selectedKey === nodeKey),
             onSelected: node.type === serverTreeViewNodeType.KEY_PATH_NODE_TYPE_KEY
               ? () => {
                 this.props.keySelected(server, nodeKey)
@@ -188,16 +187,12 @@ export default class ServerList extends Component {
   }
 
   render () {
-    let {shouldRedirectToKeyView} = this.props.serverKeyTree
-
     let serverListItems = this.getNodeListItems(this.getListItemsTree())
 
     return (<div
       ref={(serverListContainer) => (this.serverListContainer = serverListContainer)}
       className='server-list-container'
     >
-      {shouldRedirectToKeyView && <Redirect to={routes.KEY_VIEW} />}
-
       {
         this.serverListContainer && <VirtualList
           className='server-list'

@@ -100,11 +100,6 @@ const serverListReducer = (state = defaultState, action) => {
           [action.itemKey]: !state.itemsExpandedState[action.itemKey]
         }
       }
-    case serverKeyTreeActionTypes.OPEN_KEY:
-      return {
-        ...state,
-        shouldRedirectToKeyView: true
-      }
 
     case serverKeyTreeToolBoxActionTypes.FILTER_CHANGED:
       return {
@@ -183,12 +178,6 @@ const serverListReducer = (state = defaultState, action) => {
           ...state.loadingServerKeys,
           [action.server.id]: false
         }
-      }
-
-    case LOCATION_CHANGE:
-      return {
-        ...state,
-        shouldRedirectToKeyView: false
       }
 
     default:

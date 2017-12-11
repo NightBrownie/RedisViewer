@@ -9,7 +9,6 @@ import ServerSettings from '../components/ServerSettings'
 
 export default withRouter(connect(
   state => ({
-    shouldRedirectToTheRoot: state.serverSettings.shouldRedirectToTheRoot,
     editingSettings: state.serverSettings.editingSettings,
     settingsSaved: state.serverSettings.settingsSaved,
     isEditMode: state.serverSettings.isEditMode

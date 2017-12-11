@@ -33,7 +33,10 @@ export default withRouter(connect(
 
     keySelected: (server, key) => dispatch(serverKeyTreeActions.keySelected(server, key)),
     serverSelected: (server) => dispatch(serverKeyTreeActions.serverSelected(server)),
-    openKey: (server, key) => dispatch(serverKeyTreeActions.openKey(server, key)),
+    openKey: (server, key) => {
+      dispatch(serverKeyTreeActions.openKey(server, key))
+      history.push(routes.KEY_VIEW)
+    },
 
     toggleServerListItemExpand: (itemKey) => dispatch(serverKeyTreeActions.toggleItemExpand(itemKey)),
 
