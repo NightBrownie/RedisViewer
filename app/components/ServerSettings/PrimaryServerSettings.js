@@ -52,27 +52,29 @@ const renderPasswordField = (field) => (
 
 export default class PrimaryServerSettings extends Component {
   render () {
-    return (<FormSection
-      name='primarySettings'
-      className='primary-server-settings'
-    >
-      <Field
-        name='serverName'
-        component={renderServerNameField}
-        validate={[required()]}
-      />
-      <Field
-        name='host'
-        component={renderHostIPField}
-      />
-      <Field
-        name='port'
-        component={renderPortField}
-      />
-      <Field
-        name='password'
-        component={renderPasswordField}
-      />
-    </FormSection>)
+    return (
+      <FormSection
+        name='primarySettings'
+        className='primary-server-settings'
+      >
+        <Field
+          name='serverName'
+          component={renderServerNameField}
+          validate={[required()]}
+        />
+        <Field
+          name='host'
+          component={renderHostIPField}
+        />
+        <Field
+          name='port'
+          component={renderPortField}
+        />
+        <Field
+          name='password'
+          component={renderPasswordField}
+        />
+      </FormSection>
+    )
   }
 }

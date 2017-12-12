@@ -14,21 +14,23 @@ export default class Button extends Component {
   render () {
     let {isInactiveTransparentBorder, ...props} = this.props
 
-    return (<button
-      {...props}
-      ref={(button) => {
-        this.innerButton = button
-      }}
-      className={classNames('button',
-        isInactiveTransparentBorder
-          ? 'inactive-transparent-border'
-          : false,
-        this.props.className || '')
-      }
-      onClick={(event) => {
-        this.props.onClick && this.props.onClick(event)
-        this.innerButton.blur()
-      }}
-    />)
+    return (
+      <button
+        {...props}
+        ref={(button) => {
+          this.innerButton = button
+        }}
+        className={classNames('button',
+          isInactiveTransparentBorder
+            ? 'inactive-transparent-border'
+            : false,
+          this.props.className || '')
+        }
+        onClick={(event) => {
+          this.props.onClick && this.props.onClick(event)
+          this.innerButton.blur()
+        }}
+      />
+    )
   }
 }

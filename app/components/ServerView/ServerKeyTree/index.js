@@ -189,12 +189,12 @@ export default class ServerList extends Component {
   render () {
     let serverListItems = this.getNodeListItems(this.getListItemsTree())
 
-    return (<div
-      ref={(serverListContainer) => (this.serverListContainer = serverListContainer)}
-      className='server-list-container'
-    >
-      {
-        this.serverListContainer && <VirtualList
+    return (
+      <div
+        ref={(serverListContainer) => (this.serverListContainer = serverListContainer)}
+        className='server-list-container'
+      >
+        {this.serverListContainer && <VirtualList
           className='server-list'
           items={serverListItems}
           itemFactory={(item) => (
@@ -205,8 +205,8 @@ export default class ServerList extends Component {
           itemHeight={23}
           bufferSize={0}
           viewport={this.serverListContainer}
-        />
-      }
-    </div>)
+        />}
+      </div>
+    )
   }
 }

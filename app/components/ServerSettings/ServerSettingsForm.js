@@ -15,46 +15,48 @@ class ServerSettingsForm extends Component {
   }
 
   render () {
-    return (<form
-      className='server-settings-form'
-      onSubmit={this.props.handleSubmit}
-    >
-      <PrimaryServerSettings />
-      <Expander
-        className='advanced-server-setting-expander'
-        label='Advanced settings'
+    return (
+      <form
+        className='server-settings-form'
+        onSubmit={this.props.handleSubmit}
       >
-        <AdvancedServerSettings />
-      </Expander>
+        <PrimaryServerSettings />
+        <Expander
+          className='advanced-server-setting-expander'
+          label='Advanced settings'
+        >
+          <AdvancedServerSettings />
+        </Expander>
 
-      <div className='buttons-container'>
-        <Button
-          className='test-connection-button'
-          type='button'
-          disabled={this.props.invalid}
-          onClick={this.props.requestConnectionTest}
-        >
-          <i
-            className='test-connection-button-icon fa fa-refresh fa-fw fa-lg'
-            aria-hidden='true'
-          />
-        </Button>
-        <Button
-          className='save-server-settings-button'
-          type='submit'
-          disabled={this.props.invalid}
-        >
-          Save
-        </Button>
-        <Button
-          className='cancel-server-settings-changes-button'
-          type='button'
-          onClick={this.props.cancelEdit}
-        >
-          Cancel
-        </Button>
-      </div>
-    </form>)
+        <div className='buttons-container'>
+          <Button
+            className='test-connection-button'
+            type='button'
+            disabled={this.props.invalid}
+            onClick={this.props.requestConnectionTest}
+          >
+            <i
+              className='test-connection-button-icon fa fa-refresh fa-fw fa-lg'
+              aria-hidden='true'
+            />
+          </Button>
+          <Button
+            className='save-server-settings-button'
+            type='submit'
+            disabled={this.props.invalid}
+          >
+            Save
+          </Button>
+          <Button
+            className='cancel-server-settings-changes-button'
+            type='button'
+            onClick={this.props.cancelEdit}
+          >
+            Cancel
+          </Button>
+        </div>
+      </form>
+    )
   }
 }
 

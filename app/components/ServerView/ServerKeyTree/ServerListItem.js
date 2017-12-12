@@ -36,43 +36,45 @@ export default class ServerListItem extends Component {
             : [this.props.treeViewSpans]
     const isExpandable = this.props.itemType !== treeViewItemTypes.TREE_VIEW_KEY_ITEM
 
-    return (<li
-      className={classNames(
-        'server-list-item',
-        this.props.isSelected
-          ? 'selected'
-          : ''
-      )}
-      title={this.props.title}
-      tabIndex={0}
-      onClick={() => this.props.onSelected && this.props.onSelected()}
-      onDoubleClick={() => isExpandable && this.props.onToggleExpand()}
-    >
-      { spanTypes.map((spanType, spanTypeIndex) => (
-        <TreeViewSpan
-          // eslint-disable-next-line react/no-array-index-key
-          key={spanType + spanTypeIndex}
-          spanType={spanType}
-          isExpandable={isExpandable && (spanTypeIndex === spanTypes.length - 1)}
+    return (
+      <li
+        className={classNames(
+          'server-list-item',
+          this.props.isSelected
+            ? 'selected'
+            : ''
+        )}
+        title={this.props.title}
+        tabIndex={0}
+        onClick={() => this.props.onSelected && this.props.onSelected()}
+        onDoubleClick={() => isExpandable && this.props.onToggleExpand()}
+      >
+        {spanTypes.map((spanType, spanTypeIndex) => (
+          <TreeViewSpan
+            // eslint-disable-next-line react/no-array-index-key
+            key={spanType + spanTypeIndex}
+            spanType={spanType}
+            isExpandable={isExpandable && (spanTypeIndex === spanTypes.length - 1)}
+            isExpanded={this.props.isExpanded}
+            onToggleExpand={this.props.onToggleExpand}
+          />
+        ))}
+
+        <ServerListItemIcon
+          treeViewItemType={this.props.itemType}
           isExpanded={this.props.isExpanded}
-          onToggleExpand={this.props.onToggleExpand}
         />
-      )) }
 
-      <ServerListItemIcon
-        treeViewItemType={this.props.itemType}
-        isExpanded={this.props.isExpanded}
-      />
-
-      <span className='server-list-item-name'>
-        <span className='server-list-item-name-text'>
-          { this.props.name }
+        <span className='server-list-item-name'>
+          <span className='server-list-item-name-text'>
+            {this.props.name}
+          </span>
         </span>
-      </span>
 
-      <span className='options-button-container'>
-        <OptionsButton />
-      </span>
-    </li>)
+        <span className='options-button-container'>
+          <OptionsButton />
+        </span>
+      </li>
+    )
   }
 }

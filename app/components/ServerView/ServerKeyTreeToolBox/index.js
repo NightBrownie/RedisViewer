@@ -19,33 +19,35 @@ export default class ServerViewToolBox extends Component {
   }
 
   render () {
-    return (<div className='server-view-toolbox'>
-      <ServerViewSearchTool
-        onSearchTermChanged={this.props.filterChanged}
-      />
-      <Button
-        className='add-server-btn'
-        isInactiveTransparentBorder
-        onClick={() => this.props.requestAddServer()}
-      >
-        <i className='add-server-icon fa fa-plus fa-fw fa-lg' />
-      </Button>
-      <Button
-        className='settings-btn'
-        isInactiveTransparentBorder
-        onClick={() => this.props.requestEditServer(this.props.selectedServer)}
-        disabled={!this.props.selectedServer}
-      >
-        <i className='settings-icon fa fa-ellipsis-v fa-fw fa-lg' />
-      </Button>
-      <Button
-        className='remove-btn'
-        isInactiveTransparentBorder
-        onClick={() => this.props.requestRemoveServer(this.props.selectedServer)}
-        disabled={!this.props.selectedServer}
-      >
-        <i className='remove-icon fa fa-trash-o fa-fw fa-lg' />
-      </Button>
-    </div>)
+    return (
+      <div className='server-view-toolbox'>
+        <ServerViewSearchTool
+          onSearchTermChanged={this.props.filterChanged}
+        />
+        <Button
+          className='add-server-btn'
+          isInactiveTransparentBorder
+          onClick={() => this.props.requestAddServer()}
+        >
+          <i className='add-server-icon fa fa-plus fa-fw fa-lg' />
+        </Button>
+        <Button
+          className='settings-btn'
+          isInactiveTransparentBorder
+          onClick={() => this.props.requestEditServer(this.props.selectedServer)}
+          disabled={!this.props.selectedServer}
+        >
+          <i className='settings-icon fa fa-ellipsis-v fa-fw fa-lg' />
+        </Button>
+        <Button
+          className='remove-btn'
+          isInactiveTransparentBorder
+          onClick={() => this.props.requestRemoveServer(this.props.selectedServer)}
+          disabled={!this.props.selectedServer}
+        >
+          <i className='remove-icon fa fa-trash-o fa-fw fa-lg' />
+        </Button>
+      </div>
+    )
   }
 }

@@ -42,10 +42,12 @@ export default class ServerListItemIcon extends Component {
         break
     }
 
-    return (<span className='server-list-item-icon-container'>
-      <i
-        className={classNames('server-list-item-icon', treeViewFontAwesomeIconClass, treeViewItemIconClass)}
-      />
-    </span>)
+    return (
+      <span className='server-list-item-icon-container'>
+        <i
+          className={classNames('server-list-item-icon', treeViewFontAwesomeIconClass, treeViewItemIconClass)}
+        />
+      </span>
+    )
   }
 }

@@ -33,22 +33,24 @@ export default class ServerSettings extends Component {
       )
     }
 
-    return (<div className='server-settings'>
-      <h2 className='server-settings-form-label'>
-        {
-          this.props.isEditMode
-            ? 'Edit server'
-            : 'Add new server'
-        }
-      </h2>
+    return (
+      <div className='server-settings'>
+        <h2 className='server-settings-form-label'>
+          {
+            this.props.isEditMode
+              ? 'Edit server'
+              : 'Add new server'
+          }
+        </h2>
 
-      <ServerSettingsForm
-        enableReinitialize
-        initialValues={this.props.editingSettings}
-        onSubmit={::this.saveServer}
-        requestConnectionTest={this.props.requestConnectionTest}
-        cancelEdit={this.props.cancelEdit}
-      />
-    </div>)
+        <ServerSettingsForm
+          enableReinitialize
+          initialValues={this.props.editingSettings}
+          onSubmit={::this.saveServer}
+          requestConnectionTest={this.props.requestConnectionTest}
+          cancelEdit={this.props.cancelEdit}
+        />
+      </div>
+    )
   }
 }

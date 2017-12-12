@@ -35,27 +35,31 @@ export default class TreeViewSpan extends Component {
     }
 
     if (this.props.isExpandable) {
-      return (<span className='tree-view-span-container'>
-        <span className={classNames('tree-view-span', treeViewItemSpanClass)}>
-          <i
-            className={
-              classNames('tree-view-expander',
-                this.props.isExpanded
-                  ? 'tree-view-expander-open fa fa-minus-square-o'
-                  : 'tree-view-expander-closed fa fa-plus-square-o')
-            }
-            onClick={(event) => {
-              this.props.onToggleExpand && this.props.onToggleExpand()
-              event.preventDefault()
-              event.stopPropagation()
-            }}
-                />
+      return (
+        <span className='tree-view-span-container'>
+          <span className={classNames('tree-view-span', treeViewItemSpanClass)}>
+            <i
+              className={
+                classNames('tree-view-expander',
+                  this.props.isExpanded
+                    ? 'tree-view-expander-open fa fa-minus-square-o'
+                    : 'tree-view-expander-closed fa fa-plus-square-o')
+              }
+              onClick={(event) => {
+                this.props.onToggleExpand && this.props.onToggleExpand()
+                event.preventDefault()
+                event.stopPropagation()
+              }}
+                  />
+          </span>
         </span>
-      </span>)
+      )
     }
 
-    return (<span className='tree-view-span-container'>
-      <span className={classNames('tree-view-span', treeViewItemSpanClass)} />
-    </span>)
+    return (
+      <span className='tree-view-span-container'>
+        <span className={classNames('tree-view-span', treeViewItemSpanClass)} />
+      </span>
+    )
   }
 }

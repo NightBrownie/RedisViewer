@@ -30,23 +30,25 @@ export default class ServerView extends Component {
   }
 
   render () {
-    return (<div className='server-view'>
-      <ServerViewToolBox
-        requestAddServer={this.props.requestAddServer}
-        requestEditServer={this.props.requestEditServer}
-        requestRemoveServer={this.props.requestRemoveServer}
-        editServerRequested={this.props.editServerRequested}
-        selectedServer={!this.props.selectedKey ? this.props.selectedServer : null}
-        filterChanged={this.props.filterChanged}
-      />
-      <ServerList
-        serverKeyTree={this.props.serverKeyTree}
-        serverSelected={this.props.serverSelected}
-        toggleItemExpand={this.props.toggleServerListItemExpand}
-        requestServerKeys={this.props.requestKeys}
-        openKey={this.props.openKey}
-        keySelected={this.props.keySelected}
-      />
-    </div>)
+    return (
+      <div className='server-view'>
+        <ServerViewToolBox
+          requestAddServer={this.props.requestAddServer}
+          requestEditServer={this.props.requestEditServer}
+          requestRemoveServer={this.props.requestRemoveServer}
+          editServerRequested={this.props.editServerRequested}
+          selectedServer={!this.props.selectedKey ? this.props.selectedServer : null}
+          filterChanged={this.props.filterChanged}
+        />
+        <ServerList
+          serverKeyTree={this.props.serverKeyTree}
+          serverSelected={this.props.serverSelected}
+          toggleItemExpand={this.props.toggleServerListItemExpand}
+          requestServerKeys={this.props.requestKeys}
+          openKey={this.props.openKey}
+          keySelected={this.props.keySelected}
+        />
+      </div>
+    )
   }
 }

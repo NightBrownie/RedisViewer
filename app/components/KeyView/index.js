@@ -99,103 +99,103 @@ export default class KeyView extends Component {
       } catch (err) {}
     }
 
-    return (<div
-      className='key-view-container'
-    >
-      <header className='key-view-header'>
-        <h3 className='key-name'>
-          <span className='key-name-label'>
-            Key:
-          </span>
-          <span className='key-name-text'>
-            {this.props.keyName}
-          </span>
-        </h3>
+    return (
+      <div className='key-view-container'>
+        <header className='key-view-header'>
+          <h3 className='key-name'>
+            <span className='key-name-label'>
+              Key:
+            </span>
+            <span className='key-name-text'>
+              {this.props.keyName}
+            </span>
+          </h3>
 
-        <Button
-          className='reload-key-data-button'
-          title='Reload key data'
-          onClick={() => this.props.requestData(this.props.server, this.props.keyName)}
-        >
-          <i
-            className={
-              classNames('fa fa-refresh fa-fw fa-lg',
-              this.props.loadingKeyData ? 'fa-spin' : '')
-            }
-          />
-        </Button>
-      </header>
-
-      <div className='key-content'>
-        {
-          this.props.previousData && this.props.currentData &&
-          (<Diff
-            className='key-data'
-            inputA={previousData}
-            inputB={currentData}
-            type={this.state.keyDisplayType === keyContentType.JSON
-              ? 'json'
-              : 'chars'
-            }
-          />)
-        }
-      </div>
-
-      <div className='key-settings'>
-        <span className='key-display-type'>
-          <span className='display-type-label'>
-            Display as
-          </span>
-          <select
-            className='key-display-type-select'
-            onChange={(event) => this.setState({
-              ...this.state,
-              keyDisplayType: event.target.value
-            })}
-            value={this.state.keyDisplayType}
+          <Button
+            className='reload-key-data-button'
+            title='Reload key data'
+            onClick={() => this.props.requestData(this.props.server, this.props.keyName)}
           >
-            <option
-              className='key-display-type-option'
-              value={keyContentType.PLAIN_TEXT}
-            >
-              {keyContentType.PLAIN_TEXT}
-            </option>
-            <option
-              className='key-display-type-option'
-              value={keyContentType.JSON}
-            >
-              {keyContentType.JSON}
-            </option>
-          </select>
-        </span>
+            <i
+              className={
+                classNames('fa fa-refresh fa-fw fa-lg',
+                this.props.loadingKeyData ? 'fa-spin' : '')
+              }
+            />
+          </Button>
+        </header>
 
-        <span className='content-last-updated-timestamp'>
-          <span className='last-updated-timestamp-label'>
-            Last updated:
+        <div className='key-content'>
+          {
+            this.props.previousData && this.props.currentData &&
+            (<Diff
+              className='key-data'
+              inputA={previousData}
+              inputB={currentData}
+              type={this.state.keyDisplayType === keyContentType.JSON
+                ? 'json'
+                : 'chars'
+              }
+            />)
+          }
+        </div>
+
+        <div className='key-settings'>
+          <span className='key-display-type'>
+            <span className='display-type-label'>
+              Display as
+            </span>
+            <select
+              className='key-display-type-select'
+              onChange={(event) => this.setState({
+                ...this.state,
+                keyDisplayType: event.target.value
+              })}
+              value={this.state.keyDisplayType}
+            >
+              <option
+                className='key-display-type-option'
+                value={keyContentType.PLAIN_TEXT}
+              >
+                {keyContentType.PLAIN_TEXT}
+              </option>
+              <option
+                className='key-display-type-option'
+                value={keyContentType.JSON}
+              >
+                {keyContentType.JSON}
+              </option>
+            </select>
           </span>
-          <span className='last-updated-timestamp-text'>
-            {
-              this.props.lastUpdateTime && moment(this.props.lastUpdateTime)
-                .format(appConstants.KEY_DATA_LAST_UPDATE_DATE_FORMAT)
-            }
+
+          <span className='content-last-updated-timestamp'>
+            <span className='last-updated-timestamp-label'>
+              Last updated:
+            </span>
+            <span className='last-updated-timestamp-text'>
+              {
+                this.props.lastUpdateTime && moment(this.props.lastUpdateTime)
+                  .format(appConstants.KEY_DATA_LAST_UPDATE_DATE_FORMAT)
+              }
+            </span>
           </span>
-        </span>
-        <label className='show-content-updates'>
-          <input
-            className='show-updates-switch'
-            type='checkbox'
-            checked={this.props.isUpdatesTrackEnabled}
-            onChange={() => !this.props.isUpdatesTrackToggling &&
-              this.props.toggleKeyUpdatesTrack(
-                  this.props.server,
-                  this.props.keyName,
-                  !this.props.isUpdatesTrackEnabled)}
-          />
-          <span className='show-updates-label'>
-            Track updates
-          </span>
-        </label>
+          <label className='show-content-updates'>
+            <input
+              className='show-updates-switch'
+              type='checkbox'
+              checked={this.props.isUpdatesTrackEnabled}
+              onChange={() => !this.props.isUpdatesTrackToggling &&
+                this.props.toggleKeyUpdatesTrack(
+                    this.props.server,
+                    this.props.keyName,
+                    !this.props.isUpdatesTrackEnabled)}
+            />
+            <span className='show-updates-label'>
+              Track updates
+            </span>
+          </label>
+        </div>
       </div>
-    </div>)
+    )
   }
 }

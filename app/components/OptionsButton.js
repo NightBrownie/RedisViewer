@@ -13,12 +13,14 @@ export default class OptionsButton extends Component {
   };
 
   render () {
-    return (<Button
-      className={classNames(this.props.className, 'options-button')}
-      isInactiveTransparentBorder={this.props.isInactiveTransparentBorder}
-    >
-      <i className='options-button-icon fa fa-ellipsis-v fa-fw fa-lg' />
-      {this.props.children}
-    </Button>)
+    return (
+      <Button
+        className={classNames(this.props.className, 'options-button')}
+        isInactiveTransparentBorder={this.props.isInactiveTransparentBorder}
+      >
+        <i className='options-button-icon fa fa-ellipsis-v fa-fw fa-lg' />
+        {this.props.children}
+      </Button>
+    )
   }
 }

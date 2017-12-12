@@ -121,7 +121,9 @@ let VerticalList = React.createClass({
     }
 
     return (
-      <this.props.tagName className={this.props.className} style={css}>{ this.renderItems() }</this.props.tagName>
+      <this.props.tagName className={this.props.className} style={css}>
+        {this.renderItems()}
+      </this.props.tagName>
     )
   }
 })

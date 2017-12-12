@@ -41,26 +41,28 @@ const renderExecutionTimeoutField = (field) => (
 
 export default class AdvancedServerSettings extends Component {
   render () {
-    return (<FormSection
-      name='advancedSettings'
-      className='advanced-server-settings'
-    >
-      <Field
-        name='keysRootPattern'
-        component={renderKeysRootPatternField}
-      />
-      <Field
-        name='keysFolderSeparator'
-        component={renderKeysFolderSeparatorField}
-      />
-      <Field
-        name='connectionTimeout'
-        component={renderConnectionTimeoutField}
-      />
-      <Field
-        name='executionTimeout'
-        component={renderExecutionTimeoutField}
-      />
-    </FormSection>)
+    return (
+      <FormSection
+        name='advancedSettings'
+        className='advanced-server-settings'
+      >
+        <Field
+          name='keysRootPattern'
+          component={renderKeysRootPatternField}
+        />
+        <Field
+          name='keysFolderSeparator'
+          component={renderKeysFolderSeparatorField}
+        />
+        <Field
+          name='connectionTimeout'
+          component={renderConnectionTimeoutField}
+        />
+        <Field
+          name='executionTimeout'
+          component={renderExecutionTimeoutField}
+        />
+      </FormSection>
+    )
   }
 }

@@ -30,58 +30,60 @@ export default class Expander extends Component {
   }
 
   render () {
-    return (<div
-      className={classNames('expander',
-        this.state.isExpanded && 'expanded',
-        this.props.className)
-      }
-    >
-      <span className='expander-header'>
-        <button
-          ref={(button) => {
-            this.expandCollapseButton = button
-          }}
-          className='expand-collapse-button'
-          type='button'
-          onClick={() => {
-            this.toggleExpanded()
-            this.expandCollapseButton && this.expandCollapseButton.blur()
-          }}
-        >
-          {
-            this.state.isExpanded
-              ? <i className='collapse-icon fa fa-minus-square-o fa-fw' />
-              : <i className='expand-icon fa fa-plus-square-o fa-fw' />
-          }
-        </button>
-        <span className='expander-header-empty-space-placeholder' />
-        <span
-          className='expander-header-label'
-          onDoubleClick={() => this.toggleExpanded()}
-          title={
-            this.state.isExpanded
-            ? 'Double click to collapse'
-            : 'Double click to expand'
-          }
-        >
-          {this.props.label}
-        </span>
-        <span className='expander-header-empty-space-placeholder' />
-      </span>
-
+    return (
       <div
-        ref={(elem) => {
-          this.expanderContentContainerInner = elem
-        }}
-        className='expander-content-container'
-        style={{
-          maxHeight: this.state.isExpanded
-            ? this.state.contentHeight
-            : 0
-        }}
+        className={classNames('expander',
+          this.state.isExpanded && 'expanded',
+          this.props.className)
+        }
       >
-        {this.props.children}
+        <span className='expander-header'>
+          <button
+            ref={(button) => {
+              this.expandCollapseButton = button
+            }}
+            className='expand-collapse-button'
+            type='button'
+            onClick={() => {
+              this.toggleExpanded()
+              this.expandCollapseButton && this.expandCollapseButton.blur()
+            }}
+          >
+            {
+              this.state.isExpanded
+                ? <i className='collapse-icon fa fa-minus-square-o fa-fw' />
+                : <i className='expand-icon fa fa-plus-square-o fa-fw' />
+            }
+          </button>
+          <span className='expander-header-empty-space-placeholder' />
+          <span
+            className='expander-header-label'
+            onDoubleClick={() => this.toggleExpanded()}
+            title={
+              this.state.isExpanded
+              ? 'Double click to collapse'
+              : 'Double click to expand'
+            }
+          >
+            {this.props.label}
+          </span>
+          <span className='expander-header-empty-space-placeholder' />
+        </span>
+
+        <div
+          ref={(elem) => {
+            this.expanderContentContainerInner = elem
+          }}
+          className='expander-content-container'
+          style={{
+            maxHeight: this.state.isExpanded
+              ? this.state.contentHeight
+              : 0
+          }}
+        >
+          {this.props.children}
+        </div>
       </div>
-    </div>)
+    )
   }
 }
