@@ -168,6 +168,7 @@
     "node-gyp": "^3.6.1",
     "react-addons-test-utils": "^15.4.2",
     "react-test-renderer": "^15.4.2",
+    "redis-server": "^1.1.0",
     "redux-logger": "^3.0.1",
     "sinon": "^2.1.0",
     "spectron": "^3.6.1",

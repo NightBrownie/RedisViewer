@@ -11,6 +11,7 @@ export default class ServerSettings extends Component {
     editingSettings: PropTypes.object,
     settingsSaved: PropTypes.bool,
     isEditMode: PropTypes.bool,
+    history: PropTypes.object,
 
     saveServer: PropTypes.func.isRequired,
     cancelEdit: PropTypes.func.isRequired,
@@ -23,6 +24,10 @@ export default class ServerSettings extends Component {
       ...server
     }
     this.props.saveServer(resultServer)
+
+    if (!this.props.editingSettings) {
+      this.props.history.push(routes.ROOT)
+    }
   }
 
   // TODO: add mark that settings are saved

@@ -9,9 +9,10 @@ import routes from '../constants/routes'
 import ServerSettings from '../components/ServerSettings'
 
 const ServerSettingsContainer = withRouter(connect(
-  (state, { isEditMode }) => ({
+  (state, { isEditMode, history }) => ({
     editingSettings: state.serverSettings.editingSettings,
     settingsSaved: state.serverSettings.settingsSaved,
+    history,
     isEditMode
   }),
   (dispatch, { history }) => ({
