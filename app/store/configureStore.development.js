@@ -4,11 +4,12 @@ import createDebounceMiddleware from 'redux-debounced'
 import { createMemoryHistory as createHistory } from 'history'
 import { routerMiddleware, routerActions } from 'react-router-redux'
 import { createLogger } from 'redux-logger'
-import rootReducer from '../reducers/root.reducer'
+import rootReducer from '../reducers/root'
 
-import rootSaga from '../sagas/root.saga'
+import rootSaga from '../sagas/root'
 
-let sagaMonitor
+// todo: add saga monitor
+// let sagaMonitor
 
 export const history = createHistory()
 
@@ -63,14 +64,15 @@ export const configureStore = (initialState) => {
   sagaMiddleware.run(rootSaga)
 
   if (module.hot) {
-    module.hot.accept('../reducers/root.reducer', () =>
-      store.replaceReducer(require('../reducers/root.reducer')) // eslint-disable-line global-require
+    module.hot.accept('../reducers/root', () =>
+      store.replaceReducer(require('../reducers/root')) // eslint-disable-line global-require
     )
   }
 
   return store
 }
 
-export function getSagaMonitor () {
-  return sagaMonitor || (sagaMonitor = createSagaMonitor())
-}
+// todo: apply saga monitor
+// export function getSagaMonitor () {
+//   return sagaMonitor || (sagaMonitor = createSagaMonitor())
+// }
