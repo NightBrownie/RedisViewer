@@ -15,7 +15,14 @@ export default class ServerSettings extends Component {
 
     saveServer: PropTypes.func.isRequired,
     cancelEdit: PropTypes.func.isRequired,
+    finishEdit: PropTypes.func.isRequired,
     requestConnectionTest: PropTypes.func.isRequired
+  }
+
+  constructor() {
+    super()
+
+    this.saveServer = ::this.saveServer;
   }
 
   saveServer (server) {
@@ -23,11 +30,8 @@ export default class ServerSettings extends Component {
       ...this.props.editingSettings,
       ...server
     }
-    this.props.saveServer(resultServer)
 
-    if (!this.props.editingSettings) {
-      this.props.history.push(routes.ROOT)
-    }
+    this.props.saveServer(resultServer)
   }
 
   // TODO: add mark that settings are saved
@@ -51,8 +55,14 @@ export default class ServerSettings extends Component {
         <ServerSettingsForm
           enableReinitialize
           initialValues={this.props.editingSettings}
-          onSubmit={::this.saveServer}
+          isEditMode={this.props.isEditMode}
+
           requestConnectionTest={this.props.requestConnectionTest}
+          onSubmit={() => {
+            this.saveServer()
+            this.props.finishEdit()
+          }}
+          saveServer={this.saveServer}
           cancelEdit={this.props.cancelEdit}
         />
       </div>

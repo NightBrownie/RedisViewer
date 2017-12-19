@@ -11,7 +11,10 @@ class ServerSettingsForm extends Component {
   static propTypes = {
     requestConnectionTest: PropTypes.func.isRequired,
     cancelEdit: PropTypes.func.isRequired,
-    invalid: PropTypes.bool
+    saveServer: PropTypes.func.isRequired,
+
+    invalid: PropTypes.bool,
+    isEditMode: PropTypes.bool
   }
 
   render () {
@@ -41,14 +44,23 @@ class ServerSettingsForm extends Component {
             />
           </Button>
           <Button
-            className='save-server-settings-button'
+            className='server-settings__submit-button'
             type='submit'
             disabled={this.props.invalid}
           >
-            Save
+            {this.props.isEditMode ? 'Ok' : 'Save'}
           </Button>
+          {this.props.isEditMode && (
+            <Button
+              className='server-settings__save-button'
+              type='button'
+              onClick={this.props.saveServer}
+            >
+              Save
+            </Button>
+          )}
           <Button
-            className='cancel-server-settings-changes-button'
+            className='server-settings__cancel-changes-button'
             type='button'
             onClick={this.props.cancelEdit}
           >
