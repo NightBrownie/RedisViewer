@@ -19,10 +19,18 @@ export default class ServerSettings extends Component {
     requestConnectionTest: PropTypes.func.isRequired
   }
 
-  constructor() {
+  constructor () {
     super()
 
-    this.saveServer = ::this.saveServer;
+    this.saveServer = ::this.saveServer
+
+    this.state = { formSubmitted: false }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (this.state.formSubmitted && nextProps.settingsSaved) {
+      this.props.finishEdit()
+    }
   }
 
   saveServer (server) {
@@ -58,9 +66,9 @@ export default class ServerSettings extends Component {
           isEditMode={this.props.isEditMode}
 
           requestConnectionTest={this.props.requestConnectionTest}
-          onSubmit={() => {
-            this.saveServer()
-            this.props.finishEdit()
+          onSubmit={(resultSettings) => {
+            this.setState({ formSubmitted: true })
+            this.saveServer(resultSettings)
           }}
           saveServer={this.saveServer}
           cancelEdit={this.props.cancelEdit}

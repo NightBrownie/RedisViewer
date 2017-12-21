@@ -17,6 +17,7 @@ const ServerSettingsContainer = withRouter(connect(
   }),
   (dispatch, { history }) => ({
     saveServer: (server) => dispatch(serverActions.save(server)),
+    finishEdit: () => history.push(routes.ROOT),
     cancelEdit: () => history.push(routes.ROOT),
     requestConnectionTest: (server) => dispatch(serverActions.requestConnectionTest(server))
   })

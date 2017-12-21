@@ -3,7 +3,7 @@ import configKeys from '../constants/configKeys'
 
 import cryptoHelper from '../helpers/crypto'
 
-const {app} = (require('electron').remote || require('electron'))
+const { app } = (require('electron').remote || require('electron'))
 const keytar = require('keytar')
 const crypto = require('crypto')
 const path = require('path')
@@ -54,19 +54,20 @@ const getOrCreateEncryptionPassPhrase = async () => {
 
   try {
     currentPassword = await keytar.getPassword(
-            appName,
-            appConstants.USER_KEY_STORAGE_CONFIG_ENCRYPTION_PASSPHRASE_KEY)
+      appName,
+      appConstants.USER_KEY_STORAGE_CONFIG_ENCRYPTION_PASSPHRASE_KEY
+    )
 
     if (!currentPassword) {
       currentPassword = (await await crypto.randomBytes(
-                    appConstants.CONFIG_ENCRYPTION_PASSPHRASE_LENGTH_BYTES)
-            ).toString()
+        appConstants.CONFIG_ENCRYPTION_PASSPHRASE_LENGTH_BYTES)
+      ).toString()
 
       await keytar.setPassword(
-                appName,
-                appConstants.USER_KEY_STORAGE_CONFIG_ENCRYPTION_PASSPHRASE_KEY,
-                currentPassword
-            )
+        appName,
+        appConstants.USER_KEY_STORAGE_CONFIG_ENCRYPTION_PASSPHRASE_KEY,
+        currentPassword
+      )
     }
   } catch (err) {
     winston.error(`An error occurred during config encryption pass phrase generation: ${err.message}`)

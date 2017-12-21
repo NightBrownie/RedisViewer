@@ -38,10 +38,7 @@ class ServerSettingsForm extends Component {
             disabled={this.props.invalid}
             onClick={this.props.requestConnectionTest}
           >
-            <i
-              className='test-connection-button-icon fa fa-refresh fa-fw fa-lg'
-              aria-hidden='true'
-            />
+            <i className='test-connection-button-icon fa fa-refresh fa-fw fa-lg' />
           </Button>
           <Button
             className='server-settings__submit-button'
@@ -54,6 +51,7 @@ class ServerSettingsForm extends Component {
             <Button
               className='server-settings__save-button'
               type='button'
+              disabled={this.props.invalid}
               onClick={this.props.saveServer}
             >
               Save
