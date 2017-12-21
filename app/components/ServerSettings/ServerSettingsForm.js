@@ -15,7 +15,8 @@ class ServerSettingsForm extends Component {
 
     requestConnectionTest: PropTypes.func.isRequired,
     cancelEdit: PropTypes.func.isRequired,
-    saveServer: PropTypes.func.isRequired
+    saveServer: PropTypes.func.isRequired,
+    finishEdit: PropTypes.func.isRequired
   }
 
   render () {
@@ -24,7 +25,10 @@ class ServerSettingsForm extends Component {
     return (
       <form
         className='server-settings-form'
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(formData => {
+          this.props.saveServer(formData)
+          this.props.finishEdit()
+        })}
       >
         <PrimaryServerSettings />
         <Expander
@@ -55,7 +59,7 @@ class ServerSettingsForm extends Component {
               className='server-settings__save-button'
               type='button'
               disabled={invalid}
-              onClick={() => this.props.saveServer()}
+              onClick={handleSubmit(this.props.saveServer)}
             >
               Save
             </Button>

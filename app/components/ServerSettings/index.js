@@ -66,11 +66,8 @@ export default class ServerSettings extends Component {
           isEditMode={this.props.isEditMode}
 
           requestConnectionTest={this.props.requestConnectionTest}
-          onSubmit={(resultSettings) => {
-            this.setState({ formSubmitted: true })
-            this.saveServer(resultSettings)
-          }}
           saveServer={this.saveServer}
+          finishEdit={this.props.finishEdit}
           cancelEdit={this.props.cancelEdit}
         />
       </div>
