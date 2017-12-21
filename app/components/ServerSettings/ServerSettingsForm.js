@@ -9,19 +9,22 @@ import { reduxForm } from 'redux-form'
 
 class ServerSettingsForm extends Component {
   static propTypes = {
+    form: PropTypes.object,
+
+    isEditMode: PropTypes.bool,
+
     requestConnectionTest: PropTypes.func.isRequired,
     cancelEdit: PropTypes.func.isRequired,
-    saveServer: PropTypes.func.isRequired,
-
-    invalid: PropTypes.bool,
-    isEditMode: PropTypes.bool
+    saveServer: PropTypes.func.isRequired
   }
 
   render () {
+    const { invalid, handleSubmit } = this.props.form
+
     return (
       <form
         className='server-settings-form'
-        onSubmit={this.props.handleSubmit}
+        onSubmit={handleSubmit}
       >
         <PrimaryServerSettings />
         <Expander
@@ -35,7 +38,7 @@ class ServerSettingsForm extends Component {
           <Button
             className='test-connection-button'
             type='button'
-            disabled={this.props.invalid}
+            disabled={invalid}
             onClick={this.props.requestConnectionTest}
           >
             <i className='test-connection-button-icon fa fa-refresh fa-fw fa-lg' />
@@ -43,7 +46,7 @@ class ServerSettingsForm extends Component {
           <Button
             className='server-settings__submit-button'
             type='submit'
-            disabled={this.props.invalid}
+            disabled={invalid}
           >
             {this.props.isEditMode ? 'Ok' : 'Save'}
           </Button>
@@ -51,8 +54,8 @@ class ServerSettingsForm extends Component {
             <Button
               className='server-settings__save-button'
               type='button'
-              disabled={this.props.invalid}
-              onClick={this.props.saveServer}
+              disabled={invalid}
+              onClick={() => this.props.saveServer()}
             >
               Save
             </Button>
@@ -71,7 +74,8 @@ class ServerSettingsForm extends Component {
 }
 
 const ServerSettingsReduxForm = reduxForm({
-  form: 'serverSettings'
+  form: 'serverSettings',
+  propNamespace: 'form'
 })(ServerSettingsForm)
 
 export default ServerSettingsReduxForm
