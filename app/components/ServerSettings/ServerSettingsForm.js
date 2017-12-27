@@ -20,13 +20,20 @@ class ServerSettingsForm extends Component {
   }
 
   render () {
-    const { invalid, handleSubmit } = this.props.form
+    const {
+      invalid,
+      dirty,
+      handleSubmit
+    } = this.props.form
 
     return (
       <form
         className='server-settings-form'
         onSubmit={handleSubmit(formData => {
-          this.props.saveServer(formData)
+          if (dirty) {
+            this.props.saveServer(formData)
+          }
+
           this.props.finishEdit()
         })}
       >
@@ -58,7 +65,7 @@ class ServerSettingsForm extends Component {
             <Button
               className='server-settings__save-button'
               type='button'
-              disabled={invalid}
+              disabled={invalid || !dirty}
               onClick={handleSubmit(this.props.saveServer)}
             >
               Save

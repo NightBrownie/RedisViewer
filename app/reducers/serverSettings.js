@@ -25,6 +25,13 @@ export default (state: {
         ...state,
         editingSettings: null
       }
+
+    case serverActionTypes.SAVED:
+      return {
+        ...state,
+        editingSettings: action.server,
+        settingsSaved: true
+      }
     case serverActionTypes.REMOVED:
       return state.initialServerSettings && (state.initialServerSettings.id === action.server.id)
       ? {
@@ -32,11 +39,6 @@ export default (state: {
         editingSettings: null
       }
       : state
-    case serverActionTypes.SAVED:
-      return {
-        ...state,
-        settingsSaved: true
-      }
 
     default:
       return state

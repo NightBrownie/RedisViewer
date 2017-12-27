@@ -6,8 +6,6 @@ import keyActionTypes from '../constants/actionTypes/key'
 import serverTreeViewNodeType from '../constants/serverTreeViewNodeType'
 import defaultServerConfig from '../constants/defaultServerConfig'
 
-import { LOCATION_CHANGE } from 'react-router-redux'
-
 const defaultState = {
   servers: [],
   itemsExpandedState: {},
@@ -116,6 +114,13 @@ const serverListReducer = (state = defaultState, action) => {
           }), {})
       }
 
+    case serverActionTypes.SAVED:
+      return {
+        ...state,
+        selectedServer: state.selectedServer && state.selectedServer.id === action.server.id
+          ? action.server
+          : state.selectedServer
+      }
     case serverActionTypes.REMOVED:
       return {
         ...state,
