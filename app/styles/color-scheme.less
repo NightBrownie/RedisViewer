@@ -4,14 +4,17 @@
 
 @default-border-color: #727272;
 
-@default-error-color: #fa5532;
+@default-success-color: #458645;
+@default-failure-color: #fa5532;
+
+@default-error-color: @default-failure-color;
 
 /*----control-----*/
-@control-error-color: #fa5532;
+@control-error-color: @default-error-color;
 
 @control-border-color: #727272;
 @control-border-active-color: #9e9e9e;
-@control-border-error-color: #fa5532;
+@control-border-error-color: @default-error-color;
 @control-enabled-border-color: #2f862f;
 @control-disabled-border-color: #4e4e4e;
 
@@ -41,5 +44,5 @@
 @scrollbar-hover-background-color: #757575;
 
 /*----diff----*/
-@diff-addition-background-color: #458645;
+@diff-addition-background-color: @default-success-color;
 @diff-deletion-background-color: #be6154;

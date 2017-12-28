@@ -55,8 +55,41 @@
       display: flex;
       flex-direction: row;
 
+      align-items: center;
+
       .test-connection-button {
         margin-right: auto;
+      }
+
+      .saving-result-message {
+        margin-right: 5px;
+
+        opacity: 0;
+        transition: opacity @control-default-transition-time ease,
+          color @control-default-transition-time ease;
+
+        pointer-events: none;
+
+        &__icon {
+          font-size: 0.75em;
+        }
+
+        &__text {
+          margin-left: 5px;
+          vertical-align: middle;
+        }
+
+        &_success {
+          color: @default-success-color;
+        }
+
+        &_failure {
+          color: @default-failure-color;
+        }
+
+        &_shown {
+          opacity: 1;
+        }
       }
 
       .server-settings__save-button,

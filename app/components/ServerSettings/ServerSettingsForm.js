@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
+import classNames from 'classnames'
+import { reduxForm } from 'redux-form'
 
 import Expander from '../controls/Expander'
 import PrimaryServerSettings from './PrimaryServerSettings'
 import AdvancedServerSettings from './AdvancedServerSettings'
 import Button from '../controls/Button'
-import { reduxForm } from 'redux-form'
 
 class ServerSettingsForm extends Component {
   static propTypes = {
@@ -54,6 +55,26 @@ class ServerSettingsForm extends Component {
           >
             <i className='test-connection-button-icon fa fa-refresh fa-fw fa-lg' />
           </Button>
+
+          {this.props.isEditMode && (
+            // todo: provide options through the props to determine whether message should be shown or not
+            <span className={classNames('saving-result-message',
+                'saving-result-message_success',
+                'saving-result-message_failure',
+                'saving-result-message_shown'
+              )}
+            >
+              <span className='fa-stack fa-fw saving-result-message__icon'>
+                <i className='fa fa-circle-thin fa-stack-2x' />
+                <i className='fa fa-check fa-stack-1x' />
+              </span>
+
+              <span className='saving-result-message__text'>
+                Settings successfully saved
+              </span>
+            </span>
+          )}
+
           <Button
             className='server-settings__submit-button'
             type='submit'
