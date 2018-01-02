@@ -10,6 +10,11 @@ export const saved = (server) => ({
   server
 })
 
+export const saveFailed = (server) => ({
+  type: actionTypes.SAVE_FAILED,
+  server
+})
+
 export const remove = (server) => ({
   type: actionTypes.REMOVE,
   server
@@ -41,6 +46,7 @@ export const requestConnectionTest = (server) => ({
 export default {
   save,
   saved,
+  saveFailed,
 
   remove,
   removed,

@@ -80,6 +80,27 @@ class ServerSettingsForm extends Component {
                   </span>
                 </CSSTransition>
               )}
+
+              {this.props.settingsSaved === false && (
+                <CSSTransition
+                  timeout={300}
+                  classNames='saving-result-message_shown'
+                >
+                  <span className={classNames('saving-result-message',
+                      'saving-result-message_failure'
+                    )}
+                  >
+                    <span className='fa-stack fa-fw saving-result-message__icon'>
+                      <i className='fa fa-circle-thin fa-stack-2x' />
+                      <i className='fa fa-exclamation fa-stack-1x' />
+                    </span>
+
+                    <span className='saving-result-message__text'>
+                      Settings failed to save, try again
+                    </span>
+                  </span>
+                </CSSTransition>
+              )}
             </TransitionGroup>
           )}
 

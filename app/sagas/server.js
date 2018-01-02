@@ -16,11 +16,14 @@ function * serverListRequested () {
 }
 
 function * saveServer (action) {
-  let serverConfig = action.server
-  let updatedServer = yield call(serverConfigService.setServer, serverConfig)
-  yield put(serverActions.saved(updatedServer))
-  let serverConfigs = yield call(serverConfigService.getServer)
-  yield put(serverActions.listChanged(serverConfigs))
+  try {
+    let updatedServer = yield call(serverConfigService.setServer, action.server)
+    yield put(serverActions.saved(updatedServer))
+    let serverConfigs = yield call(serverConfigService.getServer)
+    yield put(serverActions.listChanged(serverConfigs))
+  } catch (error) {
+    yield put(serverActions.saveFailed(action.server))
+  }
 }
 
 function * removeServer (action) {
