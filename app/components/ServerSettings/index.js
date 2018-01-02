@@ -11,7 +11,6 @@ export default class ServerSettings extends Component {
     editingSettings: PropTypes.object,
     settingsSaved: PropTypes.bool,
     isEditMode: PropTypes.bool,
-    history: PropTypes.object,
 
     saveServer: PropTypes.func.isRequired,
     cancelEdit: PropTypes.func.isRequired,
@@ -23,26 +22,15 @@ export default class ServerSettings extends Component {
     super()
 
     this.saveServer = ::this.saveServer
-
-    this.state = { formSubmitted: false }
-  }
-
-  componentWillReceiveProps (nextProps) {
-    if (this.state.formSubmitted && nextProps.settingsSaved) {
-      this.props.finishEdit()
-    }
   }
 
   saveServer (server) {
-    let resultServer = {
+    this.props.saveServer({
       ...this.props.editingSettings,
       ...server
-    }
-
-    this.props.saveServer(resultServer)
+    })
   }
 
-  // TODO: add mark that settings are saved
   render () {
     if (this.props.editingSettings === null && this.props.isEditMode) {
       return (
@@ -64,6 +52,7 @@ export default class ServerSettings extends Component {
           enableReinitialize
           initialValues={this.props.editingSettings}
           isEditMode={this.props.isEditMode}
+          settingsSaved={this.props.settingsSaved}
 
           requestConnectionTest={this.props.requestConnectionTest}
           saveServer={this.saveServer}

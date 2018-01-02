@@ -64,10 +64,6 @@
       .saving-result-message {
         margin-right: 5px;
 
-        opacity: 0;
-        transition: opacity @control-default-transition-time ease,
-          color @control-default-transition-time ease;
-
         pointer-events: none;
 
         &__icon {
@@ -79,16 +75,32 @@
           vertical-align: middle;
         }
 
+        &_shown {
+          &-enter {
+            opacity: 0;
+          }
+
+          &-enter-active {
+            opacity: 1;
+            transition: opacity @control-default-transition-time ease;
+          }
+
+          &-exit {
+            opacity: 1;
+          }
+
+          &-exit-active {
+            opacity: 0;
+            transition: opacity @control-default-transition-time ease;
+          }
+        }
+
         &_success {
           color: @default-success-color;
         }
 
         &_failure {
           color: @default-failure-color;
-        }
-
-        &_shown {
-          opacity: 1;
         }
       }
 

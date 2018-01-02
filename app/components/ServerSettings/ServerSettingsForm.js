@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { reduxForm } from 'redux-form'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 import Expander from '../controls/Expander'
 import PrimaryServerSettings from './PrimaryServerSettings'
@@ -12,6 +13,7 @@ class ServerSettingsForm extends Component {
   static propTypes = {
     form: PropTypes.object,
 
+    settingsSaved: PropTypes.bool,
     isEditMode: PropTypes.bool,
 
     requestConnectionTest: PropTypes.func.isRequired,
@@ -57,22 +59,28 @@ class ServerSettingsForm extends Component {
           </Button>
 
           {this.props.isEditMode && (
-            // todo: provide options through the props to determine whether message should be shown or not
-            <span className={classNames('saving-result-message',
-                'saving-result-message_success',
-                'saving-result-message_failure',
-                'saving-result-message_shown'
-              )}
-            >
-              <span className='fa-stack fa-fw saving-result-message__icon'>
-                <i className='fa fa-circle-thin fa-stack-2x' />
-                <i className='fa fa-check fa-stack-1x' />
-              </span>
+            <TransitionGroup component='span'>
+              {this.props.settingsSaved === true && (
+                <CSSTransition
+                  timeout={300}
+                  classNames='saving-result-message_shown'
+                >
+                  <span className={classNames('saving-result-message',
+                      'saving-result-message_success'
+                    )}
+                  >
+                    <span className='fa-stack fa-fw saving-result-message__icon'>
+                      <i className='fa fa-circle-thin fa-stack-2x' />
+                      <i className='fa fa-check fa-stack-1x' />
+                    </span>
 
-              <span className='saving-result-message__text'>
-                Settings successfully saved
-              </span>
-            </span>
+                    <span className='saving-result-message__text'>
+                      Settings successfully saved
+                    </span>
+                  </span>
+                </CSSTransition>
+              )}
+            </TransitionGroup>
           )}
 
           <Button

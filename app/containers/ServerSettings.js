@@ -12,7 +12,6 @@ const ServerSettingsContainer = withRouter(connect(
   (state, { isEditMode, history }) => ({
     editingSettings: state.serverSettings.editingSettings,
     settingsSaved: state.serverSettings.settingsSaved,
-    history,
     isEditMode
   }),
   (dispatch, { history }) => ({
